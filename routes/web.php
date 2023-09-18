@@ -18,6 +18,8 @@ use App\Http\Controllers\RoomStatusController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\RegisterController;
+
 use Illuminate\Support\Facades\Route;
 
 /*

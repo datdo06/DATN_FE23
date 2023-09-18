@@ -23,7 +23,7 @@ class ImageRepository implements ImageRepositoryInterface
             $i++;
             $url = $filename . '-' . (string)$i . '.' . $urlExtension;
             $fullpathfile = $path . '/' . $url;
-        }
+        };
         $img = InterImage::make($file->path());
         $img->resize(1000, 1000, function ($constraint) {
             $constraint->aspectRatio();

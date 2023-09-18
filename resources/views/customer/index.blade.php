@@ -62,7 +62,7 @@
 
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <li><a class="dropdown-item"
-                                                    href="{{ route('customer.show', ['customer' => $customer->id]) }}">Detail</a>
+                                                    href="{{ route('customer.show', ['customer' => $customer->id]) }}">Details</a>
                                             </li>
                                             <li><a class="dropdown-item"
                                                     href="{{ route('customer.edit', ['customer' => $customer->id]) }}">Edit</a>
@@ -72,7 +72,7 @@
                                                     action="{{ route('customer.destroy', ['customer' => $customer->id]) }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a class="dropdown-item delete" href="#" customer-id="{{ $customer->id }}"
+                                                    <a class="dropdown-item delete" href="" customer-id="{{ $customer->id }}"
                                                         customer-role="Customer" customer-name="{{ $customer->name }}">
                                                         Delete
                                                     </a>
