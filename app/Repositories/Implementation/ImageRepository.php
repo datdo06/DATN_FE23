@@ -24,12 +24,12 @@ class ImageRepository implements ImageRepositoryInterface
             $url = $filename . '-' . (string)$i . '.' . $urlExtension;
             $fullpathfile = $path . '/' . $url;
         }
-        $img = InterImage::make($fullpathfile);
+        $img = InterImage::make($file->path());
         $img->resize(1000, 1000, function ($constraint) {
             $constraint->aspectRatio();
         })->save($path . '/' . $url);
 
-        return '12333';
+        return $url;
     }
 
     public function destroy($dir)
