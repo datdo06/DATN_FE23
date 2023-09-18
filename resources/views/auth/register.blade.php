@@ -24,7 +24,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <h5 class="card-title text-center">Sistem Informasi Perusahaan</h5>
+                                <h5 class="card-title text-center">King Hotel</h5>
                             </div>
                         </div>
                         <form class="form-signin" action="http://localhost:81/sip/pelamar/fungsi_daftar" method="post">
@@ -43,18 +43,18 @@
                                     <div class="form-label-group">
                                         <input type="password" id="password_konfirmasi" name="password_konfirmasi"
                                             class="form-control" placeholder="Repead Password" value="" required>
-                                        <label for="password_konfirmasi">Konfirmasi password</label>
+                                        <label for="password_konfirmasi">Confirm password</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 d-flex justify-content-center">
                                     <button class="btn btn-lg btn-primary text-white btn-block text-uppercase"
-                                        type="submit">Daftar</button>
+                                        type="submit">Register</button>
                                 </div>
                             </div>
                             <hr class="my-4">
-                            <p class="text-center">Sudah memiliki akun? <a href="/login">masuk</a></p>
+                            <p class="text-center">Do you have a account? <a href="/login">Login</a></p>
                         </form>
                     </div>
                 </div>
