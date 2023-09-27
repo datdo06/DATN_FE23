@@ -62,7 +62,7 @@
 
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                             <li><a class="dropdown-item"
-                                                    href="{{ route('customer.show', ['customer' => $customer->id]) }}">Detail</a>
+                                                    href="{{ route('customer.show', ['customer' => $customer->id]) }}">Details</a>
                                             </li>
                                             <li><a class="dropdown-item"
                                                     href="{{ route('customer.edit', ['customer' => $customer->id]) }}">Edit</a>
@@ -72,7 +72,7 @@
                                                     action="{{ route('customer.destroy', ['customer' => $customer->id]) }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a class="dropdown-item delete" href="#" customer-id="{{ $customer->id }}"
+                                                    <a class="dropdown-item delete"  href="" customer-id="{{ $customer->id }}"
                                                         customer-role="Customer" customer-name="{{ $customer->name }}">
                                                         Delete
                                                     </a>
@@ -159,35 +159,5 @@
 @endsection
 
 @section('footer')
-<script>
-    $('.delete').click(function() {
-        var customer_id = $(this).attr('customer-id');
-        var customer_name = $(this).attr('customer-name');
-        var customer_url = $(this).attr('customer-url');
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-                confirmButton: 'btn btn-success',
-                cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-        })
 
-        swalWithBootstrapButtons.fire({
-            title: 'Are you sure?',
-            text: customer_name + " will be deleted, You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'No, cancel! ',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                id = "#delete-customer-form-" + customer_id
-                console.log(id)
-                $(id).submit();
-            }
-        })
-    });
-
-</script>
 @endsection

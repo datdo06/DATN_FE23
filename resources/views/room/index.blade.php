@@ -36,7 +36,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Number</th>
-                                            <th scope="col">Type</th>
+                                            <th scope="col">Types</th>
                                             <th scope="col">Capacity</th>
                                             <th scope="col">Price / Day</th>
                                             <th scope="col">Status</th>

@@ -3,7 +3,6 @@
 @section('content')
 
 @endsection
-{{--
 @section('footer')
 <script>
     $('.delete').click(function() {
@@ -36,4 +35,4 @@
     });
 
 </script>
-@endsection --}}
+@endsection

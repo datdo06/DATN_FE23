@@ -15,8 +15,8 @@ class CreateFacilityRoomTable extends Migration
     {
         Schema::create('facility_room', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('room_id')->constrained();
-            $table->foreignId('facility_id')->constrained();
+            $table->foreignId('room_id');
+            $table->foreignId('facility_id');
             $table->timestamps();
         });
     }

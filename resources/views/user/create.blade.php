@@ -46,8 +46,18 @@
                                 <option selected disabled hidden>Choose...</option>
                                 <option value="Super" @if (old('role') == 'Super') selected @endif>Super</option>
                                 <option value="Admin" @if (old('role') == 'Admin') selected @endif>Admin</option>
+                                <option value="Customer" @if (old('role') == 'Customer') selected @endif>Customer</option>
                             </select>
                             @error('role')
+                                <div class="text-danger mt-1">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div class="col-mg-12">
+                            <label for="avatar" class="form-label">Profile Picture</label>
+                            <input class="form-control" type="file" name="avatar" id="avatar">
+                            @error('avatar')
                                 <div class="text-danger mt-1">
                                     {{ $message }}
                                 </div>

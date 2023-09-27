@@ -48,13 +48,14 @@ class CustomerController extends Controller
     public function update(Customer $customer, StoreCustomerRequest $request)
     {
         $customer->update($request->all());
-        return redirect('customer')->with('success', 'customer ' . $customer->name . ' udpated!');
+        return redirect('customer.index')->with('success', 'customer ' . $customer->name . ' udpated!');
     }
 
     public function destroy(Customer $customer, ImageRepositoryInterface $imageRepository)
     {
         try {
             $user = User::find($customer->user->id);
+
             $avatar_path = public_path('img/user/' . $user->name . '-' . $user->id);
 
             $customer->delete();
@@ -65,7 +66,7 @@ class CustomerController extends Controller
             }
 
             return redirect('customer')->with('success', 'Customer ' . $customer->name . ' deleted!');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $errorMessage = "";
             if ($e->errorInfo[0] == "23000") {
                 $errorMessage = "Data still connected to other tables";

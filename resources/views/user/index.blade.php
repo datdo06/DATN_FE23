@@ -63,7 +63,7 @@
                                                     </a>
                                                     <form class="btn btn-sm p-0 m-0" method="POST"
                                                         id="delete-post-form-{{ $user->id }}"
-                                                        action="{{ route('user.destroy', ['user' => $user->id]) }}">
+                                                        action="{{ route('user.destroy', ['user' => $user ->id]) }}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <div class="btn btn-light btn-sm rounded shadow-sm border p-0 m-0 delete"
@@ -221,7 +221,7 @@
 @endsection
 
 @section('footer')
-    <script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
         $('.delete').click(function() {
             var user_id = $(this).attr('user-id');
             var user_name = $(this).attr('user-name');
