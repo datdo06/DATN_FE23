@@ -23,4 +23,11 @@ class AuthController extends Controller
         return redirect('login')->with('success', 'Logout success, goodbye ' . $name);
     }
 
+<<<<<<< HEAD
+=======
+    public function register()
+    {
+        
+    }
+>>>>>>> ff81949cf14f4c214749f12c4922e1362e6e356a
 }

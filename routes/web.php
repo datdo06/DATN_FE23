@@ -20,7 +20,10 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ff81949cf14f4c214749f12c4922e1362e6e356a
 use Illuminate\Support\Facades\Route;
 
 /*
