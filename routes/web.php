@@ -94,9 +94,7 @@ Route::view('/register', 'auth.register')->name('register');
 Route::post('/postRegister', [RegisterController::class, 'create'])->name('postRegister');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about-us', [\App\Http\Controllers\AboutController::class, 'index'])->name('about-us');
-Route::get('/contacts', [\App\Http\Controllers\ContactController::class, 'index'])->name('contacts');
-Route::get('/typography', [\App\Http\Controllers\TypographyController::class, 'index'])->name('typography');
+
 
 
 Route::get('/sendEvent', function () {
