@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" " id=" email"
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" id=" email"
                                 name="email" value="{{ $user->email }}">
                             @error('email')
                                 <div class="text-danger mt-1">
@@ -47,6 +47,7 @@
                                 @if (in_array($user->role, ['Super', 'Admin']))
                                     <option value="Super" @if ($user->role == 'Super') selected @endif>Super</option>
                                     <option value="Admin" @if ($user->role == 'Admin') selected @endif>Admin</option>
+
                                 @endif
                                 @if ($user->role == 'Customer')
                                     <option value="Customer" @if ($user->role == 'Customer') selected @endif>Customer</option>

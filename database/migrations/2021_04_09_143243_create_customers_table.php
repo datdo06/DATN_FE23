@@ -20,7 +20,7 @@ class CreateCustomersTable extends Migration
             $table->enum('gender',['Male', 'Female']);
             $table->string('job');
             $table->date('birthdate');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

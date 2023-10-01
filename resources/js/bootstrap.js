@@ -12,14 +12,14 @@ import Pusher from "pusher-js";
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
  */
-(async () => {
+(async() => {
     window._ = _;
     try {
         window.Popper = popper;
         window.$ = window.jQuery = jquery;
         const [bootstrap, select2] = await Promise.all([
-            import("bootstrap"),
-            import("select2")
+            import ("bootstrap"),
+            import ("select2")
         ])
         window.bootstrap = bootstrap
         select2.default()
@@ -73,7 +73,7 @@ import Pusher from "pusher-js";
 
     window.CustomHelper = {
         errorHandlerForm(e) {
-            for(const error in e.responseJSON.errors) {
+            for (const error in e.responseJSON.errors) {
                 const errorLabel = error
                 const errorList = e.responseJSON.errors[error]
                 $(`#error_${errorLabel}`).text(errorList.join(', '))
@@ -85,15 +85,16 @@ import Pusher from "pusher-js";
     }
 
     await Promise.all([
-        import('datatables.net'),
-        import('datatables.net-bs5'),
+        import ('datatables.net'),
+        import ('datatables.net-bs5'),
     ])
 
     await Promise.all([
-        import("./pages/room-status"),
-        import("./pages/type"),
-        import("./pages/room"),
-        import("./pages/dashboard"),
-        import("./pages/global")
+        import ("./pages/room-status"),
+        import ("./pages/type"),
+        import ("./pages/room"),
+        import ("./pages/dashboard"),
+        import ("./pages/global"),
+        import ("./pages/customer"),
     ])
 })();

@@ -27,7 +27,7 @@
                                 <h5 class="card-title text-center">King Hotel</h5>
                             </div>
                         </div>
-                        <form class="form-signin" action="http://localhost:81/sip/pelamar/fungsi_daftar" method="post">
+                        <form class="form-signin" action="/postLogin" method="post">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-label-group">

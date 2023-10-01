@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                             <hr class="my-4">
-                            {{-- <p class="text-center">Doesnt have any account? <a href="/register">register</a></p> --}}
+                             <p class="text-center">Doesnt have any account? <a href="/register">register</a></p>
                         </form>
                     </div>
                 </div>
