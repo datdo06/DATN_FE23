@@ -58,7 +58,7 @@
         <div class="container">
             <!-- HEADER LOGO -->
             <div class="header_logo">
-                <a href="#"><img src="img/logo-header.png" alt=""></a>
+                <a href="#"><img style="width: 150px" src="img/logo.png" alt=""></a>
             </div>
             <!-- END / HEADER LOGO -->
 

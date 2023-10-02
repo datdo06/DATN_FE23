@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <!-- TITLE -->
-    <title>Index 2</title>
+    <title>King The Land</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
