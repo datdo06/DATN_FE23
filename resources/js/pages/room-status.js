@@ -149,7 +149,7 @@ $(function() {
         const response = await $.get(`/roomstatus/${roomstatusId}/edit`);
         if (!response) return
 
-        $('#main-modal .modal-title').text('Edit Room Status')
+        $('#main-modal .modal-title').text('Edit Homestay Status')
         $('#main-modal .modal-body').html(response.view)
         $('.select2').select2();
     }).on('submit', '.delete-roomstatus', async function(e) {

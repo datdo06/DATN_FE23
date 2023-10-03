@@ -35,8 +35,8 @@
                                 <table id="room-table" class="table table-sm table-hover" style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Number</th>
-                                            <th scope="col">Types</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">District</th>
                                             <th scope="col">Capacity</th>
                                             <th scope="col">Price / Day</th>
                                             <th scope="col">Status</th>
