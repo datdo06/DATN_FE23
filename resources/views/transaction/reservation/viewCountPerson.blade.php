@@ -46,6 +46,19 @@
                                                 {{ $message }}
                                             </div>
                                         @enderror
+                                        <label for="count_person" class="form-label">
+                                            Bạn muốn chọn quận/huyện nào
+                                        </label>
+                                        <select class="form-control @error('type_id') is-invalid @enderror" name="type_id" id="type_id" >
+                                            @foreach($room_type as $rt )
+                                                <option value="{{$rt->id}}" >{{$rt->name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('type_id')
+                                        <div class="text-danger mt-1">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
                                     <div class="col-12">
                                         <button type="submit" class="btn myBtn shadow-sm border float-end">Next</button>
