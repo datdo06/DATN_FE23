@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <h3>Room Status</h3>
+                            <h3>Homestay Status</h3>
                         </div>
                     </div>
                 </div>

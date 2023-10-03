@@ -23,7 +23,7 @@
             <div class="col-md-8 mt-2">
                 <div class="card shadow-sm border">
                     <div class="card-body p-3">
-                        <h2>{{ $roomsCount }} Room Available for:</h2>
+                        <h2>{{ $roomsCount }} Homestay Available for:</h2>
                         <p>{{ request()->input('count_person') }}
                             {{ Helper::plural('People', request()->input('count_person')) }} on
                             {{ Helper::dateFormat(request()->input('check_in')) }} to
@@ -36,7 +36,8 @@
                                     value="{{ request()->input('count_person') }}">
                                 <input type="date" hidden name="check_in" value="{{ request()->input('check_in') }}">
                                 <input type="date" hidden name="check_out" value="{{ request()->input('check_out') }}">
-                                <div class="col-lg-6">
+{{--                                <input type="text" hidden name="type_id" value="{{{$type_id}}}">--}}
+                                <div class="col-lg-3">
                                     <select class="form-select" id="sort_name" name="sort_name"
                                         aria-label="Default select example">
                                         <option value="Price" @if (request()->input('sort_name') == 'Price') selected @endif>Price</option>
@@ -44,14 +45,22 @@
                                         <option value="Capacity" @if (request()->input('sort_name') == 'Capacity') selected @endif>Capacity</option>
                                     </select>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
+                                    <select class="form-select" id="type_id" name="type_id"
+                                            aria-label="Default select example">
+                                        @foreach($type as $t)
+                                            <option value="{{$t->id}}" @if (request()->input('type_id') == $t->id) selected @endif>{{$t->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">
                                     <select class="form-select" id="sort_type" name="sort_type"
                                         aria-label="Default select example">
                                         <option value="ASC" @if (request()->input('sort_type') == 'ASC') selected @endif>Ascending</option>
                                         <option value="DESC" @if (request()->input('sort_type') == 'DESC') selected @endif>Descending</option>
                                     </select>
                                 </div>
-                                <div class="col-lg-2">
+                                <div class="col-lg-3">
                                     <button type="submit" class="btn myBtn shadow-sm border w-100">Search</button>
                                 </div>
                             </div>
@@ -91,6 +100,7 @@
         'count_person' => request()->input('count_person'),
         'check_in' => request()->input('check_in'),
         'check_out' => request()->input('check_out'),
+        'type_id'=>  request()->input('type_id'),
         'sort_name' => request()->input('sort_name'),
         'sort_type' => request()->input('sort_type'),
     ])->links('template.paginationlinks') }}

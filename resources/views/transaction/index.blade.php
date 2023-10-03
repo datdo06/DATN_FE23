@@ -41,7 +41,7 @@
                                     <th>#</th>
                                     <th>ID</th>
                                     <th>Customer</th>
-                                    <th>Room</th>
+                                    <th>Homestay</th>
                                     <th>Check In</th>
                                     <th>Check Out</th>
                                     <th>Days</th>
@@ -109,7 +109,7 @@
                                     <th>#</th>
                                     <th>ID</th>
                                     <th>Customer</th>
-                                    <th>Room</th>
+                                    <th>Homestay</th>
                                     <th>Check In</th>
                                     <th>Check Out</th>
                                     <th>Days</th>

@@ -11,6 +11,7 @@ class ReservationRepository implements ReservationRepositoryInterface
     {
         return Room::with('type', 'roomStatus')
             ->where('capacity', '>=', $request->count_person)
+            ->where('type_id', $request->type_id)
             ->whereNotIn('id', $occupiedRoomId)
             ->when(!empty($request->sort_name), function ($query) use ($request) {
                 $query->orderBy($request->sort_name, $request->sort_type);
@@ -23,6 +24,7 @@ class ReservationRepository implements ReservationRepositoryInterface
     {
         return Room::with('type', 'roomStatus')
             ->where('capacity', '>=', $request->count_person)
+            ->where('type_id', $request->type_id)
             ->whereNotIn('id', $occupiedRoomId)
             ->orderBy('price')
             ->orderBy('capacity')
