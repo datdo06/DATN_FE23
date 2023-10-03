@@ -2,7 +2,7 @@
     @method('PUT')
     @csrf
     <div class="col-md-12">
-        <label for="type_id" class="form-label">Type</label>
+        <label for="type_id" class="form-label">District</label>
         <select id="type_id" name="type_id" class="form-control select2">
             @foreach ($types as $type)
                 <option value="{{ $type->id }}" @if ($room->type->id == $type->id) selected @endif>{{ $type->name }}
@@ -12,7 +12,7 @@
         <div id="error_type_id" class="text-danger error"></div>
     </div>
     <div class="col-md-12">
-        <label for="room_status_id" class="form-label">Room Status</label>
+        <label for="room_status_id" class="form-label">Homestay Status</label>
         <select id="room_status_id" name="room_status_id" class="form-control select2">
             @foreach ($roomstatuses as $roomstatus)
                 <option value="{{ $roomstatus->id }}" @if ($room->roomstatus->id == $roomstatus->id) selected @endif>
@@ -22,7 +22,7 @@
         <div id="error_room_status_id" class="text-danger error"></div>
     </div>
     <div class="col-md-12">
-        <label for="number" class="form-label">Room Number</label>
+        <label for="number" class="form-label">Homestay Name</label>
         <input room="text" class="form-control @error('number') is-invalid @enderror" id="number" name="number"
             value="{{ $room->number }}" placeholder="ex: 1A">
         <div id="error_number" class="text-danger error"></div>

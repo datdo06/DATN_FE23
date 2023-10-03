@@ -72,7 +72,7 @@ $(function() {
 
         swalWithBootstrapButtons.fire({
             title: 'Are you sure?',
-            text: "Type will be deleted, You won't be able to revert this!",
+            text: "District will be deleted, You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes, delete it!',
@@ -91,7 +91,7 @@ $(function() {
         const response = await $.get(`/type/create`);
         if (!response) return
 
-        $('#main-modal .modal-title').text('Create new type')
+        $('#main-modal .modal-title').text('Create new district')
         $('#main-modal .modal-body').html(response.view)
         $('.select2').select2();
     }).on('click', '#btn-modal-save', function() {
@@ -145,7 +145,7 @@ $(function() {
         const response = await $.get(`/type/${typeId}/edit`);
         if (!response) return
 
-        $('#main-modal .modal-title').text('Edit type')
+        $('#main-modal .modal-title').text('Edit district')
         $('#main-modal .modal-body').html(response.view)
         $('.select2').select2();
     }).on('submit', '.delete-type', async function(e) {
