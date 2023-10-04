@@ -81,7 +81,7 @@
                         </div>
                         <div class="col-mg-12">
                             <label for="avatar" class="form-label">Profile Picture</label>
-                            <input class="form-control" type="file" id="avatar">
+                            <input class="form-control" type="file" id="avatar" name="avatar">
                             @error('avatar')
                                 <div class="text-danger mt-1">
                                     {{ $message }}

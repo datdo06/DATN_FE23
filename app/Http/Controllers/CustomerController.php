@@ -9,6 +9,7 @@ use App\Repositories\Implementation\ImageRepository;
 use App\Repositories\Interface\ImageRepositoryInterface;
 use App\Repositories\Interface\CustomerRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class CustomerController extends Controller
@@ -59,17 +60,11 @@ class CustomerController extends Controller
 
     public function update(Customer $customer, StoreCustomerRequest $request)
     {
-        $user = User::where('id', $customer->user_id);
-
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => 'Customer',
-            'random_key' => Str::random(60)
-        ]);
-
+        $user = User::where('id', $customer->user_id)->get();
+        $img = $customer->User->avatar;
+        $img = public_path('img/user/' . $request->name . '-' . $customer->user_id.$img);
         if ($request->hasFile('avatar')) {
-            $path = 'img/user/' . $user->name . '-' . $user->id;
+            $path = 'img/user/' . $request->name . '-' . $customer->user_id;
             $path = public_path($path);
             $file = $request->file('avatar');
 
@@ -78,7 +73,10 @@ class CustomerController extends Controller
             $imageRepository->uploadImage($path, $file);
 
             $user->avatar = $file->getClientOriginalName();
-            $user->save();
+            DB::update('update users set name = ?, email = ?, avatar = ?, role = ? where id = ? ',[$request->name, $request->email, $user->avatar, 'Customer', $customer->user_id]);
+            $imageRepository->destroy($img);
+        }else{
+            DB::update('update users set name = ?, email = ?, role = ? where id = ? ',[$request->name, $request->email, 'Customer', $customer->user_id]);
         }
 
         $customer->update([
