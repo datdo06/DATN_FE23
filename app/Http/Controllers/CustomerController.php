@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Models\Customer;
 use App\Models\User;
+use App\Repositories\Implementation\ImageRepository;
 use App\Repositories\Interface\ImageRepositoryInterface;
 use App\Repositories\Interface\CustomerRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CustomerController extends Controller
 {
@@ -57,8 +59,37 @@ class CustomerController extends Controller
 
     public function update(Customer $customer, StoreCustomerRequest $request)
     {
-        $customer->update($request->all());
-        return redirect('customer.index')->with('success', 'customer ' . $customer->name . ' udpated!');
+        $user = User::where('id', $customer->user_id);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => 'Customer',
+            'random_key' => Str::random(60)
+        ]);
+
+        if ($request->hasFile('avatar')) {
+            $path = 'img/user/' . $user->name . '-' . $user->id;
+            $path = public_path($path);
+            $file = $request->file('avatar');
+
+            $imageRepository = new ImageRepository;
+
+            $imageRepository->uploadImage($path, $file);
+
+            $user->avatar = $file->getClientOriginalName();
+            $user->save();
+        }
+
+        $customer->update([
+            'name' => $request->name,
+            'address' => $request->address,
+            'job' => $request->job,
+            'birthdate' => $request->birthdate,
+            'gender' => $request->gender,
+            'user_id' => $customer->user_id
+        ]);
+        return redirect()->route('customer.index')->with('success', 'customer ' . $customer->name . ' udpated!');
     }
 
     public function destroy(Customer $customer, ImageRepositoryInterface $imageRepository)
