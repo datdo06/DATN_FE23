@@ -42,7 +42,7 @@ $(function() {
                     return `
                         <button class="btn btn-light btn-sm rounded shadow-sm border"
                             data-action="edit-room" data-room-id="${roomId}"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Edit room">
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Edit HomeStay">
                             <i class="fas fa-edit"></i>
                         </button>
                         <form class="btn btn-sm delete-room" method="POST"
@@ -87,7 +87,7 @@ $(function() {
 
         swalWithBootstrapButtons.fire({
             title: 'Are you sure?',
-            text: "Room will be deleted, You won't be able to revert this!",
+            text: "Homestay will be deleted, You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes, delete it!',
@@ -106,7 +106,7 @@ $(function() {
         const response = await $.get(`/room/create`);
         if (!response) return
 
-        $('#main-modal .modal-title').text('Create new room')
+        $('#main-modal .modal-title').text('Create new homestay')
         $('#main-modal .modal-body').html(response.view)
         $('.select2').select2();
     }).on('click', '#btn-modal-save', function() {
@@ -160,7 +160,7 @@ $(function() {
         const response = await $.get(`/room/${roomId}/edit`);
         if (!response) return
 
-        $('#main-modal .modal-title').text('Edit room')
+        $('#main-modal .modal-title').text('Edit Homestay')
         $('#main-modal .modal-body').html(response.view)
         $('.select2').select2();
     }).on('submit', '.delete-room', async function(e) {

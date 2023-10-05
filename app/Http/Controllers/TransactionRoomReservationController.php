@@ -10,6 +10,7 @@ use App\Http\Requests\StoreCustomerRequest;
 use App\Models\Customer;
 use App\Models\Room;
 use App\Models\Transaction;
+use App\Models\Type;
 use App\Models\User;
 use App\Notifications\NewRoomReservationDownPayment;
 use App\Repositories\Interface\CustomerRepositoryInterface;
@@ -49,13 +50,15 @@ class TransactionRoomReservationController extends Controller
 
     public function viewCountPerson(Customer $customer)
     {
-        return view('transaction.reservation.viewCountPerson', compact('customer'));
+        $room_type = Type::query()->get();
+        return view('transaction.reservation.viewCountPerson', compact('customer', 'room_type'));
     }
 
     public function chooseRoom(ChooseRoomRequest $request, Customer $customer)
     {
         $stayFrom = $request->check_in;
         $stayUntil = $request->check_out;
+        $type  = Type::query()->get();
 
         $occupiedRoomId = $this->getOccupiedRoomID($request->check_in, $request->check_out);
 
@@ -67,7 +70,8 @@ class TransactionRoomReservationController extends Controller
             'rooms',
             'stayFrom',
             'stayUntil',
-            'roomsCount'
+            'roomsCount',
+            'type',
         ));
     }
 

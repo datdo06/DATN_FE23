@@ -8,8 +8,8 @@
                     <h2>Edit Customer</h2>
                 </div>
                 <div class="card-body p-3">
-                    <form class="row g-3" method="POST"
-                        action="{{ route('customer.update', ['customer' => $customer->id]) }}">
+                    <form class="row g-3" method="POST" enctype="multipart/form-data"
+                        action="{{ route('customer.update',  $customer->id) }}">
                         @method('PUT')
                         @csrf
                         <div class="col-md-12">
@@ -43,6 +43,23 @@
                             @enderror
                         </div>
                         <div class="col-md-12">
+                            <label for="birthdate" class="form-label">Gender</label>
+                            <select name="gender" id="" class="form-control">
+                                @if($customer->gender === 'Male')
+                                    <option value="Male" selected >Male</option>
+                                    <option value="Female" >Female</option>
+                                @else
+                                    <option value="Male" >Male</option>
+                                    <option value="Female"selected >Female</option>
+                                @endif
+                            </select>
+                            @error('birthdate')
+                            <div class="text-danger mt-1">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="col-md-12">
                             <label for="job" class="form-label">Job</label>
                             <input type="text" class="form-control @error('job') is-invalid @enderror" id="job" name="job"
                                 value="{{ $customer->job }}">
@@ -64,7 +81,7 @@
                         </div>
                         <div class="col-mg-12">
                             <label for="avatar" class="form-label">Profile Picture</label>
-                            <input class="form-control" type="file" id="avatar">
+                            <input class="form-control" type="file" id="avatar" name="avatar">
                             @error('avatar')
                                 <div class="text-danger mt-1">
                                     {{ $message }}
