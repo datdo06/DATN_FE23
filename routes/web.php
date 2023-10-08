@@ -95,6 +95,7 @@ Route::view('/register', 'auth.register')->name('register');
 Route::post('/postRegister', [RegisterController::class, 'create'])->name('postRegister');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');
 Route::view('/login', 'client.login')->name('login');
 Route::view('/register', 'client.register')->name('register');
 Route::post('/addCustomer', [CustomerController::class, 'add'])->name('customer.add');

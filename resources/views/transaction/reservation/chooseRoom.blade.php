@@ -13,7 +13,6 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
         }
-
     </style>
 @endsection
 @section('content')
@@ -36,28 +35,35 @@
                                     value="{{ request()->input('count_person') }}">
                                 <input type="date" hidden name="check_in" value="{{ request()->input('check_in') }}">
                                 <input type="date" hidden name="check_out" value="{{ request()->input('check_out') }}">
-{{--                                <input type="text" hidden name="type_id" value="{{{$type_id}}}">--}}
+                                {{--                                <input type="text" hidden name="type_id" value="{{{$type_id}}}"> --}}
                                 <div class="col-lg-3">
                                     <select class="form-select" id="sort_name" name="sort_name"
                                         aria-label="Default select example">
-                                        <option value="Price" @if (request()->input('sort_name') == 'Price') selected @endif>Price</option>
-                                        <option value="Number" @if (request()->input('sort_name') == 'Number') selected @endif>Number</option>
-                                        <option value="Capacity" @if (request()->input('sort_name') == 'Capacity') selected @endif>Capacity</option>
+                                        <option value="Price" @if (request()->input('sort_name') == 'Price') selected @endif>Price
+                                        </option>
+                                        <option value="Number" @if (request()->input('sort_name') == 'Number') selected @endif>Number
+                                        </option>
+                                        <option value="Capacity" @if (request()->input('sort_name') == 'Capacity') selected @endif>Capacity
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-lg-3">
                                     <select class="form-select" id="type_id" name="type_id"
-                                            aria-label="Default select example">
-                                        @foreach($type as $t)
-                                            <option value="{{$t->id}}" @if (request()->input('type_id') == $t->id) selected @endif>{{$t->name}}</option>
+                                        aria-label="Default select example">
+                                        @foreach ($type as $t)
+                                            <option value="{{ $t->id }}"
+                                                @if (request()->input('type_id') == $t->id) selected @endif>{{ $t->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-lg-3">
                                     <select class="form-select" id="sort_type" name="sort_type"
                                         aria-label="Default select example">
-                                        <option value="ASC" @if (request()->input('sort_type') == 'ASC') selected @endif>Ascending</option>
-                                        <option value="DESC" @if (request()->input('sort_type') == 'DESC') selected @endif>Descending</option>
+                                        <option value="ASC" @if (request()->input('sort_type') == 'ASC') selected @endif>Ascending
+                                        </option>
+                                        <option value="DESC" @if (request()->input('sort_type') == 'DESC') selected @endif>Descending
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-lg-3">
@@ -84,7 +90,8 @@
                                                 class="btn myBtn shadow-sm border w-100 m-2">Choose</a>
                                         </div>
                                         <div class="col-auto d-none d-lg-block">
-                                            <img src="{{ $room->firstImage() }}" width="200" height="250" alt="">
+                                            <img src="{{ $room->firstImage() }}" width="200" height="250"
+                                                alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -97,13 +104,13 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 {{ $rooms->onEachSide(1)->appends([
-        'count_person' => request()->input('count_person'),
-        'check_in' => request()->input('check_in'),
-        'check_out' => request()->input('check_out'),
-        'type_id'=>  request()->input('type_id'),
-        'sort_name' => request()->input('sort_name'),
-        'sort_type' => request()->input('sort_type'),
-    ])->links('template.paginationlinks') }}
+                                        'count_person' => request()->input('count_person'),
+                                        'check_in' => request()->input('check_in'),
+                                        'check_out' => request()->input('check_out'),
+                                        'type_id' => request()->input('type_id'),
+                                        'sort_name' => request()->input('sort_name'),
+                                        'sort_type' => request()->input('sort_type'),
+                                    ])->links('template.paginationlinks') }}
                             </div>
                         </div>
                     </div>
