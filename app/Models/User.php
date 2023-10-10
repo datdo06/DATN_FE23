@@ -51,4 +51,8 @@ class User extends Authenticatable
         }
         return asset('img/user/' . $this->name . '-' . $this->id . '/' . $this->avatar);
     }
+
+    public function customer() {
+        return $this->belongsTo(Customer::class);
+    }
 }

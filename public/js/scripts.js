@@ -1182,7 +1182,7 @@
 
 })(jQuery);
 
-// function for ajax 
+// function for ajax
 function sendBooking() {
     var $ = jQuery;
     $('#ajax-form-search-send').validate({

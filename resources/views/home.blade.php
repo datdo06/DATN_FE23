@@ -114,26 +114,29 @@
 
                     <div class="accomd-modations-slide_1">
 
-                        <!-- ITEM -->
+                        @foreach($rooms as $rooms)
                         <div class="accomd-modations-room_1">
 
                             <div class="img">
-                                <a href="#"><img src="img/room/img-7.jpg" alt=""></a>
+                                <a href="#"><img src="{{ $rooms-> firstImage() }}" alt=""></a>
                             </div>
 
                             <div class="text">
+                                <h2><a href="#">{{ $rooms -> number }}</a></h2>
+                                <p class="desc">{{ $rooms -> view }}</p>
                                 <h2><a href="#">Luxury Room</a></h2>
                                 <p class="desc">Cum sociis natoque penatibus et magnis dis part urient montes, nascetur
                                     ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
                                 <div class="wrap-price">
                                     <p class="price">
-                                        <span class="amout">$320</span> /days
+                                        <span class="amout">{{ $rooms -> price }}</span> /days
                                     </p>
                                     <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
                                 </div>
                             </div>
 
                         </div>
+                        @endforeach
                         <!-- END / ITEM -->
 
                         <!-- ITEM -->
@@ -214,15 +217,18 @@
                         <h2 class="heading">GUEST BOOK</h2>
 
                         <div class="guestbook-content_1 owl-single">
-
-                            <!-- ITEM -->
+                            @foreach($users as $user)
                             <div class="guestbook-item_1">
                                 <div class="img">
-                                    <img src="img/avatar/img-5.jpg" alt="">
-                                    <span><strong>Seelentag</strong>From Los Angeles, California</span>
+                                    <img src="{{ $user -> user -> getAvatar() }}" alt="">
+                                    <span><strong>{{ $user -> name }} </strong>{{ $user -> address }}, {{ $user -> job }}</span>
                                 </div>
 
                                 <div class="text">
+                                    <p> {{ $user -> description }}</p>
+                                </div>
+                            </div>
+                            @endforeach
                                     <p>Both the outstanding staff and the beautiful room made our first visit to Catalina
                                         Island such a success! We enjoyed the appetizers during "wine time", the turndown
                                         service, the fresh flowers in our room and the breakfast delivered to our room in a
@@ -254,7 +260,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <h2 class="heading">GUEST BOOK</h2>
+                        <h2 class="heading">Events</h2>
 
                         <div class="event-slide owl-single">
                             <!-- ITEM -->

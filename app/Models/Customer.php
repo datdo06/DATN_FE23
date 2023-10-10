@@ -17,7 +17,8 @@ class Customer extends Model
         'job',
         'birthdate',
         'user_id',
-        'gender'
+        'gender',
+        'description'
     ];
 
     public function user()
