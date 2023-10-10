@@ -58,7 +58,7 @@
         <div class="container">
             <!-- HEADER LOGO -->
             <div class="header_logo">
-                <a href="#"><img style="width: 150px" src="img/logo.png" alt=""></a>
+                <a href="#"><img style="width: 150px" src="img/logo/sip.png" alt=""></a>
             </div>
             <!-- END / HEADER LOGO -->
 
@@ -66,7 +66,7 @@
             <nav class="header_menu">
                 <ul class="menu">
                     <li class="current-menu-item">
-                        <a href="index.html">Home <span class="fa fa-caret-down"></span></a>
+                        <a href="{{ route('home') }}">Home <span class="fa fa-caret-down"></span></a>
                         <ul class="sub-menu">
                             <li><a href="index.html">Home 1</a></li>
                             <li class="current-menu-item"><a href="index-2.html">Home 2</a></li>
@@ -74,7 +74,7 @@
                             <li><a href="index-4.html">Home 4</a></li>
                         </ul>
                     </li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="{{ route('about') }}">About</a></li>
 
                     <li>
                         <a href="#">Room <span class="fa fa-caret-down"></span></a>
@@ -165,7 +165,7 @@
                             <li><a href="blog-detail-fullwidth.html">Blog Detail Fullwidth</a></li>
                         </ul>
                     </li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="{{ route('contact') }}">Contact</a></li>
                 </ul>
             </nav>
             <!-- END / HEADER MENU -->
