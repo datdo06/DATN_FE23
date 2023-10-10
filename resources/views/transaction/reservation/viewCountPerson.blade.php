@@ -18,9 +18,11 @@
                                         <label for="count_person" class="form-label">
                                             How many person?
                                         </label>
-                                        <input type="text" class="form-control @error('count_person') is-invalid @enderror"
+                                        <input type="text"
+                                            class="form-control @error('count_person') is-invalid @enderror"
                                             id="
-                                                count_person" name="count_person" value="{{ old('count_person') }}">
+                                                count_person"
+                                            name="count_person" value="{{ old('count_person') }}">
                                         @error('count_person')
                                             <div class="text-danger mt-1">
                                                 {{ $message }}
@@ -29,8 +31,10 @@
                                         <label for="check_in" class="form-label">
                                             From
                                         </label>
-                                        <input type="date" class="form-control @error('check_in') is-invalid @enderror" id="
-                                                check_in" name="check_in" value="{{ old('check_in') }}">
+                                        <input type="date" class="form-control @error('check_in') is-invalid @enderror"
+                                            id="
+                                                check_in" name="check_in"
+                                            value="{{ old('check_in') }}">
                                         @error('check_in')
                                             <div class="text-danger mt-1">
                                                 {{ $message }}
@@ -39,8 +43,10 @@
                                         <label for="check_out" class="form-label">
                                             Until
                                         </label>
-                                        <input type="date" class="form-control @error('check_out') is-invalid @enderror" id="
-                                                check_out" name="check_out" value="{{ old('check_out') }}">
+                                        <input type="date" class="form-control @error('check_out') is-invalid @enderror"
+                                            id="
+                                                check_out" name="check_out"
+                                            value="{{ old('check_out') }}">
                                         @error('check_out')
                                             <div class="text-danger mt-1">
                                                 {{ $message }}
@@ -49,15 +55,16 @@
                                         <label for="count_person" class="form-label">
                                             Bạn muốn chọn quận/huyện nào
                                         </label>
-                                        <select class="form-control @error('type_id') is-invalid @enderror" name="type_id" id="type_id" >
-                                            @foreach($room_type as $rt )
-                                                <option value="{{$rt->id}}" >{{$rt->name}}</option>
+                                        <select class="form-control @error('type_id') is-invalid @enderror" name="type_id"
+                                            id="type_id">
+                                            @foreach ($room_type as $rt)
+                                                <option value="{{ $rt->id }}">{{ $rt->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('type_id')
-                                        <div class="text-danger mt-1">
-                                            {{ $message }}
-                                        </div>
+                                            <div class="text-danger mt-1">
+                                                {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
                                     <div class="col-12">

@@ -2385,19 +2385,28 @@ blockquote p:after {
     border-radius: 100%
 }
 
-.check-availability .availability-form {
+.check-availability .availability-form  {
     font-size: 0;
     text-align: right;
     margin-top: 5px;
     position: relative
 }
 
-.check-availability .availability-form .awe-calendar-wrapper {
+.check-availability .availability-form .awe-calendar-wrapper{
     width: 150px;
     margin-right: 20px
 }
+.check-availability .availability-form .awe-input{
+    width: 100px;
+    margin-right: 20px;
+    padding-bottom: 8px;
+}
 
-.check-availability .availability-form .awe-calendar-wrapper .awe-calendar {
+.check-availability .availability-form .awe-calendar-wrapper  .awe-calendar{
+    border-color: #fff;
+    color: #fff
+}
+.check-availability .availability-form .awe-input  {
     border-color: #fff;
     color: #fff
 }
@@ -4657,7 +4666,17 @@ blockquote p:after {
 .reservation .reservation_form .awe-calendar-wrapper i {
     color: #fff
 }
-
+.check-availability .availability-form .awe-input::-webkit-input-placeholder {
+    color: #fff
+}
+.check-availability .availability-form .awe-input {
+    border: 2px solid #fff;
+    background-color: transparent;
+    color: #fff
+}
+.check-availability .availability-form .awe-input:-ms-input-placeholder {
+    color: #fff
+}
 .reservation .reservation_form .awe-input {
     margin-top: 20px;
     border: 2px solid #fff;
@@ -10192,8 +10211,15 @@ blockquote p:after {
         padding-right: 15px;
         float: left
     }
-
+    .check-availability .availability-form .awe-input {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
     .check-availability .availability-form .awe-calendar-wrapper {
+        width: 50%;
+        margin: 0
+    }
+    .check-availability .availability-form .awe-input {
         width: 50%;
         margin: 0
     }
