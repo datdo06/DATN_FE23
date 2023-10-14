@@ -113,3 +113,5 @@ Route::get('/sendEvent', function () {
         // event(new NewReservationEvent($message, $superAdmin));
     }
 });
+Route::get('/homestay-detail/{id}',[RoomController::class,'homestayDetail'])->name('homestayDetail');
+// Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');
