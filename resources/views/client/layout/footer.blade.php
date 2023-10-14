@@ -47,7 +47,7 @@
                     <div class="widget widget_logo">
                         <div class="widget-logo">
                             <div class="img">
-                                <a href="#"><img src="img/logo-footer.png" alt=""></a>
+                                <a href="#"><img src="img/logo/sip.png" alt=""></a>
                             </div>
                             <div class="text">
                                 <p><i class="lotus-icon-location"></i> 225 Beach Street, Australian</p>
