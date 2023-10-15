@@ -60,7 +60,7 @@
                                         <select class="awe-select" id="sort_name" name="sort_name">
                                             <option value="Price" @if (request()->input('sort_name') == 'Price') selected @endif>Price
                                             </option>
-                                            <option value="Number" @if (request()->input('sort_name') == 'Number') selected @endif>Number
+                                            <option value="Number" @if (request()->input('sort_name') == 'Number') selected @endif>Name
                                             </option>
                                             <option value="Capacity" @if (request()->input('sort_name') == 'Capacity') selected @endif>
                                                 Capacity
@@ -113,11 +113,15 @@
                                 <!-- ITEM -->
                                 @forelse ($rooms as $room)
                                     <div class="reservation-room_item">
-
-                                        <h2 class="reservation-room_name"><a href="#">{{ $room->number }} ~ {{ $room->type->name }}</a></h2>
-
+                                        <form action="{{ route('homestayDetail', ['id' => $room->id])  }}" method="GET">
+                                            @csrf
+                                        <h2 class="reservation-room_name"><a href="{{ route('homestayDetail', ['id' => $room->id])  }}">{{ $room->number }} ~ {{ $room->type->name }}</a></h2>
+                                            <input type="hidden" value="{{ request()->input('check_in') }}" name="checkin">
+                                            <input type="hidden" value="{{ request()->input('check_out') }}" name="checkout">
+                                            <input type="hidden" value="{{ request()->input('count_person') }}"name="person">
+                                            <input type="hidden" value="{{ $room->type->id }}" name="typeid">
                                         <div class="reservation-room_img">
-                                            <a href="#"><img src="{{ $room->firstImage() }}" alt=""></a>
+                                            <a href="{{ route('homestayDetail', ['id' => $room->id])  }}"><img src="{{ $room->firstImage() }}" alt=""></a>
                                         </div>
 
                                         <div class="reservation-room_text">
@@ -132,7 +136,7 @@
                                                 </ul>
                                             </div>
 
-                                            <a href="#" class="reservation-room_view-more">View More Infomation</a>
+                                            <a href="{{ route('homestayDetail', ['id' => $room->id])  }}" class="reservation-room_view-more">View More Infomation</a>
 
                                             <div class="clear"></div>
 
@@ -142,8 +146,8 @@
                                                 / days
                                             </p>
 
-                                            <a href="#" class="awe-btn awe-btn-default">BOOK ROOM</a>
-
+                                            <button type="submit" class="awe-btn awe-btn-default">BOOK ROOM</button>
+                                        </form>
                                         </div>
 
                                       
