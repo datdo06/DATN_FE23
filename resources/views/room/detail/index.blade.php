@@ -45,7 +45,7 @@
                             @endforeach
                         </div>
                         <!-- END / THUMBNAIL IMAGE -->
-                        <h1> Khách sạn :::{{ $detailRoom->number }}</h1>
+                        <h1> Khách sạn ::{{ $detailRoom->number }}</h1>
                         <p>{{ $detailRoom->view }}</p>
 
 
