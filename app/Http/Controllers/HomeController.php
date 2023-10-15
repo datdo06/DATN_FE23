@@ -14,7 +14,7 @@ use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Requests\ChooseRoomRequest;
 use App\Repositories\Interface\ReservationRepositoryInterface;
-use App\Models\Transaction;
+
 
 class HomeController extends Controller
 {
@@ -74,6 +74,7 @@ class HomeController extends Controller
 
     public function show(Room $room)
     {
+        $room_type = Type::query()->get();
         $roomImage = Image::query()
             ->get();
         $rooms = Room::query()
@@ -85,6 +86,6 @@ class HomeController extends Controller
             ->where('role', '=', 'super')
             ->get();
 
-        return view('home', compact('roomImage', 'rooms', 'users'));
+        return view('home', compact('roomImage', 'rooms', 'users', 'room_type'));
     }
 }
