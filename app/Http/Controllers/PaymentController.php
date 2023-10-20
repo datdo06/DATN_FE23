@@ -44,4 +44,5 @@ class PaymentController extends Controller
     {
         return view('payment.invoice', compact('payment'));
     }
+
 }

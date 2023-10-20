@@ -136,4 +136,5 @@ class TransactionRoomReservationController extends Controller
             ->orWhere([['check_out', '>=', $stayFrom], ['check_out', '<=', $stayUntil]])
             ->pluck('room_id');
     }
+
 }

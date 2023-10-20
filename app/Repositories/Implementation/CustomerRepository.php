@@ -65,6 +65,7 @@ class CustomerRepository implements CustomerRepositoryInterface
             'job' => $request->job,
             'birthdate' => $request->birthdate,
             'gender' => $request->gender,
+//            'description' => $request->description,
             'user_id' => $user->id
         ]);
 

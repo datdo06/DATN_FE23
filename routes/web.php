@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
         Route::get('/{customer}/viewCountPerson', [TransactionRoomReservationController::class, 'viewCountPerson'])->name('viewCountPerson');
         Route::get('/{customer}/chooseRoom', [TransactionRoomReservationController::class, 'chooseRoom'])->name('chooseRoom');
         Route::get('/{customer}/{room}/{from}/{to}/confirmation', [TransactionRoomReservationController::class, 'confirmation'])->name('confirmation');
+
         Route::post('/{customer}/{room}/payDownPayment', [TransactionRoomReservationController::class, 'payDownPayment'])->name('payDownPayment');
     });
 
@@ -98,12 +99,12 @@ Route::post('/postRegister', [RegisterController::class, 'create'])->name('postR
 Route::get('/about', [\App\Http\Controllers\AboutController::class, 'index'])->name('about');
 Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact');
 Route::get('/', [HomeController::class, 'show'])->name('home');
-Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');
 Route::view('/login', 'client.login')->name('login');
 Route::view('/register', 'client.register')->name('register');
 Route::post('/addCustomer', [CustomerController::class, 'add'])->name('customer.add');
 
+Route::get('/oke', [TransactionRoomReservationController::class, 'oke']);
 Route::get('/sendEvent', function () {
     $superAdmins = User::where('role', 'Super')->get();
     event(new RefreshDashboardEvent("Someone reserved a room"));
