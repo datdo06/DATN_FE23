@@ -74,22 +74,22 @@
                                 <input type="text" class="awe-calendar from  @error('check_in') is-invalid @enderror"
                                     id="check_in" name="check_in"
                                     value="{{ old('check_in') }}" placeholder="Ngày đến" required>
-                                
+
                                 <input type="text" class="awe-calendar to @error('check_out') is-invalid @enderror"
                                     id="check_out" name="check_out"
                                     value="{{ old('check_out') }}" placeholder="Ngày đi" required>
-                             
+
                                 <input type="text" class="awe-input @error('count_person') is-invalid @enderror"
                                     id="count_person" name="count_person" value="{{ old('count_person') }}"
                                     placeholder="Số người" required>
-                              
+
                                 <select class="awe-select @error('type_id') is-invalid @enderror" name="type_id"
                                     id="type_id" required>
                                     @foreach ($room_type as $rt)
                                         <option value="{{ $rt->id }}">{{ $rt->name }}</option>
                                     @endforeach
                                 </select>
-                              
+
                                 <div class="vailability-submit">
                                     <button class="awe-btn awe-btn-13" type="submit">Tìm</button>
                                 </div>
@@ -114,22 +114,22 @@
 
                     <div class="accomd-modations-slide_1">
 
-                        @foreach($rooms as $rooms)
+                        @foreach($rooms as $room)
                         <div class="accomd-modations-room_1">
 
                             <div class="img">
-                                <a href="#"><img src="{{ $rooms-> firstImage() }}" alt=""></a>
+                                <a href="#"><img src="{{ $room-> firstImage() }}" alt=""></a>
                             </div>
 
                             <div class="text">
-                                <h2><a href="#">{{ $rooms -> number }}</a></h2>
-                                <p class="desc">{{ $rooms -> view }}</p>
+                                <h2><a href="#">{{ $room -> number }}</a></h2>
+                                <p class="desc">{{ $room -> view }}</p>
                                 <h2><a href="#">Luxury Room</a></h2>
                                 <p class="desc">Cum sociis natoque penatibus et magnis dis part urient montes, nascetur
                                     ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
                                 <div class="wrap-price">
                                     <p class="price">
-                                        <span class="amout">{{ $rooms -> price }}</span> /days
+                                        <span class="amout">{{ $room -> price }}</span> /days
                                     </p>
                                     <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
                                 </div>
@@ -138,64 +138,6 @@
                         </div>
                         @endforeach
                         <!-- END / ITEM -->
-
-                        <!-- ITEM -->
-                        <div class="accomd-modations-room_1">
-                            <div class="img">
-                                <a href="#"><img src="img/room/img-8.jpg" alt=""></a>
-                            </div>
-                            <div class="text">
-                                <h2><a href="#">Luxury Room</a></h2>
-                                <p class="desc">Cum sociis natoque penatibus et magnis dis part urient montes, nascetur
-                                    ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
-                                <div class="wrap-price">
-                                    <p class="price">
-                                        <span class="amout">$320</span> /days
-                                    </p>
-                                    <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END / ITEM -->
-
-                        <!-- ITEM -->
-                        <div class="accomd-modations-room_1">
-                            <div class="img">
-                                <a href="#"><img src="img/room/img-9.jpg" alt=""></a>
-                            </div>
-                            <div class="text">
-                                <h2><a href="#">Luxury Room</a></h2>
-                                <p class="desc">Cum sociis natoque penatibus et magnis dis part urient montes, nascetur
-                                    ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
-                                <div class="wrap-price">
-                                    <p class="price">
-                                        <span class="amout">$320</span> /days
-                                    </p>
-                                    <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END / ITEM -->
-
-                        <!-- ITEM -->
-                        <div class="accomd-modations-room_1">
-                            <div class="img">
-                                <a href="#"><img src="img/room/img-7.jpg" alt=""></a>
-                            </div>
-                            <div class="text">
-                                <h2><a href="#">Luxury Room</a></h2>
-                                <p class="desc">Cum sociis natoque penatibus et magnis dis part urient montes, nascetur
-                                    ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
-                                <div class="wrap-price">
-                                    <p class="price">
-                                        <span class="amout">$320</span> /days
-                                    </p>
-                                    <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END / ITEM -->
-
                     </div>
 
                 </div>
@@ -229,32 +171,6 @@
                                 </div>
                             </div>
                             @endforeach
-                                    <p>Both the outstanding staff and the beautiful room made our first visit to Catalina
-                                        Island such a success! We enjoyed the appetizers during "wine time", the turndown
-                                        service, the fresh flowers in our room and the breakfast delivered to our room in a
-                                        wicker basket.. An attendant set it out for us in a charming fashion. We would not
-                                        consider another property when we return to Catalina!</p>
-                                </div>
-                            </div>
-                            <!-- END / ITEM -->
-
-                            <!-- ITEM -->
-                            <div class="guestbook-item_1">
-                                <div class="img">
-                                    <img src="img/avatar/img-5.jpg" alt="">
-                                    <span><strong>Seelentag</strong>From Los Angeles, California</span>
-                                </div>
-
-                                <div class="text">
-                                    <p>Both the outstanding staff and the beautiful room made our first visit to Catalina
-                                        Island such a success! We enjoyed the appetizers during "wine time", the turndown
-                                        service, the fresh flowers in our room and the breakfast delivered to our room in a
-                                        wicker basket.. An attendant set it out for us in a charming fashion. We would not
-                                        consider another property when we return to Catalina!</p>
-                                </div>
-                            </div>
-                            <!-- END / ITEM -->
-
                         </div>
 
                     </div>
