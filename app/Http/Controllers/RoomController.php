@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRoomRequest;
+use App\Models\Image;
 use App\Models\Room;
 use App\Models\RoomStatus;
 use App\Models\Transaction;
@@ -99,5 +100,11 @@ class RoomController extends Controller
                 'message' => 'Customer ' . $room->number . ' cannot be deleted! Error Code:' . $e->errorInfo[1]
             ], 500);
         }
+    }
+    public function homestayDetail($id)
+    {
+        $detailRoom = Room::where('id', $id)->first();
+        $image = Image::where('room_id', $id)->get();
+        return view('room.detail.index', compact('detailRoom', 'image'));
     }
 }
