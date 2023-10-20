@@ -40,7 +40,7 @@ class HomeController extends Controller
         $this->reservationRepository = $reservationRepository;
     }
 
-  
+
     public function chooseRoomU(ChooseRoomRequest $request)
     {
         $stayFrom = $request->check_in;
@@ -70,6 +70,7 @@ class HomeController extends Controller
 
     public function show(Room $room)
     {
+        $room_type = Type::query()->get();
         $roomImage = Image::query()
             ->get();
         $room_type = Type::query()->get();
@@ -85,5 +86,5 @@ class HomeController extends Controller
 
         return view('home', compact('roomImage', 'rooms', 'users', 'room_type'));
     }
-    
+
 }

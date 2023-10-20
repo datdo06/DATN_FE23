@@ -45,7 +45,7 @@
                             <hr>
                             <div class="col-sm-12 mt-2">
                                 <form method="POST"
-                                    action="{{ route('transaction.reservation.payDownPayment', ['customer' => $customer->id, 'room' => $room->id]) }}">
+                                    action="{{ route('transaction.reservation.payOnlinePayment', ['customer' => $customer->id, 'room' => $room->id]) }}">
                                     @csrf
                                     <div class="row mb-3">
                                         <label for="check_in" class="col-sm-2 col-form-label">Check In</label>
@@ -105,7 +105,7 @@
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-10" id="showPaymentType"></div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary float-end">Pay DownPayment</button>
+                                    <button type="submit" class="btn btn-primary float-end" name="redirect">Pay DownPayment</button>
                                 </form>
                             </div>
                         </div>

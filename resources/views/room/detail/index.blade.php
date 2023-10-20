@@ -5,8 +5,8 @@
         <div class="sub-banner">
             <div class="container">
                 <div class="text text-center">
-                    <h2>LUXURY ROOM</h2>
-                    <p>Lorem Ipsum is simply dummy text</p>
+                    <h2>{{ $detailRoom->number }}</h2>
+                    <p>{{$detailRoom->type->name}}</p>
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
                             @endforeach
                         </div>
                         <!-- END / THUMBNAIL IMAGE -->
-                        <h1> Khách sạn :{{ $detailRoom->number }}</h1>
+                        <h1> Homestay :{{ $detailRoom->number }}</h1>
                         <p>{{ $detailRoom->view }}</p>
 
 
@@ -59,10 +59,10 @@
                             <div class="room-detail_total">
                                 <img src="img/icon-logo.png" alt="" class="icon-logo">
 
-                                <h6>STARTING ROOM FROM</h6>
+                                <h6>STARTING HOMESTAY FROM</h6>
 
                                 <p class="price">
-                                    <span class="amout">$260</span> /days
+                                    <span class="amout">{{$detailRoom->price}}VND</span> /days
                                 </p>
                             </div>
 
@@ -70,14 +70,14 @@
                                 <label>Arrive</label>
                                 <input type="text" class="awe-calendar from" disabled placeholder="Arrive Date" value="{{ Helper::dateFormat($_GET['checkin']) }}" name="checkin">
                                 <label>Depature</label>
-                                <input type="text" class="awe-calendar to" disabled placeholder="Departure Date" value="{{ Helper::dateFormat($_GET['checkout']) }}">
+                                <input type="text" class="awe-calendar to" disabled placeholder="Departure Date" value="{{ Helper::dateFormat($_GET['checkout']) }}" name="checkin">
                                 <label>Person: {{ $_GET['person'] }}</label>
-                            
+
                                 <label>Address: {{ $detailRoom->type->name }}</label>
-                
+
                                 <button class="awe-btn awe-btn-13">Book Now</button>
                             </div>
-                        
+
                         </div>
                         <!-- END / FORM BOOK -->
 

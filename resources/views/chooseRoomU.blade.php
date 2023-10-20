@@ -30,8 +30,9 @@
 
                                 <!-- CURRENT -->
                                 <div class="reservation-room-seleted_current bg-blue">
-                                    <h6> <label>{{ request()->input('count_person') }}
-                                            {{ Helper::plural('People', request()->input('count_person')) }}</label></h6>
+                                    <h6><label>{{ request()->input('count_person') }}
+                                            {{ Helper::plural('People', request()->input('count_person')) }}</label>
+                                    </h6>
                                 </div>
                                 <!-- CURRENT -->
 
@@ -53,16 +54,21 @@
                                 <h6 class="check_availability_title">your stay dates</h6>
                                 <form action="chooseRoom" method="GET">
                                     <input type="text" hidden name="count_person"
-                                        value="{{ request()->input('count_person') }}">
-                                    <input type="text" hidden name="check_in" value="{{ request()->input('check_in') }}">
-                                    <input type="text" hidden name="check_out" value="{{ request()->input('check_out') }}">
+                                           value="{{ request()->input('count_person') }}">
+                                    <input type="text" hidden name="check_in"
+                                           value="{{ request()->input('check_in') }}">
+                                    <input type="text" hidden name="check_out"
+                                           value="{{ request()->input('check_out') }}">
                                     <div class="check_availability-field">
                                         <select class="awe-select" id="sort_name" name="sort_name">
-                                            <option value="Price" @if (request()->input('sort_name') == 'Price') selected @endif>Price
+                                            <option value="Price"
+                                                    @if (request()->input('sort_name') == 'Price') selected @endif>Price
                                             </option>
-                                            <option value="Number" @if (request()->input('sort_name') == 'Number') selected @endif>Name
+                                            <option value="Number"
+                                                    @if (request()->input('sort_name') == 'Number') selected @endif>Name
                                             </option>
-                                            <option value="Capacity" @if (request()->input('sort_name') == 'Capacity') selected @endif>
+                                            <option value="Capacity"
+                                                    @if (request()->input('sort_name') == 'Capacity') selected @endif>
                                                 Capacity
                                             </option>
                                         </select>
@@ -71,7 +77,7 @@
                                         <select class="awe-select" id="type_id" name="type_id">
                                             @foreach ($type as $t)
                                                 <option value="{{ $t->id }}"
-                                                    @if (request()->input('type_id') == $t->id) selected @endif>{{ $t->name }}
+                                                        @if (request()->input('type_id') == $t->id) selected @endif>{{ $t->name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -80,10 +86,12 @@
 
                                         <select class="awe-select" id="sort_type" name="sort_type">
 
-                                            <option value="ASC" @if (request()->input('sort_type') == 'ASC') selected @endif>
+                                            <option value="ASC"
+                                                    @if (request()->input('sort_type') == 'ASC') selected @endif>
                                                 Ascending
                                             </option>
-                                            <option value="DESC" @if (request()->input('sort_type') == 'DESC') selected @endif>
+                                            <option value="DESC"
+                                                    @if (request()->input('sort_type') == 'DESC') selected @endif>
                                                 Descending
                                             </option>
                                         </select>
@@ -91,7 +99,6 @@
                                     <button class="awe-btn awe-btn-13" type="submit">CHECK AVAILABLE</button>
 
                                 </form>
-
 
 
                             </div>
@@ -113,72 +120,78 @@
                                 <!-- ITEM -->
                                 @forelse ($rooms as $room)
                                     <div class="reservation-room_item">
-                                        <form action="{{ route('homestayDetail', ['id' => $room->id])  }}" method="GET">
+                                        <form action="" method="POST">
                                             @csrf
-                                        <h2 class="reservation-room_name"><a href="{{ route('homestayDetail', ['id' => $room->id])  }}">{{ $room->number }} ~ {{ $room->type->name }}</a></h2>
-                                            <input type="hidden" value="{{ request()->input('check_in') }}" name="checkin">
-                                            <input type="hidden" value="{{ request()->input('check_out') }}" name="checkout">
-                                            <input type="hidden" value="{{ request()->input('count_person') }}"name="person">
+                                            <h2 class="reservation-room_name"><a
+                                                    href="homestay-detail/{{$room->id}}?checkin={{$stayFrom}}&checkout={{$stayUntil}}&person={{request()->input('count_person')}}">{{ $room->number }}
+                                                    ~ {{ $room->type->name }}</a></h2>
+                                            <input type="hidden" value="{{ $stayFrom }}" name="checkin">
+                                            <input type="hidden" value="{{ $stayUntil }}" name="checkout">
+                                            <input type="hidden" value="{{ request()->input('count_person') }}"
+                                                   name="person">
                                             <input type="hidden" value="{{ $room->type->id }}" name="typeid">
-                                        <div class="reservation-room_img">
-                                            <a href="{{ route('homestayDetail', ['id' => $room->id])  }}"><img src="{{ $room->firstImage() }}" alt=""></a>
-                                        </div>
-
-                                        <div class="reservation-room_text">
-
-                                            <div class="reservation-room_desc">
-                                                <p>{{ $room->view }}</p>
-                                                <ul>
-                                                    <li>1 King Bed</li>
-                                                    <li>Free Wi-Fi in all guest rooms</li>
-                                                    <li>Separate sitting area</li>
-
-                                                </ul>
+                                            <div class="reservation-room_img">
+                                                <a href="homestay-detail/{{$room->id}}?checkin={{$stayFrom}}&checkout={{$stayUntil}}&person={{request()->input('count_person')}}"><img
+                                                        src="{{ $room->firstImage() }}" alt=""></a>
                                             </div>
 
-                                            <a href="{{ route('homestayDetail', ['id' => $room->id])  }}" class="reservation-room_view-more">View More Infomation</a>
+                                            <div class="reservation-room_text">
 
-                                            <div class="clear"></div>
+                                                <div class="reservation-room_desc">
+                                                    <p>{{ $room->view }}</p>
+                                                    <ul>
+                                                        <li>1 King Bed</li>
+                                                        <li>Free Wi-Fi in all guest rooms</li>
+                                                        <li>Separate sitting area</li>
 
-                                            <p class="reservation-room_price">
+                                                    </ul>
+                                                </div>
+
+                                                <a href="homestay-detail/{{$room->id}}?checkin={{$stayFrom}}&checkout={{$stayUntil}}&person={{request()->input('count_person')}}"
+                                                   class="reservation-room_view-more">View More Infomation</a>
+
+                                                <div class="clear"></div>
+
+                                                <p class="reservation-room_price">
                                                 <span
                                                     class="reservation-room_amout">{{ Helper::convertToRupiah($room->price) }}</span>
-                                                / days
-                                            </p>
+                                                    / days
+                                                </p>
 
-                                            <button type="submit" class="awe-btn awe-btn-default">BOOK ROOM</button>
+                                                <button type="submit" class="awe-btn awe-btn-default">BOOK ROOM</button>
+                                            </div>
                                         </form>
-                                        </div>
-
-                                      
                                     </div>
-                                @empty
-                                    <h3>Theres no available room for {{ request()->input('count_person') }} or more
-                                        person
-                                    </h3>
-                                @endforelse
-                                <!-- END / ITEM -->
 
-                                <!-- ITEM -->
 
                             </div>
-                            <!-- END / RESERVATION ROOM -->
-                        </div>
+                            @empty
+                                <h3>Theres no available room for {{ request()->input('count_person') }} or more
+                                    person
+                                </h3>
+                            @endforelse
+                            <!-- END / ITEM -->
 
+                            <!-- ITEM -->
+
+                        </div>
+                        <!-- END / RESERVATION ROOM -->
                     </div>
-                    <!-- END / CONTENT -->
-                    <div>
-                        {{ $rooms->onEachSide(1)->appends([
-                                'count_person' => request()->input('count_person'),
-                                'check_in' => request()->input('check_in'),
-                                'check_out' => request()->input('check_out'),
-                                'type_id' => request()->input('type_id'),
-                                'sort_name' => request()->input('sort_name'),
-                                'sort_type' => request()->input('sort_type'),
-                            ])->links('template.paginationlinks') }}
-                    </div>
+
+                </div>
+                <!-- END / CONTENT -->
+                <div>
+                    {{ $rooms->onEachSide(1)->appends([
+                            'count_person' => request()->input('count_person'),
+                            'check_in' => request()->input('check_in'),
+                            'check_out' => request()->input('check_out'),
+                            'type_id' => request()->input('type_id'),
+                            'sort_name' => request()->input('sort_name'),
+                            'sort_type' => request()->input('sort_type'),
+                        ])->links('template.paginationlinks') }}
                 </div>
             </div>
+        </div>
         </div>
 
     </section>
