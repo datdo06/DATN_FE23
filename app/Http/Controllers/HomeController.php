@@ -40,11 +40,7 @@ class HomeController extends Controller
         $this->reservationRepository = $reservationRepository;
     }
 
-    public function index()
-    {
-        $room_type = Type::query()->get();
-        return view('home', compact( 'room_type'));
-    }
+
     public function chooseRoomU(ChooseRoomRequest $request)
     {
         $stayFrom = $request->check_in;
@@ -77,6 +73,8 @@ class HomeController extends Controller
         $room_type = Type::query()->get();
         $roomImage = Image::query()
             ->get();
+        $room_type = Type::query()->get();
+
         $rooms = Room::query()
 //            ->join('images', 'rooms.id', '=', 'images.room_id')
 //            ->select('rooms.*', 'images.url')
@@ -88,5 +86,5 @@ class HomeController extends Controller
 
         return view('home', compact('roomImage', 'rooms', 'users', 'room_type'));
     }
-    
+
 }

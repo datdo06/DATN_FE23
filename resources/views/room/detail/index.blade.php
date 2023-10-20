@@ -5,8 +5,8 @@
         <div class="sub-banner">
             <div class="container">
                 <div class="text text-center">
-                    <h2>LUXURY ROOM</h2>
-                    <p>Lorem Ipsum is simply dummy text</p>
+                    <h2>{{ $detailRoom->number }}</h2>
+                    <p>{{$detailRoom->type->name}}</p>
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
                             @endforeach
                         </div>
                         <!-- END / THUMBNAIL IMAGE -->
-                        <h1> Khách sạn ::{{ $detailRoom->number }}</h1>
+                        <h1> Homestay :{{ $detailRoom->number }}</h1>
                         <p>{{ $detailRoom->view }}</p>
 
 
@@ -59,48 +59,24 @@
                             <div class="room-detail_total">
                                 <img src="img/icon-logo.png" alt="" class="icon-logo">
 
-                                <h6>STARTING ROOM FROM</h6>
+                                <h6>STARTING HOMESTAY FROM</h6>
 
                                 <p class="price">
-                                    <span class="amout">$260</span> /days
+                                    <span class="amout">{{$detailRoom->price}}VND</span> /days
                                 </p>
                             </div>
 
                             <div class="room-detail_form">
                                 <label>Arrive</label>
-                                <input type="text" class="awe-calendar from" placeholder="Arrive Date">
+                                <input type="text" class="awe-calendar from" disabled placeholder="Arrive Date" value="{{ Helper::dateFormat($_GET['checkin']) }}" name="checkin">
                                 <label>Depature</label>
-                                <input type="text" class="awe-calendar to" placeholder="Departure Date">
-                                <label>Adult</label>
-                                <select class="awe-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option selected>3</option>
-                                    <option>4</option>
-                                </select>
-                                <label>Chirld</label>
-                                <select class="awe-select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option selected>3</option>
-                                    <option>4</option>
-                                </select>
+                                <input type="text" class="awe-calendar to" disabled placeholder="Departure Date" value="{{ Helper::dateFormat($_GET['checkout']) }}" name="checkin">
+                                <label>Person: {{ $_GET['person'] }}</label>
+
+                                <label>Address: {{ $detailRoom->type->name }}</label>
+
                                 <button class="awe-btn awe-btn-13">Book Now</button>
                             </div>
-                            <!-- CURRENT -->
-                            <div class="reservation-room-seleted_current bg-blue">
-                                <h6> <label>{{ request()->input('count_person') }}
-                                        {{ Helper::plural('People', request()->input('count_person')) }}</label></h6>
-                            </div>
-                            <!-- CURRENT -->
-
-                            <!-- ITEM -->
-                            <div class="reservation-room-seleted_item reservation_disable">
-                                <span class="reservation-option"> {{ Helper::dateFormat(request()->input('check_in')) }}
-                                    to
-                                    {{ Helper::dateFormat(request()->input('check_out')) }}</span>
-                            </div>
-                            <!-- END / ITEM -->
 
                         </div>
                         <!-- END / FORM BOOK -->
