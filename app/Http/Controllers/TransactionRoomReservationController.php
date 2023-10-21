@@ -23,6 +23,9 @@ use Illuminate\Http\Request;
 class TransactionRoomReservationController extends Controller
 {
     private $reservationRepository;
+    private $cus;
+    private $ro;
+    private $da;
 
     public function __construct(ReservationRepositoryInterface $reservationRepository)
     {
@@ -78,6 +81,7 @@ class TransactionRoomReservationController extends Controller
 
     public function confirmation(Customer $customer, Room $room, $stayFrom, $stayUntil)
     {
+
         $price = $room->price;
         $dayDifference = Helper::getDateDifference($stayFrom, $stayUntil);
         $downPayment = ($price * $dayDifference) * 0.15;
@@ -97,6 +101,7 @@ class TransactionRoomReservationController extends Controller
         Request  $request,
     )
     {
+
         $dayDifference = Helper::getDateDifference($request->check_in, $request->check_out);
         $minimumDownPayment = ($room->price * $dayDifference) * 0.15;
 
@@ -109,10 +114,16 @@ class TransactionRoomReservationController extends Controller
         if (in_array($room->id, $occupiedRoomIdInArray)) {
             return redirect()->back()->with('failed', 'Sorry, room ' . $room->number . ' already occupied');
         }
+
+
+
         session(['customer' => $customer]);
         session(['room' => $room]);
         session(['request' => $request->all()]);
-        $this->pay();
+        $data = $request->all();
+
+
+        return view('transaction.css', compact('data', 'room'));
     }
 
     public function pay()
@@ -121,15 +132,8 @@ class TransactionRoomReservationController extends Controller
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         if (session()->has('request')) {
             $data = session()->get('request');
-            $request = session()->get('request');
-            $customer = session()->get('customer');
-            $room = session()->get('room');
-            session(['customer' => $customer]);
-            session(['room' => $room]);
-            session(['request' => $request]);
+
         }
-
-
 
 
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
@@ -193,6 +197,7 @@ class TransactionRoomReservationController extends Controller
 
         if (isset($_POST['redirect'])) {
             header('Location: ' . $vnp_Url);
+
             die();
 
         } else {
@@ -204,7 +209,6 @@ class TransactionRoomReservationController extends Controller
 
     public function vnpay()
     {
-
         if (session()->has('request')&&session()->has('customer')&&session()->has('room')&&$_GET['vnp_ResponseCode']=="00") {
             $request = session()->get('request');
             $customer = session()->get('customer');
