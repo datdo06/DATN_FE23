@@ -45,4 +45,8 @@ class PaymentController extends Controller
         return view('payment.invoice', compact('payment'));
     }
 
+    public function Payment(){
+        return view('payment.pay');
+    }
+
 }
