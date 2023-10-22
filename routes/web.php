@@ -126,4 +126,5 @@ Route::get('/homestay-detail/{id}',[RoomController::class,'homestayDetail'])->na
 Route::get('/booking', function (){
     return view('booking');
 });
+Route::get('/pay', [PaymentController::class,'Payment']);
 // Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');
