@@ -70,6 +70,14 @@
                             @enderror
                         </div>
                         <div class="field-form">
+                            <input type="text" class="field-text" placeholder="Mô tả" name="description" value="{{old('description')}}">
+                            @error('description')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="field-form">
                             <input type="file" class="field-text"  name="avatar">
                             @error('avatar')
                             <span class="invalid-feedback" role="alert">

@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
                     <!-- HEADER MENU -->
-                  
+
                     <!-- END / HEADER MENU -->
 
                     <!-- MENU BAR -->
@@ -11,13 +11,12 @@
                     </span>
                     <!-- END / MENU BAR -->
 
-                </div>
-            </div>
+
             <!-- END / HEADER LOGO & MENU -->
 
-        </header>
+
         <!-- END / HEADER -->
-        
+
         <!-- SUB BANNER -->
         <section class="section-sub-banner awe-parallax bg-16">
 
@@ -35,270 +34,138 @@
 
         </section>
         <!-- END / SUB BANNER -->
-        
+
         <!-- RESERVATION -->
         <section class="section-reservation-page bg-white">
 
             <div class="container">
                 <div class="reservation-page">
-                    
+
                     <!-- STEP -->
-                
+
                     <!-- END / STEP -->
 
                     <div class="row">
+                        <div class="col-md-2 col-lg-2 ">
+                            </div>
 
                         <!-- SIDEBAR -->
-                        <div class="col-md-4 col-lg-3">
+                        <div class=" col-md-8 col-lg-8">
 
-                            <div class="reservation-sidebar">
 
-                                <!-- RESERVATION DATE -->
-                                <div class="reservation-date bg-gray">
+                                <div class="reservation-sidebar">
 
-                                    <!-- HEADING -->
-                                    <h2 class="reservation-heading">Dates</h2>
-                                    <!-- END / HEADING -->
+                                    <!-- RESERVATION DATE -->
+                                    <div class="reservation-date bg-gray">
 
-                                    <ul>
-                                        <li>
-                                            <span>Check-In</span>
-                                            <span>Thu 06/03/2015</span>
-                                        </li>
-                                        <li>
-                                            <span>Check-Out</span>
-                                            <span>Sat 06/06/2015</span>
-                                        </li>
-                                        <li>
-                                            <span>Total Nights</span>
-                                            <span>2</span>
-                                        </li>
-                                        <li>
-                                            <span>Total Rooms</span>
-                                            <span>2 of 2</span>
-                                        </li>
-                                        <li>
-                                            <span>Total Guests</span>
-                                            <span>4 Adults 1 Children</span>
-                                        </li>
-                                    </ul>
+                                        <!-- HEADING -->
+                                        <h2 class="reservation-heading">Dates</h2>
+                                        <!-- END / HEADING -->
+
+                                        <ul>
+                                            <li>
+                                                <span>Check-In</span>
+                                                <span>{{Helper::dateFormat($data['checkin'])}}</span>
+                                            </li>
+                                            <li>
+                                                <span>Check-Out</span>
+                                                <span>{{Helper::dateFormat($data['checkout'])}}</span>
+                                            </li>
+                                            <li>
+                                                <span>Total Day</span>
+                                                <span>{{$data['total_day']}}</span>
+                                            </li>
+                                            <li>
+                                                <span>Total Guests</span>
+                                                <span>{{$data['person']}}</span>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                    <!-- END / RESERVATION DATE -->
+
+                                    <!-- ROOM SELECT -->
+                                    <div class="reservation-room-selected bg-gray">
+
+                                        <!-- HEADING -->
+                                        <h2 class="reservation-heading">Select Homestay</h2>
+                                        <!-- END / HEADING -->
+
+                                        <!-- ITEM -->
+                                        <div class="reservation-room-seleted_item">
+
+                                            <h6>{{$room->number}}</h6> <span class="reservation-option">{{$room->capacity}} people</span>
+
+                                            <div class="reservation-room-seleted_name has-package">
+                                                <h2><a href="#">{{$room->type->name}}</a></h2>
+                                            </div>
+
+                                            <div class="reservation-room-seleted_package">
+                                                <h6>Space Price</h6>
+                                                <ul>
+                                                    <li>
+                                                        <span>Price/Day</span>
+                                                        <span>{{ Helper::convertToRupiah($room->price) }}"</span>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="reservation-room-seleted_total-room">
+                                                TOTAL DAY
+                                                <span class="reservation-amout">{{ $data['total_day'] }} {{ Helper::plural('Day', $data['total_day']) }}</span>
+                                            </div>
+
+
+                                            <div class="reservation-room-seleted_total-room">
+                                                TOTAL {{$room->name}}
+                                                <span class="reservation-amout">{{ Helper::convertToRupiah(Helper::getTotalPayment($data['total_day'], $room->price)) }}</span>
+                                            </div>
+                                        </div>
+                                        <!-- END / ITEM -->
+
+                                        <!-- ITEM -->
+                                        <!-- END / ITEM -->
+
+                                        <!-- TOTAL -->
+                                        <div class="reservation-room-seleted_total bg-blue">
+                                            <label>TOTAL</label>
+                                            <span class="reservation-total">{{ Helper::convertToRupiah(Helper::getTotalPayment($data['total_day'], $room->price)) }}</span>
+                                        </div>
+                                        <!-- END / TOTAL -->
+
+                                    </div>
+                                    <!-- END / ROOM SELECT -->
 
                                 </div>
-                                <!-- END / RESERVATION DATE -->
-                                
-                                <!-- ROOM SELECT -->
-                                <div class="reservation-room-selected bg-gray">
 
-                                    <!-- HEADING -->
-                                    <h2 class="reservation-heading">Select Rooms</h2>
-                                    <!-- END / HEADING -->
-
-                                    <!-- ITEM -->
-                                    <div class="reservation-room-seleted_item">
-
-                                        <h6>ROOM 1</h6> <span class="reservation-option">2 Adult, 1 Child</span>
-
-                                        <div class="reservation-room-seleted_name has-package">
-                                            <h2><a href="#">LUXURY ROOM</a></h2>
-                                        </div>
-
-                                        <div class="reservation-room-seleted_package">
-                                            <h6>Space Price</h6>
-                                            <ul>
-                                                <li>
-                                                    <span>3 June 2015</span>
-                                                    <span>$250.00</span>
-                                                </li>
-                                                <li>
-                                                    <span>6 June 2015</span>
-                                                    <span>$320.00</span>
-                                                </li>
-                                            </ul>
-
-                                            <ul>
-                                                <li>
-                                                    <span>Service</span>
-                                                    <span>Free</span>
-                                                </li>
-                                                <li>
-                                                    <span>Tax</span>
-                                                    <span>$320.00</span>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-
-                                        <div class="reservation-room-seleted_total-room">
-                                            TOTAL Room 1
-                                            <span class="reservation-amout">$470.00</span>
-                                        </div>
-                                        
-                                    </div>
-                                    <!-- END / ITEM -->
-
-                                    <!-- ITEM -->
-                                    <!-- END / ITEM -->
-                                    
-                                    <!-- TOTAL -->
-                                    <div class="reservation-room-seleted_total bg-blue">
-                                        <label>TOTAL</label>
-                                        <span class="reservation-total">$470.00</span>
-                                    </div>
-                                    <!-- END / TOTAL -->
-
+                            <form method="POST"
+                                  action="{{route('transaction.reservation.payOnlinePayment', ['customer' => $customer->id, 'room' => $room->id])}}">
+                                @csrf
+                                <div>
+                                    <input type="hidden" value="{{$data['checkin']}}" name="check_in" >
+                                    <input type="hidden" value="{{$data['checkout']}}" name="check_out" >
+                                    <input type="hidden" value="{{$data['total_day']}}" name="total_day">
+                                    <input type="hidden" value="1" name="cus">
                                 </div>
-                                <!-- END / ROOM SELECT -->
-                                
-                            </div>
+                                <button style="margin-top: 50px" type="submit" class="awe-btn awe-btn-13">THANH TOÁN VNPAY</button>
+                            </form>
 
                         </div>
                         <!-- END / SIDEBAR -->
-                        
+
                         <!-- CONTENT -->
-                        <div class="col-md-8 col-lg-9">
-
-                            <div class="reservation_content">
-                                
-                                <div class="reservation-billing-detail">
-
-                                    <p class="reservation-login">Returning customer? <a href="#">Click here to login</a></p>
-
-                                    <h4>BILLING DETAILS</h4>
-
-                                    <label>Country <sup>*</sup></label>
-                                    <select class="awe-select">
-                                        <option>United Kingdom (Uk)</option>
-                                        <option>Viet Nam</option>
-                                        <option>Thai Lan</option>
-                                        <option>China</option>
-                                    </select>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>First Name<sup>*</sup></label>
-                                            <input type="text" class="input-text">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>Last Name<sup>*</sup></label>
-                                            <input type="text" class="input-text">
-                                        </div>
-                                    </div>
-
-                                    <label>Company Name</label>
-                                    <input type="text" class="input-text">
-
-                                    <label>Address<sup>*</sup></label>
-                                    <input type="text" class="input-text" placeholder="Street Address">
-                                    <br><br>
-                                    <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (Optional)">
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>Town / City<sup>*</sup></label>
-                                            <input type="text" class="input-text">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>Country<sup>*</sup></label>
-                                            <input type="text" class="input-text">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>Email Address<sup>*</sup></label>
-                                            <input type="text" class="input-text">
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>Phone<sup>*</sup></label>
-                                            <input type="text" class="input-text">
-                                        </div>
-                                    </div>
-
-                                    <label>Order Notes</label>
-                                    <textarea class="input-textarea" placeholder="Notes about your order, eg. special notes for delivery"></textarea>
-
-                                    <label class="label-radio">
-                                        <input type="radio" class="input-radio">
-                                        Create an account?
-                                    </label>
-
-                                    <p class="reservation-code">
-                                        You have a coupon? <a href="#">Click here to enter your code</a>
-                                    </p>
-
-                                    <ul class="option-bank">
-                                        <li>
-                                            <label class="label-radio">
-                                                <input type="radio" class="input-radio" name="chose-bank">
-                                                Direct Bank Transfer
-                                            </label>
-                                            <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                                        </li>
-
-                                        <li>
-                                            <label class="label-radio">
-                                                <input type="radio" class="input-radio" name="chose-bank">
-                                                Credit Card
-                                            </label>
-
-                                            <img src="images/icon-card.jpg" alt="">
-                                        </li>
-
-                                    </ul>
-                                    <button class="awe-btn awe-btn-13">PLACE ORDER</button>
-                                </div>
-
-                            </div>
-
+                        <div class="col-md-2 col-lg-2 ">
                         </div>
+
                         <!-- END / CONTENT -->
-                        
+
                     </div>
                 </div>
             </div>
 
         </section>
         <!-- END / RESERVATION -->
-        
+
         <!-- FOOTER -->
-        <footer id="footer">
-
-            <!-- FOOTER TOP -->
-            <div class="footer_top">
-                <div class="container">
-                    <div class="row">
-
-                        <!-- WIDGET MAILCHIMP -->
-                        <div class="col-lg-9">
-                            <div class="mailchimp">
-                                <h4>News &amp; Offers</h4>
-                                <div class="mailchimp-form">
-                                    <form action="#" method="POST">
-                                        <input type="text" name="email" placeholder="Your email address" class="input-text">
-                                        <button class="awe-btn">SIGN UP</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END / WIDGET MAILCHIMP -->
-                        
-                        <!-- WIDGET SOCIAL -->
-                        <div class="col-lg-3">
-                            <div class="social">
-                                <div class="social-content">
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END / WIDGET SOCIAL -->
-
-                    </div>
-                </div>
-            </div>
-
-            </div>
+         </div>
 @endsection
