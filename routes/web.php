@@ -71,16 +71,17 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
     Route::get('/get-dialy-guest-chart-data', [ChartController::class, 'dialyGuestPerMonth']);
     Route::get('/get-dialy-guest/{year}/{month}/{day}', [ChartController::class, 'dialyGuest'])->name('chart.dialyGuest');
 });
-Route::name('transaction.reservation.')->group(function () {
-    Route::post('/{customer}/{room}/payOnlinePayment', [TransactionRoomReservationController::class, 'payOnlinePayment'])->name('payOnlinePayment');
-    Route::get('/payOnlinePayment', [TransactionRoomReservationController::class, 'vnpay'])->name('vnpay');
-    Route::post('/paym', [TransactionRoomReservationController::class, 'pay'])->name('pay');
-});
+
 Route::group(['middleware' => ['auth', 'checkRole:Super,Admin,Customer']], function () {
     Route::resource('user', UserController::class)->only([
         'show'
     ]);
-
+    Route::post('/{user}/{room}/confirm', [TransactionRoomReservationController::class, 'confirm'])->name('confirm');
+    Route::name('transaction.reservation.')->group(function () {
+        Route::post('/{customer}/{room}/payOnlinePayment', [TransactionRoomReservationController::class, 'payOnlinePayment'])->name('payOnlinePayment');
+        Route::get('/payOnlinePayment', [TransactionRoomReservationController::class, 'vnpay'])->name('vnpay');
+        Route::post('/paym', [TransactionRoomReservationController::class, 'pay'])->name('pay');
+    });
 
     Route::view('/notification', 'notification.index')->name('notification.index');
 
@@ -126,5 +127,5 @@ Route::get('/homestay-detail/{id}', [RoomController::class, 'homestayDetail'])->
 Route::get('/booking', function () {
     return view('booking');
 });
-Route::post('/{user}/{room}/confirm', [TransactionRoomReservationController::class, 'confirm'])->name('confirm');
+
 // Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');
