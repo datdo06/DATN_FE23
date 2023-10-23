@@ -120,7 +120,7 @@
                                 <!-- ITEM -->
                                 @forelse ($rooms as $room)
                                     <div class="reservation-room_item">
-                                        <form action="" method="POST">
+                                        <form action="{{route('confirm',['user' => Auth()->user()->id, 'room'=>$room->id])}}" method="POST">
                                             @csrf
                                             <h2 class="reservation-room_name"><a
                                                     href="homestay-detail/{{$room->id}}?checkin={{$stayFrom}}&checkout={{$stayUntil}}&person={{request()->input('count_person')}}">{{ $room->number }}
@@ -129,7 +129,7 @@
                                             <input type="hidden" value="{{ $stayUntil }}" name="checkout">
                                             <input type="hidden" value="{{ request()->input('count_person') }}"
                                                    name="person">
-                                            <input type="hidden" value="{{ $room->type->id }}" name="typeid">
+                                            <input type="hidden" value="{{Helper::getDateDifference($_GET['check_in'], $_GET['check_out'])}}" name="total_day">
                                             <div class="reservation-room_img">
                                                 <a href="homestay-detail/{{$room->id}}?checkin={{$stayFrom}}&checkout={{$stayUntil}}&person={{request()->input('count_person')}}"><img
                                                         src="{{ $room->firstImage() }}" alt=""></a>
