@@ -45,9 +45,12 @@ class HomeController extends Controller
     {
         $stayFrom = $request->check_in;
         $stayUntil = $request->check_out;
-        $type  = Type::query()->get();
-
-        $occupiedRoomId = $this->getOccupiedRoomID($request->check_in, $request->check_out);
+        $type = Type::query()->get();
+        $checkin = date_create($request->check_in);
+        $checkout = date_create($request->check_out);
+        $stayFrom = date_format($checkin,"Y-m-d");
+        $stayUntil = date_format($checkout,"Y-m-d");
+        $occupiedRoomId = $this->getOccupiedRoomID($stayFrom, $stayUntil);
 
         $rooms = $this->reservationRepository->getUnocuppiedroom($request, $occupiedRoomId);
         $roomsCount = $this->reservationRepository->countUnocuppiedroom($request, $occupiedRoomId);

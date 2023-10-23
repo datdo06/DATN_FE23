@@ -124,14 +124,11 @@
                             <div class="text">
                                 <h2><a href="#">{{ $room -> number }}</a></h2>
                                 <p class="desc">{{ $room -> view }}</p>
-                                <h2><a href="#">Luxury Room</a></h2>
-                                <p class="desc">Cum sociis natoque penatibus et magnis dis part urient montes, nascetur
-                                    ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
                                 <div class="wrap-price">
                                     <p class="price">
                                         <span class="amout">{{ $room -> price }}</span> /days
                                     </p>
-                                    <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
+                                    <a href="{{ route('homestayDetail' , $room -> id) }}" class="awe-btn awe-btn-default">VIEW DETAIL</a>
                                 </div>
                             </div>
 
