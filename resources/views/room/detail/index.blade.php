@@ -62,7 +62,7 @@
                                 <h6>STARTING HOMESTAY FROM</h6>
 
                                 <p class="price">
-                                    <span class="amout">{{$detailRoom->price}}VND</span> /days
+                                    <span class="amout">{{Helper::convertToRupiah($detailRoom->price)}}</span> /days
                                 </p>
                             </div>
 
@@ -75,7 +75,14 @@
 
                                 <label>Address: {{ $detailRoom->type->name }}</label>
 
-                                <button class="awe-btn awe-btn-13">Book Now</button>
+                                <form action="{{route('confirm',['user' => Auth()->user()->id, 'room'=>$detailRoom->id])}}" method="post">
+                                    @csrf
+                                    <input type="hidden" value="{{$_GET['checkin']}}" name="checkin">
+                                    <input type="hidden" value="{{ $_GET['checkout'] }}" name="checkout">
+                                    <input type="hidden" value="{{Helper::getDateDifference($_GET['checkin'], $_GET['checkout'])}}" name="total_day">
+                                    <input type="hidden" value="{{$_GET['person']}}" name="person">
+                                    <button class="awe-btn awe-btn-13" type="submit">Book Now</button>
+                                </form>
                             </div>
 
                         </div>
