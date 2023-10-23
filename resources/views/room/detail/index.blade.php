@@ -75,7 +75,15 @@
 
                                 <label>Address: {{ $detailRoom->type->name }}</label>
 
-                                <form action="{{route('confirm',['user' => Auth()->user()->id, 'room'=>$detailRoom->id])}}" method="post">
+                                @if(isset(Auth()->user()->id))
+                                    <form
+                                        action="{{route('confirm',['user' => Auth()->user()->id, 'room'=>$detailRoom->id])}}"
+                                        method="POST">
+                                        @else
+                                            <form
+                                                action="{{route('confirm',['user' => 0, 'room'=>$detailRoom->id])}}"
+                                                method="POST">
+                                                @endif
                                     @csrf
                                     <input type="hidden" value="{{$_GET['checkin']}}" name="checkin">
                                     <input type="hidden" value="{{ $_GET['checkout'] }}" name="checkout">
