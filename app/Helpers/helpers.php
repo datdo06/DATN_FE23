@@ -80,4 +80,5 @@ class Helper
 
         return $file->storeAs($nameFolder, $fileName, 'public');
     }
+
 }

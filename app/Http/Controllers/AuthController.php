@@ -18,7 +18,7 @@ class AuthController extends Controller
                 return redirect('dashboard')->with('success', 'Welcome ' . auth()->user()->name);
             }
         }
-        return redirect()->route('admin.login')->with('failed', 'Incorrect email / password');
+        return redirect()->route('login')->with('failed', 'Incorrect email / password');
     }
 
     public function logout()

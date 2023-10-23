@@ -21,7 +21,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
 
 
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,8 +33,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
 
 
 Route::group(['middleware' => ['auth', 'checkRole:Super']], function () {
@@ -53,10 +50,9 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
         Route::get('/{customer}/viewCountPerson', [TransactionRoomReservationController::class, 'viewCountPerson'])->name('viewCountPerson');
         Route::get('/{customer}/chooseRoom', [TransactionRoomReservationController::class, 'chooseRoom'])->name('chooseRoom');
         Route::get('/{customer}/{room}/{from}/{to}/confirmation', [TransactionRoomReservationController::class, 'confirmation'])->name('confirmation');
-        Route::post('/{customer}/{room}/payOnlinePayment', [TransactionRoomReservationController::class, 'payOnlinePayment'])->name('payOnlinePayment');
-        Route::get('/payOnlinePayment', [TransactionRoomReservationController::class, 'vnpay'])->name('vnpay');
-
         Route::post('/{customer}/{room}/payDownPayment', [TransactionRoomReservationController::class, 'payDownPayment'])->name('payDownPayment');
+
+
     });
 
     Route::resource('customer', CustomerController::class);
@@ -75,11 +71,16 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
     Route::get('/get-dialy-guest-chart-data', [ChartController::class, 'dialyGuestPerMonth']);
     Route::get('/get-dialy-guest/{year}/{month}/{day}', [ChartController::class, 'dialyGuest'])->name('chart.dialyGuest');
 });
-
+Route::name('transaction.reservation.')->group(function () {
+    Route::post('/{customer}/{room}/payOnlinePayment', [TransactionRoomReservationController::class, 'payOnlinePayment'])->name('payOnlinePayment');
+    Route::get('/payOnlinePayment', [TransactionRoomReservationController::class, 'vnpay'])->name('vnpay');
+    Route::post('/paym', [TransactionRoomReservationController::class, 'pay'])->name('pay');
+});
 Route::group(['middleware' => ['auth', 'checkRole:Super,Admin,Customer']], function () {
     Route::resource('user', UserController::class)->only([
         'show'
     ]);
+
 
     Route::view('/notification', 'notification.index')->name('notification.index');
 
@@ -89,7 +90,7 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin,Customer']], funct
 
     Route::get('/mark-all-as-read', [NotificationsController::class, 'markAllAsRead'])->name('notification.markAllAsRead');
 
-    Route::get('/notification-to/{id}',[NotificationsController::class, 'routeTo'])->name('notification.routeTo');
+    Route::get('/notification-to/{id}', [NotificationsController::class, 'routeTo'])->name('notification.routeTo');
 });
 
 Route::view('/admin/login', 'auth.login')->name('admin.login');
@@ -121,8 +122,9 @@ Route::get('/sendEvent', function () {
         // event(new NewReservationEvent($message, $superAdmin));
     }
 });
-Route::get('/homestay-detail/{id}',[RoomController::class,'homestayDetail'])->name('homestayDetail');
-Route::get('/booking', function (){
+Route::get('/homestay-detail/{id}', [RoomController::class, 'homestayDetail'])->name('homestayDetail');
+Route::get('/booking', function () {
     return view('booking');
 });
+Route::post('/{user}/{room}/confirm', [TransactionRoomReservationController::class, 'confirm'])->name('confirm');
 // Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');
