@@ -321,7 +321,19 @@ class TransactionRoomReservationController extends Controller
     }
     public function confirm(User $user, Room $room, Request $request){
         $customer= Customer::whereUserId($user->id)->first();
-        $data = $request->all();
+        $checkin = date_create($request->checkin);
+        $checkout = date_create($request->checkout);
+        $request->checkin = date_format($checkin,"Y-m-d");
+        $request->checkout = date_format($checkout,"Y-m-d");
+        if($request->total_day == 0){
+            $request->total_day = Helper::getDateDifference($request->checkin, $request->checkout);
+        }
+        $data = [
+            'checkin' => $request->checkin,
+            'checkout' => $request->checkout,
+            'person' => $request->person,
+            'total_day' => $request->total_day,
+        ];
         return view('payment.pay', compact('data',  'customer', 'room'));
     }
 
