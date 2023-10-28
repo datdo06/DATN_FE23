@@ -27,7 +27,8 @@ class RoomController extends Controller
         if ($request->ajax()) {
             return $this->roomRepository->getRoomsDatatable($request);
         }
-        return view('room.index');
+        $district = Type::query()->get();
+        return view('room.index', compact('district'));
     }
 
     public function create()
