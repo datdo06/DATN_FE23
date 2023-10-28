@@ -701,6 +701,16 @@ blockquote p:after {
     height: 40px;
     line-height: 36px
 }
+.awe-input {
+    padding: 0 30px 0 10px;
+    background-color: transparent;
+    color: #333333;
+    width: 100%;
+    border: 2px solid #333333;
+    height: 40px;
+    line-height: 36px
+}
+
 
 .awe-calendar-wrapper .awe-calendar::-webkit-input-placeholder {
     color: #333
@@ -2397,9 +2407,11 @@ blockquote p:after {
     margin-right: 20px
 }
 .check-availability .availability-form .awe-input{
+    padding: 0 25px 8px 12px;
     width: 100px;
+    height: 40px;
+    line-height: 40px;
     margin-right: 20px;
-    padding-bottom: 8px;
 }
 
 .check-availability .availability-form .awe-calendar-wrapper  .awe-calendar{
@@ -5978,6 +5990,15 @@ blockquote p:after {
     color: #898989;
     font-weight: 500
 }
+.room-detail_book .room-detail_form .awe-input {
+    border-width: 0;
+    background-color: #fff;
+    line-height: 30px;
+    height: 30px;
+    color: #898989;
+    font-weight: 500;
+    width: 100%;
+}
 
 .room-detail_book .room-detail_form .bootstrap-select.btn-group.awe-select {
     width: 100%
@@ -8589,7 +8610,7 @@ blockquote p:after {
 }
 
 .reservation-room-selected .reservation-room-seleted_item.reservation_disable span {
-    opacity: .3
+    opacity: .5
 }
 
 .reservation-room-selected .reservation-room-seleted_current {
@@ -10220,8 +10241,9 @@ blockquote p:after {
         margin: 0
     }
     .check-availability .availability-form .awe-input {
-        width: 50%;
-        margin: 0
+        width: 45.5%;
+        margin-right: 15px;
+        margin-top: 20px;
     }
 
     .check-availability .availability-form .awe-calendar-wrapper i {

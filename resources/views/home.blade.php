@@ -71,19 +71,19 @@
                     <div class="col-lg-9">
                         <div class="availability-form">
                             <form action="chooseRoom" method="GET">
-                                <input type="text" class="awe-calendar from  @error('check_in') is-invalid @enderror"
+                                <input type="text" class="awe-calendar from"
                                     id="check_in" name="check_in"
                                     value="{{ old('check_in') }}" placeholder="Ngày đến" required>
 
-                                <input type="text" class="awe-calendar to @error('check_out') is-invalid @enderror"
+                                <input type="text" class="awe-calendar to"
                                     id="check_out" name="check_out"
                                     value="{{ old('check_out') }}" placeholder="Ngày đi" required>
 
-                                <input type="text" class="awe-input @error('count_person') is-invalid @enderror"
+                                <input type="text" class="awe-input"
                                     id="count_person" name="count_person" value="{{ old('count_person') }}"
                                     placeholder="Số người" required>
 
-                                <select class="awe-select @error('type_id') is-invalid @enderror" name="type_id"
+                                <select class="awe-select" name="type_id"
                                     id="type_id" required>
                                     @foreach ($room_type as $rt)
                                         <option value="{{ $rt->id }}">{{ $rt->name }}</option>
@@ -124,14 +124,11 @@
                             <div class="text">
                                 <h2><a href="#">{{ $room -> number }}</a></h2>
                                 <p class="desc">{{ $room -> view }}</p>
-                                <h2><a href="#">Luxury Room</a></h2>
-                                <p class="desc">Cum sociis natoque penatibus et magnis dis part urient montes, nascetur
-                                    ridiculus mus. Vestib ulum id ligula porta felis euis.</p>
                                 <div class="wrap-price">
                                     <p class="price">
                                         <span class="amout">{{ $room -> price }}</span> /days
                                     </p>
-                                    <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
+                                    <a href="{{ route('homestayDetail' , $room -> id) }}" class="awe-btn awe-btn-default">VIEW DETAIL</a>
                                 </div>
                             </div>
 

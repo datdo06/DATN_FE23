@@ -104,8 +104,9 @@ class RoomController extends Controller
     }
     public function homestayDetail($id)
     {
+        $room_type = Type::query()->get();
         $detailRoom = Room::where('id', $id)->first();
         $image = Image::where('room_id', $id)->get();
-        return view('room.detail.index', compact('detailRoom', 'image'));
+        return view('room.detail.index', compact('detailRoom', 'image','room_type'));
     }
 }
