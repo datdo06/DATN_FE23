@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FacilityRoomController;
 use App\Models\User;
 use App\Events\NewReservationEvent;
 use App\Events\RefreshDashboardEvent;
@@ -59,6 +60,8 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
     Route::resource('roomstatus', RoomStatusController::class);
     Route::resource('transaction', TransactionController::class);
     Route::resource('facility', FacilityController::class);
+    Route::resource('facility_room', FacilityRoomController::class);
+
 
     Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
     Route::get('/payment/{payment}/invoice', [PaymentController::class, 'invoice'])->name('payment.invoice');
