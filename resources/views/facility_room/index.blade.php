@@ -1,5 +1,5 @@
 @extends('template.master')
-@section('title', 'Facility')
+@section('title', 'FacilityRoom')
 @section('head')
     <style>
         .text {
@@ -32,12 +32,12 @@
                     <div class="card shadow-sm border">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="facility-table" class="table table-sm table-hover" style="width: 100%;">
+                                <table id="facilityRoom-table" class="table table-sm table-hover" style="width: 100%;">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Detail</th>
+                                        <th scope="col">Homestay</th>
+                                        <th scope="col">Facility</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                     </thead>

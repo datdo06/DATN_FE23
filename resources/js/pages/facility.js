@@ -1,97 +1,56 @@
 $(function() {
     const currentRoute = window.location.pathname;
-    if(!currentRoute.split('/').includes('room')) return
+    if(!currentRoute.startsWith('/facility')) return
 
-    const datatable = $("#room-table").DataTable({
+    const datatable = $("#facility-table").DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: `/room`,
+            url: `/facility`,
             type: 'GET',
             error: function(xhr, status, error) {
 
-            },
-
+            }
         },
         "columns": [{
-                "name": "number",
-                "data": "number"
+            "name": "number",
+            "data": "number"
+        },
+            {
+                "name": "name",
+                "data": "name"
             },
             {
-                "name": "type",
-                "data": "type"
-            },
-            {
-                "name": "capacity",
-                "data": "capacity"
-            },
-            {
-                "name": "price",
-                "data": "price",
-                "render": function(price) {
-                    return `<div>${new Intl.NumberFormat().format(price)}</div>`
-                }
-            },
-            {
-                "name": "status",
-                "data": "status"
+                "name": "detail",
+                "data": "detail"
             },
             {
                 "name": "id",
                 "data": "id",
-                "render": function(roomId) {
+                "width": "100px",
+                "render": function(facilityId) {
                     return `
                         <button class="btn btn-light btn-sm rounded shadow-sm border"
-                            data-action="edit-room" data-room-id="${roomId}"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Edit HomeStay">
+                            data-action="edit-facility" data-facility-id="${facilityId}"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Edit facility">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <form class="btn btn-sm delete-room" method="POST"
-                            id="delete-room-form-${roomId}"
-                            action="/room/${roomId}">
+                        <form class="btn btn-sm delete-facility" method="POST"
+                            id="delete-facility-form-${facilityId}"
+                            action="/facility/${facilityId}">
+                            <input type="hidden" name="_method" value="DELETE">
                             <a class="btn btn-light btn-sm rounded shadow-sm border delete"
-                                href="#" room-id="${roomId}" room-role="room" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Delete room">
+                                href="#" facility-id="${facilityId}" type-role="type" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Delete facility">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </form>
-                        <a class="btn btn-light btn-sm rounded shadow-sm border"
-                            href="/room/${roomId}"
-                            data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Room detail">
-                            <i class="fas fa-info-circle"></i>
-                        </a>
 
                     `
                 }
             }
         ]
     });
-    $(document).on('change','#filter-type', async function (){
-        var selectedType = $(this).val();
-        console.log(selectedType);
-        // Gửi giá trị đã chọn lên server bằng AJAX
-        const response = await $.ajax({
-            url: '/room', // Điều này cần được thay thế bằng địa chỉ endpoint của bạn
-            method: 'GET',
-            data: { filter_type: selectedType },
-            success: function(data) {
-                // Xử lý dữ liệu trả về từ server và cập nhật bảng DataTables (nếu cần)
-            },
-            error: function(xhr, status, error) {
-                // Xử lý lỗi nếu cần
-            }
-        });
-        console.log(response);
-        datatable.ajax.reload()
-    })
-
-
-
-
-
-
-
 
     const modal = new bootstrap.Modal($("#main-modal"), {
         backdrop: true,
@@ -100,9 +59,9 @@ $(function() {
     })
 
     $(document).on('click', '.delete', function() {
-        var room_id = $(this).attr('room-id');
-        var room_name = $(this).attr('room-name');
-        var room_url = $(this).attr('room-url');
+        var facility_id = $(this).attr('facility-id');
+        var facility_name = $(this).attr('facility-name');
+        var facility_url = $(this).attr('facility-url');
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',
@@ -113,7 +72,7 @@ $(function() {
 
         swalWithBootstrapButtons.fire({
             title: 'Are you sure?',
-            text: "Homestay will be deleted, You won't be able to revert this!",
+            text: "District will be deleted, You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes, delete it!',
@@ -121,7 +80,7 @@ $(function() {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                $(`#delete-room-form-${room_id}`).submit();
+                $(`#delete-facility-form-${facility_id}`).submit();
             }
         })
     }).on('click', '#add-button', async function() {
@@ -129,16 +88,18 @@ $(function() {
 
         $('#main-modal .modal-body').html(`Fetching data`)
 
-        const response = await $.get(`/room/create`);
+        const response = await $.get(`/facility/create`);
         if (!response) return
 
-        $('#main-modal .modal-title').text('Create new homestay')
+        $('#main-modal .modal-title').text('Create new facility')
         $('#main-modal .modal-body').html(response.view)
         $('.select2').select2();
     }).on('click', '#btn-modal-save', function() {
-        $('#form-save-room').submit()
-    }).on('submit', '#form-save-room', async function(e) {
+        $('#form-save-facility').submit()
+    }).on('submit', '#form-save-facility', async function(e) {
+
         e.preventDefault();
+
         CustomHelper.clearError()
         $('#btn-modal-save').attr('disabled', true)
         try {
@@ -176,20 +137,20 @@ $(function() {
         } finally {
             $('#btn-modal-save').attr('disabled', false)
         }
-    }).on('click', '[data-action="edit-room"]', async function() {
+    }).on('click', '[data-action="edit-facility"]', async function() {
         modal.show()
 
         $('#main-modal .modal-body').html(`Fetching data`)
 
-        const roomId = $(this).data('room-id')
+        const facilityId = $(this).data('facility-id')
 
-        const response = await $.get(`/room/${roomId}/edit`);
+        const response = await $.get(`/facility/${facilityId}/edit`);
         if (!response) return
 
-        $('#main-modal .modal-title').text('Edit Homestay')
+        $('#main-modal .modal-title').text('Edit district')
         $('#main-modal .modal-body').html(response.view)
         $('.select2').select2();
-    }).on('submit', '.delete-room', async function(e) {
+    }).on('submit', '.delete-facility', async function(e) {
         e.preventDefault()
 
         try {
@@ -197,9 +158,7 @@ $(function() {
                 url: $(this).attr('action'),
                 data: $(this).serialize(),
                 method: $(this).attr('method'),
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             })
 
             if (!response) return
@@ -215,6 +174,15 @@ $(function() {
             datatable.ajax.reload()
         } catch (e) {
 
+            if(e && e.responseJSON && e.responseJSON.message) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: e.responseJSON.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
         }
     })
 });

@@ -1,108 +1,66 @@
 $(function() {
     const currentRoute = window.location.pathname;
-    if(!currentRoute.split('/').includes('room')) return
+    if(!currentRoute.startsWith('/facility_room')) return
 
-    const datatable = $("#room-table").DataTable({
+    const datatable = $("#facilityRoom-table").DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: `/room`,
+            url: `/facility_room`,
             type: 'GET',
             error: function(xhr, status, error) {
 
-            },
-
+            }
         },
         "columns": [{
-                "name": "number",
-                "data": "number"
+            "name": "number",
+            "data": "number"
+        },
+            {
+                "name": "homestay",
+                "data": "homestay"
             },
             {
-                "name": "type",
-                "data": "type"
-            },
-            {
-                "name": "capacity",
-                "data": "capacity"
-            },
-            {
-                "name": "price",
-                "data": "price",
-                "render": function(price) {
-                    return `<div>${new Intl.NumberFormat().format(price)}</div>`
-                }
-            },
-            {
-                "name": "status",
-                "data": "status"
+                "name": "facility",
+                "data": "facility"
             },
             {
                 "name": "id",
                 "data": "id",
-                "render": function(roomId) {
+                "width": "100px",
+                "render": function(facilityRoomId) {
                     return `
                         <button class="btn btn-light btn-sm rounded shadow-sm border"
-                            data-action="edit-room" data-room-id="${roomId}"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Edit HomeStay">
+                            data-action="edit-facility-room" data-facility-room-id="${facilityRoomId}"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Facility Room">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <form class="btn btn-sm delete-room" method="POST"
-                            id="delete-room-form-${roomId}"
-                            action="/room/${roomId}">
+                        <form class="btn btn-sm delete-facility-room" method="POST"
+                            id="delete-facility-room-form-${facilityRoomId}"
+                            action="/facility_room/${facilityRoomId}">
+                            <input type="hidden" name="_method" value="DELETE">
                             <a class="btn btn-light btn-sm rounded shadow-sm border delete"
-                                href="#" room-id="${roomId}" room-role="room" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Delete room">
+                                href="#" facility_room_id="${facilityRoomId}" type-role="type" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Delete facility">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </form>
-                        <a class="btn btn-light btn-sm rounded shadow-sm border"
-                            href="/room/${roomId}"
-                            data-bs-toggle="tooltip" data-bs-placement="top"
-                            title="Room detail">
-                            <i class="fas fa-info-circle"></i>
-                        </a>
 
                     `
                 }
             }
         ]
     });
-    $(document).on('change','#filter-type', async function (){
-        var selectedType = $(this).val();
-        console.log(selectedType);
-        // Gửi giá trị đã chọn lên server bằng AJAX
-        const response = await $.ajax({
-            url: '/room', // Điều này cần được thay thế bằng địa chỉ endpoint của bạn
-            method: 'GET',
-            data: { filter_type: selectedType },
-            success: function(data) {
-                // Xử lý dữ liệu trả về từ server và cập nhật bảng DataTables (nếu cần)
-            },
-            error: function(xhr, status, error) {
-                // Xử lý lỗi nếu cần
-            }
-        });
-        console.log(response);
-        datatable.ajax.reload()
-    })
-
-
-
-
-
-
-
 
     const modal = new bootstrap.Modal($("#main-modal"), {
         backdrop: true,
         keyboard: true,
         focus: true
     })
-
     $(document).on('click', '.delete', function() {
-        var room_id = $(this).attr('room-id');
-        var room_name = $(this).attr('room-name');
-        var room_url = $(this).attr('room-url');
+        var facility_room_id = $(this).attr('facility_room_id');
+
+        var facility_room_url = $(this).attr('facility_room-url');
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',
@@ -113,7 +71,7 @@ $(function() {
 
         swalWithBootstrapButtons.fire({
             title: 'Are you sure?',
-            text: "Homestay will be deleted, You won't be able to revert this!",
+            text: "District will be deleted, You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Yes, delete it!',
@@ -121,23 +79,20 @@ $(function() {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                $(`#delete-room-form-${room_id}`).submit();
+                $(`#delete-facility-room-form-${facility_room_id}`).submit();
             }
         })
     }).on('click', '#add-button', async function() {
         modal.show()
-
         $('#main-modal .modal-body').html(`Fetching data`)
-
-        const response = await $.get(`/room/create`);
+        const response = await $.get(`/facility_room/create`);
         if (!response) return
-
-        $('#main-modal .modal-title').text('Create new homestay')
+        $('#main-modal .modal-title').text('Create new facility homestay')
         $('#main-modal .modal-body').html(response.view)
         $('.select2').select2();
     }).on('click', '#btn-modal-save', function() {
-        $('#form-save-room').submit()
-    }).on('submit', '#form-save-room', async function(e) {
+        $('#form-save-facility-room').submit()
+    }).on('submit', '#form-save-facility-room', async function(e) {
         e.preventDefault();
         CustomHelper.clearError()
         $('#btn-modal-save').attr('disabled', true)
@@ -162,6 +117,7 @@ $(function() {
             })
 
             modal.hide()
+            modal.hide()
             datatable.ajax.reload()
         } catch (e) {
             if (e.status === 422) {
@@ -176,31 +132,26 @@ $(function() {
         } finally {
             $('#btn-modal-save').attr('disabled', false)
         }
-    }).on('click', '[data-action="edit-room"]', async function() {
+    }).on('click', '[data-action="edit-facility-room"]', async function() {
         modal.show()
-
         $('#main-modal .modal-body').html(`Fetching data`)
-
-        const roomId = $(this).data('room-id')
-
-        const response = await $.get(`/room/${roomId}/edit`);
+        var facilityRoomID = $(this).data('facility-room-id')
+        const response = await $.get(`/facility_room/${facilityRoomID}/edit`);
         if (!response) return
 
-        $('#main-modal .modal-title').text('Edit Homestay')
+        $('#main-modal .modal-title').text('Edit Facility Room')
         $('#main-modal .modal-body').html(response.view)
         $('.select2').select2();
-    }).on('submit', '.delete-room', async function(e) {
+    }).on('submit', '.delete-facility-room', async function(e) {
         e.preventDefault()
-
         try {
             const response = await $.ajax({
                 url: $(this).attr('action'),
                 data: $(this).serialize(),
                 method: $(this).attr('method'),
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             })
+            console.log(response);
 
             if (!response) return
 
@@ -211,10 +162,17 @@ $(function() {
                 showConfirmButton: false,
                 timer: 1500
             })
-
             datatable.ajax.reload()
         } catch (e) {
-
+            if(e && e.responseJSON && e.responseJSON.message) {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: e.responseJSON.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
         }
     })
 });
