@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Repositories\Implementation\CustomerRepository;
+use App\Repositories\Implementation\FacilityRepository;
+use App\Repositories\Implementation\FacilityRoomRepository;
 use App\Repositories\Implementation\ImageRepository;
 use App\Repositories\Implementation\PaymentRepository;
 use App\Repositories\Implementation\ReservationRepository;
@@ -12,6 +14,8 @@ use App\Repositories\Implementation\TransactionRepository;
 use App\Repositories\Implementation\TypeRepository;
 use App\Repositories\Implementation\UserRepository;
 use App\Repositories\Interface\CustomerRepositoryInterface;
+use App\Repositories\Interface\FacilityRepositoryInterface;
+use App\Repositories\Interface\FacilityRoomRepositoryInterface;
 use App\Repositories\Interface\ImageRepositoryInterface;
 use App\Repositories\Interface\PaymentRepositoryInterface;
 use App\Repositories\Interface\ReservationRepositoryInterface;
@@ -40,6 +44,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
         $this->app->bind(TypeRepositoryInterface::class, TypeRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(FacilityRepositoryInterface::class, FacilityRepository::class);
+        $this->app->bind(FacilityRoomRepositoryInterface::class, FacilityRoomRepository::class);
     }
 
     /**

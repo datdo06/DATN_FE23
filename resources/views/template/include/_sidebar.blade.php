@@ -39,6 +39,7 @@
                         <li><a class="dropdown-item" href="{{ route('type.index') }}">District</a></li>
                         <li><a class="dropdown-item" href="{{ route('roomstatus.index') }}">Status</a></li>
                         <li><a class="dropdown-item" href="{{ route('facility.index') }}">Facility</a></li>
+                        <li><a class="dropdown-item" href="{{ route('facility_room.index') }}">FacilityRoom</a></li>
                     </ul>
                 </li>
                 <li class="mb-2 bg-white rounded cursor-pointer">
