@@ -6,8 +6,8 @@
         <div class="sub-banner">
             <div class="container">
                 <div class="text text-center">
-                    <h2>CONTACT WITH US</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing</p>
+                    <h2>Thông tin liên hệ</h2>
+                    <p>Gửi Lời Nhắn Cho Chúng Tôi</p>
                 </div>
             </div>
 
@@ -23,47 +23,49 @@
                 <div class="row">
                     <div class="col-md-6 col-lg-5">
                         <div class="text">
-                            <h2>Contact</h2>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+                            <h2>King The Land HomeStay</h2>
+                            <p>Trang web được quản lý và vận hành bởi FPT Polytechnich Team.
+                                 Quý khách hàng, đối tác có thể liên hệ trực tiếp với chúng tôi qua các thông tin dưới đây.</p>
                             <ul>
-                                <li><i class="icon lotus-icon-location"></i> 225 Beach Street, Australian</li>
-                                <li><i class="icon lotus-icon-phone"></i> +61 2 6854 8496</li>
-                                <li><i class="icon fa fa-envelope-o"></i> <a href="https://landing.engotheme.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="630f0c1716100b0c17060f23040e020a0f4d000c0e">[email&#160;protected]</a></li>
+                                <li><i class="icon lotus-icon-location" style="padding-right:5px;"></i> Hà Nội, Việt Nam  </li>
+                                <li><i class="icon lotus-icon-phone"></i> (+84) 989999999</li>
+                                <li><i class="icon fa fa-envelope-o"></i> <a href="">KingTheLand@gmail.com</a></li>
                             </ul>
                         </div>
                         <div class="contact-location">
-                            <a class="btn-collapse" data-toggle="collapse" href="#location">OTHER LOCATION <span class="fa fa-angle-down"></span></a>
+                            <a class="btn-collapse" data-toggle="collapse" href="#location">CÁC CƠ SỞ TRÊN TOÀN QUỐC <span class="fa fa-angle-down"></span></a>
                             <div class="collapse" id="location">
                                 <div class="location-group">
-                                    <h6>NORTH AMERICA</h6>
-                                    <span>Caribbean, French West Indies</span>
+                                    <h6>Khu vực châu á</h6>
+                                    <span>Hà Nội, Việt Nam</span>
                                     <!-- ITEM -->
-                                    <div class="location-item" data-location="39.0926986,-94.5747324">
+                                    <div class="location-item" data-location="21.016987, 105.803730">
                                         <div class="img">
                                             <img src="images/contact/img-1.jpg" alt="">
                                             <i class="fa  fa-map-marker"></i>
                                         </div>
                                         <div class="text">
-                                            <address>PO Box 4077, 2584 St Martin, CEDEX, French West Indies</address>
+                                            <address> 
+                                                734 Đường Láng, Trung Hòa, Đống Đa, Hà Nội</address>
                                             <p>
-                                                Tel: 858 634 8975 <br>
-                                                Fax: +1 212 854 7039
+                                                Tel: (+84) 989999999  <br>
+                                                
                                             </p>
                                         </div>
                                     </div>
                                     <!-- END / ITEM -->
 
                                     <!-- ITEM -->
-                                    <div class="location-item" data-location="39.0912284,-94.5743515">
+                                    <div class="location-item" data-location="21.037479646844922, 105.78993706268827">
                                         <div class="img">
                                             <img src="images/contact/img-2.jpg" alt="">
                                             <i class="fa  fa-map-marker"></i>
                                         </div>
                                         <div class="text">
-                                            <address>PO Box 4077, 2584 St Martin, CEDEX, French West Indies</address>
+                                            <address>47 Đường Nguyễn Phong Sắc, Dịch Vọng Hậu, Cầu Giấy, Hà Nội</address>
                                             <p>
-                                                Tel: 858 634 8975 <br>
-                                                Fax: +1 212 854 7039
+                                                Tel: (+84) 989999999 <br>
+                                                
                                             </p>
                                         </div>
                                     </div>
@@ -80,16 +82,16 @@
                             <form action="https://landing.engotheme.com/html/lotus/demo/send_mail_contact.php" method="post">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <input type="text" class="field-text"  name="name" placeholder="Name">
+                                        <input type="text" class="field-text"  name="name" placeholder="Họ và tên">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="field-text" name="email" placeholder="Email">
+                                        <input type="text" class="field-text" name="email" placeholder="Địa chỉ Email">
                                     </div>
                                     <div class="col-sm-12">
-                                        <input type="text" class="field-text" name="subject" placeholder="Subject">
+                                        <input type="text" class="field-text" name="subject" placeholder="Chủ đề">
                                     </div>
                                     <div class="col-sm-12">
-                                        <textarea cols="30" rows="10" name="message"  class="field-textarea" placeholder="Write what do you want"></textarea>
+                                        <textarea cols="30" rows="10" name="message"  class="field-textarea" placeholder="Nội Dung"></textarea>
                                     </div>
                                     <div class="col-sm-6">
                                         <button type="submit" class="awe-btn awe-btn-13">SEND</button>

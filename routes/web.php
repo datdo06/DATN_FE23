@@ -95,10 +95,12 @@ Route::view('/register', 'auth.register')->name('register');
 Route::post('/postRegister', [RegisterController::class, 'create'])->name('postRegister');
 
 // About
+Route::get('/roomdetail', [\App\Http\Controllers\RoomDetailController::class, 'index'])->name('roomdetail');
+Route::get('/gallery', [\App\Http\Controllers\GalleryController::class, 'index'])->name('gallery');
+Route::get('/event', [\App\Http\Controllers\EventController::class, 'index'])->name('event');
 Route::get('/about', [\App\Http\Controllers\AboutController::class, 'index'])->name('about');
 Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact');
 Route::get('/', [HomeController::class, 'show'])->name('home');
-Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');
 Route::view('/login', 'client.login')->name('login');
 Route::view('/register', 'client.register')->name('register');
