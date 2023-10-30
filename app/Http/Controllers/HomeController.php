@@ -71,17 +71,17 @@ class HomeController extends Controller
             ->pluck('room_id');
     }
 
-    public function show(Room $room)
+    public function show()
     {
-        $room_type = Type::query()->get();
         $roomImage = Image::query()
             ->get();
         $room_type = Type::query()->get();
 
-        $rooms = Room::query()
-//            ->join('images', 'rooms.id', '=', 'images.room_id')
-//            ->select('rooms.*', 'images.url')
-            ->get();
+        $transactions = Transaction::pluck('room_id')->toArray();
+
+        $rooms = Room::whereNotIn('id', $transactions)->get();
+
+
         $users = Customer::query()
             ->join('users', 'customers.user_id', '=', 'users.id')
             ->where('role', '=', 'super')

@@ -3,22 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRoomRequest;
-use App\Models\Image;
 use App\Models\Room;
 use App\Models\RoomStatus;
 use App\Models\Transaction;
 use App\Models\Type;
+use App\Models\Image;
 use App\Repositories\Interface\ImageRepositoryInterface;
 use App\Repositories\Interface\RoomRepositoryInterface;
+use App\Repositories\Interface\RoomStatusRepositoryInterface;
+use App\Repositories\Interface\TypeRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
-    private $roomRepository;
-
-    public function __construct(RoomRepositoryInterface $roomRepository)
-    {
+    public function __construct(
+        private RoomRepositoryInterface $roomRepository,
+        private TypeRepositoryInterface $typeRepository,
+        private RoomStatusRepositoryInterface $roomStatusRepositoryInterface
+    ) {
         $this->roomRepository = $roomRepository;
     }
 
@@ -27,7 +30,10 @@ class RoomController extends Controller
         if ($request->ajax()) {
             return $this->roomRepository->getRoomsDatatable($request);
         }
-        return view('room.index');
+
+        $types = $this->typeRepository->getTypeList($request);
+        $roomStatuses = $this->roomStatusRepositoryInterface->getRoomStatusList($request);
+        return view('room.index', compact('types', 'roomStatuses'));
     }
 
     public function create()
