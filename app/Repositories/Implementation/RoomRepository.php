@@ -37,10 +37,10 @@ class RoomRepository implements RoomRepositoryInterface
             5 => 'types.id',
         );
 
-        $limit          = $request->input('length');
-        $start          = $request->input('start');
-        $order          = $columns[$request->input('order.0.column')];
-        $dir            = $request->input('order.0.dir');
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
 
         $main_query = Room::select(
             'rooms.id',
@@ -59,7 +59,17 @@ class RoomRepository implements RoomRepositoryInterface
             ->leftJoin("types", "rooms.type_id", "=", "types.id")
             ->leftJoin("room_statuses", "rooms.room_status_id", "=", "room_statuses.id");
 
-        $totalData  =   $main_query->get()->count();
+        $totalData = $main_query->get()->count();
+        if ($request->has('filter_type')) {
+            // Giá trị `filter_type` đã được truyền từ phía client
+            $filterType = $request->input('filter_type');
+            $main_query->where('types.id', $filterType);
+            // Xử lý giá trị `filterType` ở đây
+        }
+
+//        }
+
+
 
         // Filter global column
         if ($request->input('search.value')) {
@@ -76,6 +86,10 @@ class RoomRepository implements RoomRepositoryInterface
                 }
             });
         }
+
+
+
+
 
         $totalFiltered = $main_query->count();
 

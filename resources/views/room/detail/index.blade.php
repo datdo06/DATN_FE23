@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="text text-center">
                     <h2>{{ $detailRoom->number }}</h2>
-                    <p>{{$detailRoom->type->name}}</p>
+                    <p>{{ $detailRoom->type->name }}</p>
                 </div>
             </div>
 
@@ -62,35 +62,69 @@
                                 <h6>STARTING HOMESTAY FROM</h6>
 
                                 <p class="price">
-                                    <span class="amout">{{Helper::convertToRupiah($detailRoom->price)}}</span> /days
+                                    <span class="amout">{{ Helper::convertToRupiah($detailRoom->price) }}</span> /days
                                 </p>
                             </div>
 
                             <div class="room-detail_form">
+                                <?php 
+                                if(isset($_GET['checkin']) && isset($_GET['checkout']) && isset($_GET['person'])){
+                                ?>
                                 <label>Arrive</label>
-                                <input type="text" class="awe-calendar from" disabled placeholder="Arrive Date" value="{{ Helper::dateFormat($_GET['checkin']) }}" name="checkin">
+                                <input type="text" class="awe-calendar from" disabled placeholder="Arrive Date"
+                                    value="{{ Helper::dateFormat($_GET['checkin']) }}" name="checkin">
                                 <label>Depature</label>
-                                <input type="text" class="awe-calendar to" disabled placeholder="Departure Date" value="{{ Helper::dateFormat($_GET['checkout']) }}" name="checkin">
+                                <input type="text" class="awe-calendar to" disabled placeholder="Departure Date"
+                                    value="{{ Helper::dateFormat($_GET['checkout']) }}" name="checkin">
                                 <label>Person: {{ $_GET['person'] }}</label>
 
                                 <label>Address: {{ $detailRoom->type->name }}</label>
 
-                                @if(isset(Auth()->user()->id))
+                                @if (isset(Auth()->user()->id))
                                     <form
-                                        action="{{route('confirm',['user' => Auth()->user()->id, 'room'=>$detailRoom->id])}}"
+                                        action="{{ route('confirm', ['user' => Auth()->user()->id, 'room' => $detailRoom->id]) }}"
                                         method="POST">
-                                        @else
-                                            <form
-                                                action="{{route('confirm',['user' => 0, 'room'=>$detailRoom->id])}}"
-                                                method="POST">
-                                                @endif
-                                    @csrf
-                                    <input type="hidden" value="{{$_GET['checkin']}}" name="checkin">
-                                    <input type="hidden" value="{{ $_GET['checkout'] }}" name="checkout">
-                                    <input type="hidden" value="{{Helper::getDateDifference($_GET['checkin'], $_GET['checkout'])}}" name="total_day">
-                                    <input type="hidden" value="{{$_GET['person']}}" name="person">
-                                    <button class="awe-btn awe-btn-13" type="submit">Book Now</button>
+                                    @else
+                                        <form action="{{ route('confirm', ['user' => 0, 'room' => $detailRoom->id]) }}"
+                                            method="POST">
+                                @endif
+                                @csrf
+                                <input type="hidden" value="{{ $_GET['checkin'] }}" name="checkin">
+                                <input type="hidden" value="{{ $_GET['checkout'] }}" name="checkout">
+                                <input type="hidden"
+                                    value="{{ Helper::getDateDifference($_GET['checkin'], $_GET['checkout']) }}"
+                                    name="total_day">
+                                <input type="hidden" value="{{ $_GET['person'] }}" name="person">
+                                <button class="awe-btn awe-btn-13" type="submit">Book Now</button>
                                 </form>
+
+                                <?php } else { ?>
+                                @if (isset(Auth()->user()->id))
+                                    <form
+                                        action="{{ route('confirm', ['user' => Auth()->user()->id, 'room' => $detailRoom->id]) }}"
+                                        method="POST">
+                                    @else
+                                        <form action="{{ route('confirm', ['user' => 0, 'room' => $detailRoom->id]) }}"
+                                            method="POST">
+                                @endif
+                                @csrf
+                                <label>Arrive</label>
+                                <input type="text" class="awe-calendar from" placeholder="Ngày đến" id="check_in"
+                                    name="checkin" value="{{ old('checkin') }}" required>
+                                <label>Depature</label>
+
+                                <input type="text" class="awe-calendar to" placeholder="Ngày đi" id="check_out"
+                                    name="checkout" value="{{ old('checkout') }}" required>
+                                <input type="hidden"
+                                    value="0"
+                                    name="total_day">
+                                <label>Số người</label>
+                                <input type="text" class="awe-input" placeholder="Số người" id="count_person"
+                                    name="person" value="{{ old('person') }}" required>
+                                <label>Address: {{ $detailRoom->type->name }}</label>
+                                <button class="awe-btn awe-btn-13" type="submit">Book Now</button>
+                                </form>
+                                <?php }?>
                             </div>
 
                         </div>

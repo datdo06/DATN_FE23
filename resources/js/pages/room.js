@@ -13,6 +13,10 @@ $(function () {
                 d.type = $("#type").val();
             },
             error: function (xhr, status, error) {},
+            type: 'GET',
+            error: function(xhr, status, error) {
+
+            },
         },
         columns: [
             {
@@ -71,6 +75,31 @@ $(function () {
             },
         ],
     });
+    $(document).on('change','#filter-type', async function (){
+        var selectedType = $(this).val();
+        console.log(selectedType);
+        // Gửi giá trị đã chọn lên server bằng AJAX
+        const response = await $.ajax({
+            url: '/room', // Điều này cần được thay thế bằng địa chỉ endpoint của bạn
+            method: 'GET',
+            data: { filter_type: selectedType },
+            success: function(data) {
+                // Xử lý dữ liệu trả về từ server và cập nhật bảng DataTables (nếu cần)
+            },
+            error: function(xhr, status, error) {
+                // Xử lý lỗi nếu cần
+            }
+        });
+        console.log(response);
+        datatable.ajax.reload()
+    })
+
+
+
+
+
+
+
 
     const modal = new bootstrap.Modal($("#main-modal"), {
         backdrop: true,

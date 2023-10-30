@@ -75,12 +75,10 @@ class HomeController extends Controller
     {
         $roomImage = Image::query()
             ->get();
-        $room_type = Type::query()->get();
-
+    
         $transactions = Transaction::pluck('room_id')->toArray();
 
         $rooms = Room::whereNotIn('id', $transactions)->get();
-
 
         $users = Customer::query()
             ->join('users', 'customers.user_id', '=', 'users.id')
