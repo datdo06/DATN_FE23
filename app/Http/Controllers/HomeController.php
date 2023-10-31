@@ -73,9 +73,10 @@ class HomeController extends Controller
 
     public function show()
     {
+        $room_type = Type::query()->get();
         $roomImage = Image::query()
             ->get();
-    
+
         $transactions = Transaction::pluck('room_id')->toArray();
 
         $rooms = Room::whereNotIn('id', $transactions)->get();
