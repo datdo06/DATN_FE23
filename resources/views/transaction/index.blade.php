@@ -63,18 +63,24 @@
                                         <td>{{ Helper::dateFormat($transaction->check_out) }}</td>
                                         <td>{{ $transaction->getDateDifferenceWithPlural($transaction->check_in, $transaction->check_out) }}
                                         </td>
-                                        <td>{{ Helper::convertToRupiah($transaction->getTotalPrice()) }}
+                                        <td>{{ Helper::convertToRupiah($transaction->sum_money) }}
                                         </td>
                                         <td>
                                             {{ Helper::convertToRupiah($transaction->getTotalPayment()) }}
                                         </td>
-                                        <td>{{ $transaction->getTotalPrice() - $transaction->getTotalPayment() <= 0 ? '-' : Helper::convertToRupiah($transaction->getTotalPrice() - $transaction->getTotalPayment()) }}
+                                        <td>{{ $transaction->sum_money - $transaction->getTotalPayment() <= 0 ? '-' : Helper::convertToRupiah($transaction->sum_money - $transaction->getTotalPayment()) }}
                                         </td>
                                         <td>
                                             <a class="btn btn-light btn-sm rounded shadow-sm border p-1 m-0 {{$transaction->getTotalPrice() - $transaction->getTotalPayment() <= 0 ? 'disabled' : ''}}"
                                                 href="{{ route('transaction.payment.create', ['transaction' => $transaction->id]) }}"
                                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Pay">
                                                 <i class="fas fa-money-bill-wave-alt"></i>
+                                            </a>
+                                            <a class="btn btn-light btn-sm rounded shadow-sm border"
+                                               href="/payment/{{$transaction->id}}/invoice"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                            >
+                                                <i class="fas fa-info-circle"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -131,18 +137,24 @@
                                     <td>{{ Helper::dateFormat($transaction->check_out) }}</td>
                                     <td>{{ $transaction->getDateDifferenceWithPlural($transaction->check_in, $transaction->check_out) }}
                                     </td>
-                                    <td>{{ Helper::convertToRupiah($transaction->getTotalPrice()) }}
+                                    <td>{{ Helper::convertToRupiah($transaction->sum_money) }}
                                     </td>
                                     <td>
                                         {{ Helper::convertToRupiah($transaction->getTotalPayment()) }}
                                     </td>
-                                    <td>{{ $transaction->getTotalPrice() - $transaction->getTotalPayment() <= 0 ? '-' : Helper::convertToRupiah($transaction->getTotalPrice($transaction->room->price, $transaction->check_in, $transaction->check_out) - $transaction->getTotalPayment()) }}
+                                    <td>{{ $transaction->sum_money - $transaction->getTotalPayment() <= 0 ? '-' : Helper::convertToRupiah($transaction->sum_money - $transaction->getTotalPayment()) }}
                                     </td>
                                     <td>
-                                        <a class="btn btn-light btn-sm rounded shadow-sm border p-1 m-0 {{$transaction->getTotalPrice($transaction->room->price, $transaction->check_in, $transaction->check_out) - $transaction->getTotalPayment() <= 0 ? 'disabled' : ''}}"
+                                        <a class="btn btn-light btn-sm rounded shadow-sm border p-1 m-0 {{$transaction->sum_money - $transaction->getTotalPayment() <= 0 ? 'disabled' : ''}}"
                                             href="{{ route('transaction.payment.create', ['transaction' => $transaction->id]) }}"
                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Pay">
                                             <i class="fas fa-money-bill-wave-alt"></i>
+                                        </a>
+                                        <a class="btn btn-light btn-sm rounded shadow-sm border"
+                                           href="/payment/{{$transaction->id}}/invoice"
+                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                           >
+                                            <i class="fas fa-info-circle"></i>
                                         </a>
                                     </td>
                                 </tr>

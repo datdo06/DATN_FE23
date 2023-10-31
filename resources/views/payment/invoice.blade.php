@@ -34,7 +34,7 @@
                 <div class="card">
                     <div class="d-flex flex-row p-2"> <img src="{{ asset('img/logo/sip.png') }}" width="48">
                         <div class="d-flex flex-column"> <span class="font-weight-bold">Invoice</span>
-                            <small>INV-{{ $payment->id }}</small>
+                            <small>INV-{{ $transaction->id }}</small>
                         </div>
                     </div>
                     <hr>
@@ -46,8 +46,8 @@
                                     <td>To</td>
                                 </tr>
                                 <tr class="content">
-                                    <td class="font-weight-bold"> {{Helper::dateDayFormat($payment->transaction->check_in)}}</td>
-                                    <td class="font-weight-bold"> {{Helper::dateDayFormat($payment->transaction->check_out)}}</td>
+                                    <td class="font-weight-bold"> {{Helper::dateDayFormat($transaction->check_in)}}</td>
+                                    <td class="font-weight-bold"> {{Helper::dateDayFormat($transaction->check_out)}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -63,37 +63,63 @@
                                     <td class="text-center">Total Price</td>
                                 </tr>
                                 <tr class="content">
-                                    <td>{{ $payment->transaction->room->type->name }} -
-                                        {{ $payment->transaction->room->number }}</td>
-                                    <td class="text-center">{{ $payment->transaction->getDateDifferenceWithPlural() }}
+                                    <td>{{ $transaction->room->type->name }} -
+                                        {{ $transaction->room->number }}</td>
+                                    <td class="text-center">{{ $transaction->getDateDifferenceWithPlural() }}
                                     </td>
                                     <td class="text-center">
-                                        {{ Helper::convertToRupiah($payment->transaction->room->price) }}</td>
+                                        {{ Helper::convertToRupiah($transaction->room->price) }}</td>
                                     <td class="text-center">
-                                        {{ Helper::convertToRupiah($payment->transaction->getTotalPrice()) }}</td>
+                                        {{ Helper::convertToRupiah($transaction->getTotalPrice()) }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    @if(!empty($transaction_facilities))
+                        <hr>
+                        <div class="products p-2">
+                            <table class="table table-borderless">
+                                <tbody>
+                                <tr class="add">
+                                    <td>Facility</td>
+                                    <td>Price</td>
+
+                                </tr>
+                                @foreach($transaction_facilities as $transaction_facility)
+                                    <tr>
+                                        <td >
+                                            {{ $transaction_facility->Facility->name}}</td>
+                                        <td >{{ Helper::convertToRupiah($transaction_facility->Facility->price)}}</td>
+
+                                    </tr>
+                                @endforeach
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    @endif
                     <hr>
                     <div class="products p-2">
                         <table class="table table-borderless">
                             <tbody>
                                 <tr class="add">
-                                    <td></td>
-                                    <td class="text-center">Minimum DownPayment</td>
-                                    <td class="text-center">Paid Off</td>
-                                    <td class="text-center">
+
+                                    <td>Minimum DownPayment</td>
+                                    <td>Paid Off</td>
+                                    <td>
                                         insufficient payment</td>
+                                    <td>Total Price</td>
                                 </tr>
                                 <tr class="content">
-                                    <td></td>
-                                    <td class="text-center">
-                                        {{ Helper::convertToRupiah($payment->transaction->getMinimumDownPayment()) }}</td>
-                                    <td class="text-center">{{ Helper::convertToRupiah($payment->price) }}</td>
-                                    <td class="text-center">
-                                        {{ $payment->transaction->getTotalPrice() - $payment->transaction->getTotalPayment() <= 0 ? '-' : Helper::convertToRupiah($payment->transaction->getTotalPrice($payment->transaction->room->price, $payment->transaction->check_in, $payment->transaction->check_out) - $payment->transaction->getTotalPayment()) }}
-                                    </td>
+
+                                    <td>
+                                        {{ Helper::convertToRupiah($transaction->getMinimumDownPayment()) }}</td>
+                                    <td>{{ Helper::convertToRupiah($transaction->getTotalPayment()) }}</td>
+                                    <td>
+                                        {{ $transaction->sum_money - $transaction->getTotalPayment() <= 0 ? '-' : Helper::convertToRupiah($transaction->sum_money - $transaction->getTotalPayment()) }}
+                                    </td >
+                                    <td >{{ Helper::convertToRupiah($transaction->sum_money) }} </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -107,10 +133,9 @@
                                 </tr>
                                 <tr class="content">
                                     <td>
-                                        Customer ID : {{ $payment->transaction->customer->id }}
-                                        <br>Customer Name : {{ $payment->transaction->customer->name }}
-                                        <br> Customer Job : {{ $payment->transaction->customer->job }}
-                                        <br> Customer Address : {{ $payment->transaction->customer->address }}
+                                        Customer Name : {{ $transaction->customer->name }}
+                                        <br> Customer Job : {{ $transaction->customer->job }}
+                                        <br> Customer Address : {{ $transaction->customer->address }}
                                         <br>
                                     </td>
                                 </tr>
