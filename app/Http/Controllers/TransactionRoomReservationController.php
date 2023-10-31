@@ -8,9 +8,12 @@ use App\Helpers\Helper;
 use App\Http\Requests\ChooseRoomRequest;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Models\Customer;
+use App\Models\Facility;
+use App\Models\FacilityRoom;
 use App\Models\Payment;
 use App\Models\Room;
 use App\Models\Transaction;
+use App\Models\TransactionFacility;
 use App\Models\Type;
 use App\Models\User;
 use App\Notifications\NewRoomReservationDownPayment;
@@ -106,7 +109,8 @@ class TransactionRoomReservationController extends Controller
     {
 
         $dayDifference = Helper::getDateDifference($request->check_in, $request->check_out);
-        $minimumDownPayment = ($room->price * $dayDifference) * 0.15;
+        $minimumDownPayment = $request->sum_money * 0.15;
+
         if(empty($request->cus)){
             $request->validate([
                 'downPayment' => 'required|numeric|gte:' . $minimumDownPayment
@@ -124,9 +128,17 @@ class TransactionRoomReservationController extends Controller
         session(['request' => $request->all()]);
         $data = $request->all();
 
-
        if(!empty($request->cus)){
-           return view('payment.confirm', compact('data', 'room', 'minimumDownPayment'));
+           if(!empty($request->facility)){
+               $facility_id = $request->facility;
+               foreach ($facility_id as $key => $value ){
+                   $facilities [] = Facility::where('id', $value)->first();
+               }
+               return view('payment.confirm', compact('data', 'room', 'minimumDownPayment', 'facilities'));
+           }else{
+               return view('payment.confirm', compact('data', 'room', 'minimumDownPayment'));
+           }
+
        }else{
            return view('transaction.css', compact('data', 'room'));
        }
@@ -226,6 +238,7 @@ class TransactionRoomReservationController extends Controller
             $customer = session()->get('customer');
             $downPayment = $_GET['vnp_Amount']/100;
 
+
             $room = session()->get('room');
             $checkin = date_create($request['check_in']);
             $checkout = date_create($request['check_out']);
@@ -237,8 +250,20 @@ class TransactionRoomReservationController extends Controller
                 'room_id' => $room->id,
                 'check_in' => $request['check_in'],
                 'check_out' => $request['check_out'],
-                'status' => 'Reservation'
+                'status' => 'Reservation',
+                'sum_money' =>$request['sum_money'],
             ]);
+            if(isset($request['facility'])){
+                $facility = $request['facility'];
+
+                foreach ($facility as $key=>$value){
+                    $facility_room = TransactionFacility::create([
+                        'transanction_id' => $transaction->id,
+                        'facility_id'=>$value
+                    ]);
+                }
+            }
+
             $status = 'Down Payment';
             $payment = Payment::create([
                 'user_id' => Auth()->user()->id,
@@ -258,7 +283,7 @@ class TransactionRoomReservationController extends Controller
             event(new RefreshDashboardEvent("Someone reserved a room"));
 
             if(isset($request['cus'])){
-                return 'Thành công';
+                return redirect()->route('payment.invoice', ['transaction' => $transaction->id]);
             }else{
                 return redirect()->route('transaction.index')
                     ->with('success', 'Room ' . $room->number . ' has been reservated by ' . $customer->name);
@@ -328,13 +353,14 @@ class TransactionRoomReservationController extends Controller
         if($request->total_day == 0){
             $request->total_day = Helper::getDateDifference($request->checkin, $request->checkout);
         }
+        $facilities= Facility::where('status','Ngoài Homestay')->get();
         $data = [
             'checkin' => $request->checkin,
             'checkout' => $request->checkout,
             'person' => $request->person,
             'total_day' => $request->total_day,
         ];
-        return view('payment.pay', compact('data',  'customer', 'room'));
+        return view('payment.pay', compact('data',  'customer', 'room', 'facilities'));
     }
 
 }

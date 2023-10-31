@@ -29,7 +29,7 @@ class TransactionRepository implements TransactionRepositoryInterface
             ->when(!empty($request->search), function ($query) use ($request) {
                 $query->where('id', '=', $request->search);
             })
-            ->orderBy('check_out', 'ASC')->orderBy('id', 'DESC')->paginate(20)
+            ->orderBy('id', 'DESC')->paginate(20)
             ->appends($request->all());
     }
 
@@ -39,7 +39,7 @@ class TransactionRepository implements TransactionRepositoryInterface
             ->when(!empty($request->search), function ($query) use ($request) {
                 $query->where('id', '=', $request->search);
             })
-            ->orderBy('check_out', 'ASC')->paginate(20)
+            ->orderBy('id', 'DESC')->paginate(20)
             ->appends($request->all());
     }
 }
