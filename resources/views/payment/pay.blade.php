@@ -170,6 +170,7 @@
                                     <input type="hidden" value="{{$data['checkin']}}" name="check_in">
                                     <input type="hidden" value="{{$data['checkout']}}" name="check_out">
                                     <input type="hidden" value="{{$data['total_day']}}" name="total_day">
+                                    <input type="hidden" value="{{$data['person']}}" name="person">
                                     <input type="hidden" id="sum_money" value="{{Helper::getTotalPayment($data['total_day'], $room->price)}}" name="sum_money">
                                     <input type="hidden" value="1" name="cus">
                                 </div>

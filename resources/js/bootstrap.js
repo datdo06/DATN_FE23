@@ -96,7 +96,10 @@ import Pusher from "pusher-js";
         import ("./pages/dashboard"),
         import ("./pages/global"),
         import ("./pages/customer"),
-        import("./pages/facility"),
         import("./pages/facility_room"),
+        import("./pages/facility"),
+        import('./pages/Chart.min'),
+        import("./pages/chart"),
+
     ])
 })();

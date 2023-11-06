@@ -77,6 +77,7 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin,Customer']], funct
     Route::resource('user', UserController::class)->only([
         'show'
     ]);
+    Route::get('/{user}/order', [TransactionRoomReservationController::class, 'TransactionHometay'])->name('order');
     Route::get('/payment/{transaction}/invoice', [PaymentController::class, 'invoice'])->name('payment.invoice');
     Route::post('/{user}/{room}/confirm', [TransactionRoomReservationController::class, 'confirm'])->name('confirm');
     Route::name('transaction.reservation.')->group(function () {
@@ -129,5 +130,6 @@ Route::get('/homestay-detail/{id}', [RoomController::class, 'homestayDetail'])->
 Route::get('/booking', function () {
     return view('booking');
 });
-
+Route::get('/money', [ChartController::class,'dailyMoneysPerMonth']);
+Route::get('/{transaction}/mail', [TransactionRoomReservationController::class, 'CancelHomstay'])->name('cancelHomestay');
 // Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');

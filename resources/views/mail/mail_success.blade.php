@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
         }
+
         .container {
             background-color: #fff;
             border-radius: 5px;
@@ -19,90 +20,99 @@
             max-width: 600px;
             padding: 20px;
         }
-        h1 {
-            color: #007BFF;
-            text-align: center;
-        }
+
         p {
             color: #333;
         }
+
         ul {
             list-style-type: none;
-            padding: 0;
         }
+
         li {
+            font-size: 14px;
             margin-bottom: 10px;
         }
+
         strong {
             font-weight: bold;
         }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
         }
 
         .success-card {
-            width: 800px;
+            width: 600px;
             padding: 30px;
             margin: 100px auto;
             background-color: #ffffff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
         }
 
         .success-card h1 {
             font-size: 36px;
-            color: #FFFFFF;
+            color: #4caf50;
             margin-bottom: 30px;
         }
 
+        .header {
+            background-color: #FFFFFF;
+            text-align: center;
+            padding: 15px 0;
+        }
+
         .success-card p {
-            font-size: 18px;
+            font-size: 14px;
             color: #666666;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
         }
 
         .success-card a {
             display: inline-block;
             font-size: 18px;
-            color: #ffffff;
-            background-color: #4caf50;
             padding: 12px 24px;
             border-radius: 4px;
             text-decoration: none;
         }
-        .header {
-            background-color: #4caf50;
-            color: #fff;
-            text-align: center;
-            padding: 15px 0;
+
+        .signature {
+            font-family: 'Comic Sans MS', sans-serif;
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 <div class="success-card">
     <div class="header">
-        <h1>Đặt phòng thành công</h1>
+        <h1>Đặt homestay thành công</h1>
     </div>
-    <p>Xin chào [Tên khách hàng],</p>
-    <p>Cảm ơn bạn đã đặt phòng tại khách sạn chúng tôi. Đặt phòng của bạn đã được xác nhận và thông tin đặt phòng chi tiết như sau:</p>
+    <p>Xin chào {{$user->name}},</p>
+    <p>Cảm ơn bạn đã đặt homestay của chúng tôi. Homestay của bạn đã đặt được xác nhận và thông tin chi tiết như
+        sau:</p>
 
-    <h2>Thông tin đặt phòng</h2>
-    <ul>
-        <li><strong>Ngày nhận phòng:</strong> [Ngày nhận phòng]</li>
-        <li><strong>Ngày trả phòng:</strong> [Ngày trả phòng]</li>
-        <li><strong>Loại phòng:</strong> [Loại phòng]</li>
-        <li><strong>Số lượng người lớn:</strong> [Số người lớn]</li>
-        <li><strong>Số lượng trẻ em:</strong> [Số trẻ em]</li>
-        <li><strong>Tổng giá:</strong> [Tổng giá]</li>
-    </ul>
+    <h2>Thông tin đặt homestay</h2>
+    <p><strong>Ngày nhận phòng:</strong> {{\App\Helpers\Helper::dateFormat($transaction->check_in)}}</p>
+    <p><strong>Ngày trả phòng:</strong> {{\App\Helpers\Helper::dateFormat($transaction->check_out)}}</p>
+    <p><strong>Homestay đã đặt: </strong>{{$transaction->room->number}} - {{$transaction->room->type->name}}</p>
+    <p><strong>Tổng giá:</strong> {{\App\Helpers\Helper::convertToRupiah($transaction->sum_money)}}</p>
+    <p><strong>Lưu ý: </strong>Quý khách sẽ được hoàn tiền nếu hủy đặt homestay trước 1 ngày</p>
 
-    <p>Hãy kiểm tra email này để xem lại thông tin đặt phòng của bạn. Nếu bạn có bất kỳ câu hỏi hoặc cần sự hỗ trợ bổ sung, vui lòng liên hệ với chúng tôi tại <span>kingtheland@gmail.com</span> hoặc số điện thoại [Số điện thoại của khách sạn].</p>
+    <p>Nếu bạn có bất kỳ câu hỏi hoặc cần sự hỗ trợ bổ sung, vui lòng liên hệ với chúng tôi</p>
 
     <p>Chúng tôi rất mong được phục vụ bạn tại homestay của chúng tôi. Chúc bạn có một kỳ nghỉ thú vị!</p>
 
     <p>Trân trọng,</p>
-    <p>Kng The Land</p>
+    <div class="signature">
+        King The Land
+        <div class="contact-info">
+            Email: john.doe@example.com<br>
+            Phone: (123) 456-7890
+        </div>
+    </div>
 </div>
 </body>
 </html>

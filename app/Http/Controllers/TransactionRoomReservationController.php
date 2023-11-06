@@ -7,6 +7,10 @@ use App\Events\RefreshDashboardEvent;
 use App\Helpers\Helper;
 use App\Http\Requests\ChooseRoomRequest;
 use App\Http\Requests\StoreCustomerRequest;
+use App\Jobs\SendSuccessMail;
+use App\Jobs\SendWelcomeEmail;
+use App\Mail\CancelHomestayMail;
+use App\Mail\SuccessHomestayMail;
 use App\Models\Customer;
 use App\Models\Facility;
 use App\Models\FacilityRoom;
@@ -22,6 +26,7 @@ use App\Repositories\Interface\ReservationRepositoryInterface;
 use App\Repositories\Interface\PaymentRepositoryInterface;
 use App\Repositories\Interface\TransactionRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class TransactionRoomReservationController extends Controller
 {
@@ -238,7 +243,6 @@ class TransactionRoomReservationController extends Controller
             $customer = session()->get('customer');
             $downPayment = $_GET['vnp_Amount']/100;
 
-
             $room = session()->get('room');
             $checkin = date_create($request['check_in']);
             $checkout = date_create($request['check_out']);
@@ -250,6 +254,7 @@ class TransactionRoomReservationController extends Controller
                 'room_id' => $room->id,
                 'check_in' => $request['check_in'],
                 'check_out' => $request['check_out'],
+                'sum_people'=>$request['person'],
                 'status' => 'Reservation',
                 'sum_money' =>$request['sum_money'],
             ]);
@@ -283,7 +288,10 @@ class TransactionRoomReservationController extends Controller
             event(new RefreshDashboardEvent("Someone reserved a room"));
 
             if(isset($request['cus'])){
-                return redirect()->route('payment.invoice', ['transaction' => $transaction->id]);
+                $user = User::query()->findOrFail($transaction->user_id);
+                $mail = new SuccessHomestayMail($user, $transaction);
+                SendSuccessMail::dispatch($user, $mail);
+                return view('transaction.success', compact('user', 'transaction'));
             }else{
                 return redirect()->route('transaction.index')
                     ->with('success', 'Room ' . $room->number . ' has been reservated by ' . $customer->name);
@@ -361,6 +369,21 @@ class TransactionRoomReservationController extends Controller
             'total_day' => $request->total_day,
         ];
         return view('payment.pay', compact('data',  'customer', 'room', 'facilities'));
+    }
+    public function TransactionHometay(User $user){
+
+        $transactions =  Transaction::where('user_id', $user->id)->get();
+        return view('client.order', compact('transactions'));
+    }
+    public function CancelHomstay(Transaction $transaction){
+        $user = User::query()->findOrFail($transaction->user_id);
+        $mail = new CancelHomestayMail($user, $transaction);
+
+        SendWelcomeEmail::dispatch($user, $mail);
+//        $transaction->delete();
+        return view('cancelHomestay', compact('transaction'));
+
+
     }
 
 }
