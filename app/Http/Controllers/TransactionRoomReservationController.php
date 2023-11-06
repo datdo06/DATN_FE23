@@ -378,9 +378,8 @@ class TransactionRoomReservationController extends Controller
     public function CancelHomstay(Transaction $transaction){
         $user = User::query()->findOrFail($transaction->user_id);
         $mail = new CancelHomestayMail($user, $transaction);
-
         SendWelcomeEmail::dispatch($user, $mail);
-//        $transaction->delete();
+        $transaction->delete();
         return view('cancelHomestay', compact('transaction'));
 
 
