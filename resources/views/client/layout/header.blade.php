@@ -15,12 +15,12 @@
                         <span>{{auth()->user()->name}}</span>
                         <ul>
                             <li>
-                                <form action="{{route('logout')}}" method="POST">
+                                <form action="{{route('logout')}}" method="POST" id="logout">
                                     @csrf
-                                    <a><button style="border: 1px solid #e1bd85; background-color: #e1bd85; " class="dropdown-item" type="submit">Logout</button></a>
+                                    <a onclick="document.getElementById('logout').submit();">Logout</a>
                                 </form>
                             </li>
-                            <li><a href="#">EUR</a></li>
+                            <li><a href="{{route('order', ['user'=>auth()->user()->id])}}">Lịch sử</a></li>
                         </ul>
                     </div>
                 @else
@@ -67,33 +67,33 @@
                 <ul class="menu">
                     <li class="current-menu-item">
                         <a href="{{ route('home') }}">Home <span class="fa fa-caret-down"></span></a>
-                       
+
                     </li>
                     <li><a href="{{ route('about') }}">About</a></li>
 
                     <li>
                         <a href="#">Room <span class="fa fa-caret-down"></span></a>
-                      
+
                     </li>
                     <li>
                         <a href="#">Restaurant <span class="fa fa-caret-down"></span></a>
-                      
+
                     </li>
                     <li>
                         <a href="#">Reservation <span class="fa fa-caret-down"></span></a>
-                       
+
                     </li>
                     <li>
                         <a href="#">Page <span class="fa fa-caret-down"></span></a>
-                       
+
                     </li>
                     <li>
                         <a href="#">Gallery <span class="fa fa-caret-down"></span></a>
-                        
+
                     </li>
                     <li>
                         <a href="#">Blog <span class="fa fa-caret-down"></span></a>
-                       
+
                     </li>
                     <li><a href="{{ route('contact') }}">Contact</a></li>
                 </ul>

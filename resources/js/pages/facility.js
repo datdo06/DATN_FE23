@@ -25,6 +25,14 @@ $(function() {
                 "data": "detail"
             },
             {
+                "name": "status",
+                "data": "status"
+            },
+            {
+                "name": "price",
+                "data": "price"
+            },
+            {
                 "name": "id",
                 "data": "id",
                 "width": "100px",
