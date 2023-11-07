@@ -35,6 +35,7 @@ class CouponController extends Controller
 
     public function store(StoreCouponRequest $request)
     {
+
         $coupon = $this->couponRepository->store($request);
         return response()->json([
             'message' => 'success', 'Coupon ' . $coupon->name . ' created'
@@ -70,6 +71,9 @@ class CouponController extends Controller
                 'message' => 'Type ' . $coupon->name . ' cannot be deleted! Error Code:' . $e->errorInfo[1]
             ], 500);
         }
+    }
+    public function test (Request $request){
+        dd($request);
     }
 }
 

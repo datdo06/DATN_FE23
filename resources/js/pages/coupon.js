@@ -148,11 +148,8 @@ $(function() {
         }
     }).on('click', '[data-action="edit-coupon"]', async function() {
         modal.show()
-
         $('#main-modal .modal-body').html(`Fetching data`)
-
         const couponId = $(this).data('coupon-id')
-
         const response = await $.get(`/coupon/${couponId}/edit`);
         if (!response) return
 
