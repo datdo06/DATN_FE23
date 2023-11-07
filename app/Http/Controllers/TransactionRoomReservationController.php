@@ -363,7 +363,6 @@ class TransactionRoomReservationController extends Controller
             'total_day' => $request->total_day,
         ];
 
-        return view('payment.pay', compact('data',  'customer', 'room'));
         return view('payment.pay', compact('data',  'customer', 'room', 'facilities'));
     }
     public function TransactionHometay(User $user){

@@ -68,7 +68,7 @@
                                                     href="{{ route('customer.edit', ['customer' => $customer->id]) }}">Edit</a>
                                             </li>
                                             <li>
-                                                <form method="POST" id="delete-customer-form-{{ $customer->id }}"
+                                                <form class="delete-cus" method="POST" id="delete-customer-form-{{ $customer->id }}"
                                                     action="{{ route('customer.destroy', ['customer' => $customer->id]) }}">
                                                     @csrf
                                                     @method('DELETE')

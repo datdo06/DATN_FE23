@@ -264,8 +264,6 @@
                                 <!-- END / ROOM SELECT -->
 
                             </div>
-
-
                                 <div>
                                     <input type="hidden" value="{{$data['checkin']}}" name="check_in">
                                     <input type="hidden" value="{{$data['checkout']}}" name="check_out">
