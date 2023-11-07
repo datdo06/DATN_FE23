@@ -68,7 +68,7 @@ class NewRoomReservationDownPayment extends Notification
     {
         return [
             'message' => 'Room ' . $this->transaction->room->number . ' reservated by ' . $this->transaction->customer->name . '. Payment: ' . Helper::convertToRupiah($this->payment->price),
-            'url' => route('payment.invoice', ['payment' => $this->payment->id])
+            'url' => route('payment.invoice', ['transaction' => $this->transaction->id])
         ];
     }
 
@@ -76,7 +76,7 @@ class NewRoomReservationDownPayment extends Notification
     {
         return new BroadcastMessage([
             'message' => 'Room ' . $this->transaction->room->number . ' reservated by ' . $this->transaction->customer->name,
-            'url' => route('payment.invoice', ['payment' => $this->payment->id])
+            'url' => route('payment.invoice', ['transaction' => $this->transaction->id])
         ]);
     }
 }

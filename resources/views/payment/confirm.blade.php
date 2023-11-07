@@ -84,6 +84,20 @@
 
                                             </ul>
                                         </div>
+                                        @if(!empty($facilities))
+                                            <div class="reservation-room-seleted_package">
+                                                <h6>Facility</h6>
+                                                <ul>
+                                                    @foreach($facilities as $facility)
+                                                        <li>
+                                                            <span>{{$facility->name}}</span>
+                                                            <span>{{ Helper::convertToRupiah($facility->price) }}</span>
+                                                        </li>
+                                                    @endforeach
+
+                                                </ul>
+                                            </div>
+                                        @endif
                                         <div class="reservation-room-seleted_total-room">
                                             TOTAL DAY
                                             <span
@@ -94,7 +108,7 @@
                                         <div class="reservation-room-seleted_total-room">
                                             TOTAL
                                             <span
-                                                class="reservation-amout">{{ Helper::convertToRupiah(Helper::getTotalPayment($data['total_day'], $room->price)) }}</span>
+                                                class="reservation-amout">{{ Helper::convertToRupiah($data['sum_money']) }}</span>
                                         </div>
                                         <div class="reservation-room-seleted_total-room">
                                             Mini DownPaymment

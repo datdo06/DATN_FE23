@@ -8,10 +8,17 @@ use App\Helpers\Helper;
 use App\Http\Requests\ChooseRoomRequest;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Models\Coupon;
+use App\Jobs\SendSuccessMail;
+use App\Jobs\SendWelcomeEmail;
+use App\Mail\CancelHomestayMail;
+use App\Mail\SuccessHomestayMail;
 use App\Models\Customer;
+use App\Models\Facility;
+use App\Models\FacilityRoom;
 use App\Models\Payment;
 use App\Models\Room;
 use App\Models\Transaction;
+use App\Models\TransactionFacility;
 use App\Models\Type;
 use App\Models\User;
 use App\Notifications\NewRoomReservationDownPayment;
@@ -22,6 +29,8 @@ use App\Repositories\Interface\TransactionRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 session_start();
+use Illuminate\Support\Facades\Mail;
+
 class TransactionRoomReservationController extends Controller
 {
     private $reservationRepository;
@@ -107,7 +116,8 @@ class TransactionRoomReservationController extends Controller
     )
     {
         $dayDifference = Helper::getDateDifference($request->check_in, $request->check_out);
-        $minimumDownPayment = ($room->price * $dayDifference) * 0.15;
+        $minimumDownPayment = $request->sum_money * 0.15;
+
         if(empty($request->cus)){
             $request->validate([
                 'downPayment' => 'required|numeric|gte:' . $minimumDownPayment
@@ -127,9 +137,17 @@ class TransactionRoomReservationController extends Controller
         session(['request' => $request->all()]);
         $data = $request->all();
 
-
        if(!empty($request->cus)){
-           return view('payment.confirm', compact('data', 'room', 'minimumDownPayment'));
+           if(!empty($request->facility)){
+               $facility_id = $request->facility;
+               foreach ($facility_id as $key => $value ){
+                   $facilities [] = Facility::where('id', $value)->first();
+               }
+               return view('payment.confirm', compact('data', 'room', 'minimumDownPayment', 'facilities'));
+           }else{
+               return view('payment.confirm', compact('data', 'room', 'minimumDownPayment'));
+           }
+
        }else{
            return view('transaction.css', compact('data', 'room'));
        }
@@ -231,8 +249,21 @@ class TransactionRoomReservationController extends Controller
                 'room_id' => $room->id,
                 'check_in' => $request['check_in'],
                 'check_out' => $request['check_out'],
-                'status' => 'Reservation'
+                'sum_people'=>$request['person'],
+                'status' => 'Reservation',
+                'sum_money' =>$request['sum_money'],
             ]);
+            if(isset($request['facility'])){
+                $facility = $request['facility'];
+
+                foreach ($facility as $key=>$value){
+                    $facility_room = TransactionFacility::create([
+                        'transanction_id' => $transaction->id,
+                        'facility_id'=>$value
+                    ]);
+                }
+            }
+
             $status = 'Down Payment';
             $payment = Payment::create([
                 'user_id' => Auth()->user()->id,
@@ -252,7 +283,10 @@ class TransactionRoomReservationController extends Controller
             event(new RefreshDashboardEvent("Someone reserved a room"));
 
             if(isset($request['cus'])){
-                return 'Thành công';
+                $user = User::query()->findOrFail($transaction->user_id);
+                $mail = new SuccessHomestayMail($user, $transaction);
+                SendSuccessMail::dispatch($user, $mail);
+                return view('transaction.success', compact('user', 'transaction'));
             }else{
                 return redirect()->route('transaction.index')
                     ->with('success', 'Room ' . $room->number . ' has been reservated by ' . $customer->name);
@@ -321,6 +355,7 @@ class TransactionRoomReservationController extends Controller
         if($request->total_day == 0){
             $request->total_day = Helper::getDateDifference($request->checkin, $request->checkout);
         }
+        $facilities= Facility::where('status','Ngoài Homestay')->get();
         $data = [
             'checkin' => $request->checkin,
             'checkout' => $request->checkout,
@@ -329,6 +364,21 @@ class TransactionRoomReservationController extends Controller
         ];
 
         return view('payment.pay', compact('data',  'customer', 'room'));
+        return view('payment.pay', compact('data',  'customer', 'room', 'facilities'));
+    }
+    public function TransactionHometay(User $user){
+
+        $transactions =  Transaction::where('user_id', $user->id)->get();
+        return view('client.order', compact('transactions'));
+    }
+    public function CancelHomstay(Transaction $transaction){
+        $user = User::query()->findOrFail($transaction->user_id);
+        $mail = new CancelHomestayMail($user, $transaction);
+        SendWelcomeEmail::dispatch($user, $mail);
+        $transaction->delete();
+        return view('cancelHomestay', compact('transaction'));
+
+
     }
 
     public function check_coupon(Request $request) {

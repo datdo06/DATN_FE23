@@ -66,7 +66,7 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
 
 
     Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
-    Route::get('/payment/{payment}/invoice', [PaymentController::class, 'invoice'])->name('payment.invoice');
+
 
     Route::get('/transaction/{transaction}/payment/create', [PaymentController::class, 'create'])->name('transaction.payment.create');
     Route::post('/transaction/{transaction}/payment/store', [PaymentController::class, 'store'])->name('transaction.payment.store');
@@ -83,6 +83,9 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin,Customer']], funct
 
     Route::post('/check-coupon', [TransactionRoomReservationController::class,'check_coupon'])->name('check-coupon');
 
+    Route::get('/{user}/order', [TransactionRoomReservationController::class, 'TransactionHometay'])->name('order');
+    Route::get('/payment/{transaction}/invoice', [PaymentController::class, 'invoice'])->name('payment.invoice');
+    Route::post('/{user}/{room}/confirm', [TransactionRoomReservationController::class, 'confirm'])->name('confirm');
     Route::name('transaction.reservation.')->group(function () {
         Route::post('/{customer}/{room}/payOnlinePayment', [TransactionRoomReservationController::class, 'payOnlinePayment'])->name('payOnlinePayment');
         Route::get('/payOnlinePayment', [TransactionRoomReservationController::class, 'vnpay'])->name('vnpay');
@@ -134,5 +137,6 @@ Route::get('/homestay-detail/{id}', [RoomController::class, 'homestayDetail'])->
 Route::get('/booking', function () {
     return view('booking');
 });
-
+Route::get('/money', [ChartController::class,'dailyMoneysPerMonth']);
+Route::get('/{transaction}/mail', [TransactionRoomReservationController::class, 'CancelHomstay'])->name('cancelHomestay');
 // Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');

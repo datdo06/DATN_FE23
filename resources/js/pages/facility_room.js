@@ -59,7 +59,6 @@ $(function() {
     })
     $(document).on('click', '.delete', function() {
         var facility_room_id = $(this).attr('facility_room_id');
-
         var facility_room_url = $(this).attr('facility_room-url');
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -82,7 +81,7 @@ $(function() {
                 $(`#delete-facility-room-form-${facility_room_id}`).submit();
             }
         })
-    }).on('click', '#add-button', async function() {
+    }).on('click', '#add-facility-room', async function() {
         modal.show()
         $('#main-modal .modal-body').html(`Fetching data`)
         const response = await $.get(`/facility_room/create`);
@@ -93,6 +92,7 @@ $(function() {
     }).on('click', '#btn-modal-save', function() {
         $('#form-save-facility-room').submit()
     }).on('submit', '#form-save-facility-room', async function(e) {
+        modal.hide()
         e.preventDefault();
         CustomHelper.clearError()
         $('#btn-modal-save').attr('disabled', true)
@@ -115,10 +115,8 @@ $(function() {
                 showConfirmButton: false,
                 timer: 1500
             })
-
-            modal.hide()
-            modal.hide()
             datatable.ajax.reload()
+            modal.hide()
         } catch (e) {
             if (e.status === 422) {
                 console.log(e)

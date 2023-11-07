@@ -160,6 +160,46 @@
                     </div>
                 </div>
             </div>
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col-lg-12">
+                        <div class="card shadow-sm border">
+                            <div class="card-header border-0">
+                                <div class="d-flex justify-content-between">
+                                    <h3 class="card-title">Monthly Income Chart</h3>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <p class="d-flex flex-column">
+                                        {{-- <span class="text-bold text-lg">Belum</span> --}}
+                                        {{-- <span>Total Guests at {{ Helper::thisMonth() . '/' . Helper::thisYear() }}</span> --}}
+                                    </p>
+                                    {{-- <p class="ml-auto d-flex flex-column text-right">
+                                    <span class="text-success">
+                                        <i class="fas fa-arrow-up"></i> Belum
+                                    </span>
+                                    <span class="text-muted">Since last month</span>
+                                </p> --}}
+                                </div>
+                                <div class="position-relative mb-4">
+                                    <div class="chart-area">
+                                        <canvas id="myAreaChart" height="400px"></canvas>
+                                    </div>
+                                    <div class="d-flex flex-row justify-content-between">
+                                    <span class="mr-2">
+                                        <i class="fas fa-square text-primary"></i> {{ Helper::thisMonth() }}
+                                    </span>
+                                        <span>
+                                        <i class="fas fa-square text-gray"></i> Last month
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

@@ -51,6 +51,14 @@ class Helper
         $date_difference = round($date_difference / (60 * 60 * 24));
         return $date_difference;
     }
+    public static function getHourDifference($check_in, $now)
+    {
+        $check_in = strtotime($check_in);
+        $now = strtotime($now);
+        $date_difference = $now - $check_in;
+        $date_difference = round($date_difference / (60 * 60 ));
+        return $date_difference;
+    }
 
     public static function plural($value, $count)
     {
