@@ -15,7 +15,8 @@
         "intervention/image": "^2.5",
         "laravel/framework": "^9.19",
         "laravel/tinker": "^2.5",
-        "pusher/pusher-php-server": "~5.0"
+        "pusher/pusher-php-server": "~5.0",
+        "twbs/bootstrap": "5.3.2"
     },
     "require-dev": {
         "spatie/laravel-ignition": "^1.0",

@@ -4,9 +4,9 @@
     <div class="header_top">
         <div class="container">
             <div class="header_left float-left">
-                <span><i class="lotus-icon-cloud"></i> 18 °C</span>
-                <span><i class="lotus-icon-location"></i> 225 Beach Street, Australian</span>
-                <span><i class="lotus-icon-phone"></i> 1-548-854-8898</span>
+                <span><i class="lotus-icon-cloud"></i> 24 °C</span>
+                <span><i class="lotus-icon-location"></i> Việt Nam</span>
+                <span><i class="lotus-icon-phone"></i> (+84) 989999999</span>
             </div>
             <div class="header_right float-right">
 
@@ -69,9 +69,19 @@
                         <a href="{{ route('home') }}">Home <span class="fa fa-caret-down"></span></a>
 
                     </li>
-                    <li><a href="{{ route('about') }}">About</a></li>
 
                     <li>
+
+                        <a href="#">Homestay<span class="fa fa-caret-down"></span></a>
+                        <ul class="sub-menu">
+                            <li><a href="room-1.html">Homestay 1</a></li>
+                            <li><a href="room-2.html">Homestay 2</a></li>
+                            <li><a href="room-3.html">Homestay 3</a></li>
+                            <li><a href="room-4.html">Homestay 4</a></li>
+                            <li><a href="room-5.html">Homestay 5</a></li>
+                            <li><a href="room-6.html">Homestay 6</a></li>
+                        </ul>
+
                         <a href="#">Room <span class="fa fa-caret-down"></span></a>
 
                     </li>
@@ -82,12 +92,35 @@
                     <li>
                         <a href="#">Reservation <span class="fa fa-caret-down"></span></a>
 
-                    </li>
-                    <li>
-                        <a href="#">Page <span class="fa fa-caret-down"></span></a>
 
                     </li>
+                    
                     <li>
+
+                        <a href="#">Đặt Homestay </a>
+
+                        <a href="#">Page <span class="fa fa-caret-down"></span></a>
+
+
+                    </li>
+                    
+
+                            <li>
+                                <a href="{{ route('event') }}">Sự Kiện </a>
+                                
+                            </li>
+                            
+                            
+                    <li>
+
+                        <a href="{{ route('gallery') }}">Triển Lãm </a>
+                        
+                    </li>
+                    
+                    <li><a href="{{ route('about') }}">Thông Tin</a></li>
+                    <li><a href="{{ route('contact') }}">Liên Hệ</a></li>
+
+
                         <a href="#">Gallery <span class="fa fa-caret-down"></span></a>
 
                     </li>
@@ -96,6 +129,7 @@
 
                     </li>
                     <li><a href="{{ route('contact') }}">Contact</a></li>
+
                 </ul>
             </nav>
             <!-- END / HEADER MENU -->

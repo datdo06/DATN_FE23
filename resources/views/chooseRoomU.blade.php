@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="text text-center">
                     <h2>RESERVATION</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing</p>
+                    <p></p>
                 </div>
             </div>
 
@@ -50,8 +50,7 @@
 
                                 <!-- END / HEADING -->
 
-
-                                <h6 class="check_availability_title">your stay dates</h6>
+                                <h6 class="check_availability_title" style="padding-top: 15px;">your stay dates</h6>
                                 <form action="chooseRoom" method="GET">
                                     <input type="text" hidden name="count_person"
                                            value="{{ request()->input('count_person') }}">
@@ -115,11 +114,11 @@
                         <div class="reservation_content">
 
                             <!-- RESERVATION ROOM -->
-                            <div class="reservation-room">
+                            <div class="reservation-room bg-gray">
 
                                 <!-- ITEM -->
                                 @forelse ($rooms as $room)
-                                    <div class="reservation-room_item">
+                                    <div class="reservation-room_item" style="padding: 25px">
                                         @if(isset(Auth()->user()->id))
                                             <form
                                                 action="{{route('confirm',['user' => Auth()->user()->id, 'room'=>$room->id])}}"
@@ -143,7 +142,7 @@
                                                                name="total_day">
                                                         <div class="reservation-room_img">
                                                             <a href="homestay-detail/{{$room->id}}?checkin={{$stayFrom}}&checkout={{$stayUntil}}&person={{request()->input('count_person')}}"><img
-                                                                    src="{{ $room->firstImage() }}" alt=""></a>
+                                                                    src="img/homestay/homestay-1.jpg" alt=""></a>
                                                         </div>
 
                                                         <div class="reservation-room_text">

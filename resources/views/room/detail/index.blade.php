@@ -45,7 +45,7 @@
                             @endforeach
                         </div>
                         <!-- END / THUMBNAIL IMAGE -->
-                        <h1> Homestay :{{ $detailRoom->number }}</h1>
+                        <h1>{{ $detailRoom->number }}</h1>
                         <p>{{ $detailRoom->view }}</p>
 
 
@@ -141,11 +141,11 @@
                 <div class="row">
                     <div class="col-md-3">
                         <ul class="room-detail_tab-header">
-                            <li><a href="#overview" data-toggle="tab">OVERVIEW</a></li>
-                            <li class="active"><a href="#amenities" data-toggle="tab">amenities</a></li>
-                            <li><a href="#package" data-toggle="tab">PACKAGE</a></li>
-                            <li><a href="#rates" data-toggle="tab">RATES</a></li>
-                            <li><a href="#calendar" data-toggle="tab">Calendar</a></li>
+                            <li><a href="#overview" data-toggle="tab">Tổng Quan</a></li>
+                            <li class="active"><a href="#amenities" data-toggle="tab">Tiện nghi</a></li>
+                            <li><a href="#package" data-toggle="tab">Combo</a></li>
+                            <li><a href="#rates" data-toggle="tab">Giá theo mùa</a></li>
+                            <li><a href="#calendar" data-toggle="tab">Lịch</a></li>
                         </ul>
                     </div>
 
@@ -156,29 +156,29 @@
                             <div class="tab-pane fade" id="overview">
 
                                 <div class="room-detail_overview">
-                                    <h5 class='text-uppercase
+                                    {{-- <h5 class='text-uppercase
                                 '>de Finibus Bonorum et
-                                        Malorum", written by Cicero in 45 BC</h5>
-                                    <p>Located in the heart of Aspen with a unique blend of contemporary luxury and historic
-                                        heritage, deluxe accommodations, superb amenities, genuine hospitality and dedicated
-                                        service for an elevated experience in the Rocky Mountains.</p>
+                                        Malorum", written by Cicero in 45 BC</h5> --}}
+                                    <p>KingTheLand Homestay là một lựa chọn tuyệt vời cho khách du lịch khi đến Hà
+                    Nội, cung cấp không khí dành cho gia đình cùng với nhiều tiện nghi hữu ích cho kì nghỉ của bạn.
+                    KingTheLand Homestay trở thành lựa chọn lý tưởng khi khi đến Hà Nội.</p>
 
                                     <div class="row">
                                         <div class="col-xs-6 col-md-4">
-                                            <h6>SPECIAL ROOM</h6>
+                                            <h6>Thông tin phòng</h6>
                                             <ul>
-                                                <li>Max: 4 Person(s)</li>
-                                                <li>Size: 35 m2 / 376 ft2</li>
-                                                <li>View: Ocen</li>
-                                                <li>Bed: King-size or twin beds</li>
+                                                <li> 2 người lớn & 1 trẻ em</li>
+                                                <li>Diện tích : 35 m2 </li>
+                                                <li>Cửa sổ, ban công</li>
+                                                <li>Giường đôi</li>
                                             </ul>
                                         </div>
                                         <div class="col-xs-6 col-md-4">
-                                            <h6>SERVICE ROOM</h6>
+                                            <h6>Dịch vụ kèm theo</h6>
                                             <ul>
-                                                <li>Oversized work desk</li>
-                                                <li>Hairdryer</li>
-                                                <li>Iron/ironing board upon request</li>
+                                                <li>Bữa sáng</li>
+                                                <li>Dọn phòng hàng ngày</li>
+                                                <li>Dịch vụ giặt là</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -192,61 +192,58 @@
                             <div class="tab-pane fade active in" id="amenities">
 
                                 <div class="room-detail_amenities">
-                                    <p>Located in the heart of Aspen with a unique blend of contemporary luxury and historic
-                                        heritage, deluxe accommodations, superb amenities, genuine hospitality and dedicated
-                                        service for an elevated experience in the Rocky Mountains.</p>
+                                    <p> Khách có thể dùng nhân viên hỗ trợ khách và dịch vụ phòng khi nghỉ tại KingTheLand Homestay.</p>
 
                                     <div class="row">
                                         <div class="col-xs-6 col-lg-4">
-                                            <h6>LIVING ROOM</h6>
+                                            <h6>Phòng Khách</h6>
                                             <ul>
-                                                <li>Oversized work desk</li>
-                                                <li>Hairdryer</li>
-                                                <li>Iron/ironing board upon request</li>
+                                                <li>Bàn làm việc / ăn uống</li>
+                                                <li>TV / máy chiếu</li>
+                                                <li>Karaoke</li>
                                             </ul>
                                         </div>
                                         <div class="col-xs-6 col-lg-4">
-                                            <h6>KITCHEN ROOM</h6>
+                                            <h6>Phòng bếp</h6>
                                             <ul>
-                                                <li>AM/FM clock radio</li>
-                                                <li>Voicemail</li>
-                                                <li>High-speed Internet access</li>
+                                                <li>Dụng cụ nhà bếp</li>
+                                                <li>Bàn ăn</li>
+                                                <li>Thiết bị điện</li>
                                             </ul>
                                         </div>
                                         <div class="col-xs-6 col-lg-4">
-                                            <h6>balcony</h6>
+                                            <h6>Ban công</h6>
                                             <ul>
-                                                <li>AM/FM clock radio</li>
-                                                <li>Voicemail</li>
-                                                <li>High-speed Internet access</li>
+                                                <li>Bàn ghế ngoài trời</li>
+                                                <li>Sân hiên phơi nắng</li>
+                                                <li>Nhìn ra thành phố</li>
                                             </ul>
                                         </div>
                                         <div class="col-xs-6 col-lg-4">
-                                            <h6>bedroom</h6>
+                                            <h6>Phòng ngủ</h6>
                                             <ul>
-                                                <li>Coffee maker</li>
-                                                <li>25 inch or larger TV</li>
-                                                <li>Cable/satellite TV channels</li>
-                                                <li>AM/FM clock radio</li>
-                                                <li>Voicemail</li>
+                                                <li>Giường đôi</li>
+                                                <li>Tủ để quần áo</li>
+                                                <li>Hệ thống cách âm</li>
+                                                <li>Đồng hồ báo thức</li>
                                             </ul>
                                         </div>
                                         <div class="col-xs-6 col-lg-4">
-                                            <h6>bathroom</h6>
+                                            <h6>Phòng tắm</h6>
                                             <ul>
-                                                <li>Dataport</li>
-                                                <li>Phone access fees waived</li>
-                                                <li>24-hour Concierge service</li>
-                                                <li>Private concierge</li>
+                                                <li>Phòng tắm riêng</li>
+                                                <li>Áo choàng tắm</li>
+                                                <li>Máy sấy tóc</li>
+                                                <li>Khăn tắm</li>
                                             </ul>
                                         </div>
                                         <div class="col-xs-6 col-lg-4">
-                                            <h6>Oversized work desk</h6>
+                                            <h6>Khác</h6>
                                             <ul>
-                                                <li>Dataport</li>
-                                                <li>Phone access fees waived</li>
-                                                <li>24-hour Concierge service</li>
-                                                <li>Private concierge</li>
+                                                <li>Wi-fi có ở các khu vực công cộng</li>
+                                                <li>Lễ tân 24 giờ</li>
+                                                <li>Báo động an ninh</li>
+                                                <li>Két an toàn</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -612,7 +609,7 @@
 
             <!-- COMPARE ACCOMMODATION -->
             <div class="room-detail_compare">
-                <h2 class="room-compare_title">COMPARE ACCOMMODATION</h2>
+                <h2 class="room-compare_title">Địa điểm khác</h2>
 
                 <div class="room-compare_content">
 
@@ -621,19 +618,19 @@
                         <div class="col-sm-6 col-md-4 col-lg-3">
                             <div class="room-compare_item">
                                 <div class="img">
-                                    <a href="#"><img src="img/room/detail/compare/img-1.jpg" alt=""></a>
+                                    <a href="#"><img src="img/homestay/homestay-1.jpg" alt=""></a>
                                 </div>
 
                                 <div class="text">
-                                    <h2><a href="#">LUxury room</a></h2>
+                                    <h2><a href="#">Cửa Nam</a></h2>
 
                                     <ul>
-                                        <li><i class="lotus-icon-person"></i> Max: 2 Person(s)</li>
-                                        <li><i class="lotus-icon-bed"></i> Bed: King-size or twin beds</li>
-                                        <li><i class="lotus-icon-view"></i> View: Ocen</li>
+                                        <li><i class="lotus-icon-person"></i>2 người</li>
+                                        <li><i class="lotus-icon-bed"></i> Giường đôi</li>
+                                        <li><i class="lotus-icon-view"></i> Nhìn ra thành phố</li>
                                     </ul>
 
-                                    <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
+                                    <a href="#" class="awe-btn awe-btn-default">Xem chi tiết</a>
 
                                 </div>
 
@@ -645,19 +642,19 @@
                         <div class="col-sm-6 col-md-4 col-lg-3">
                             <div class="room-compare_item">
                                 <div class="img">
-                                    <a href="#"><img src="img/r oom/detail/compare/img-2.jpg" alt=""></a>
+                                    <a href="#"><img src="img/homestay/homestay-1.jpg" alt=""></a>
                                 </div>
 
                                 <div class="text">
-                                    <h2><a href="#">Family Room</a></h2>
+                                    <h2><a href="#">Phương Mai</a></h2>
 
                                     <ul>
-                                        <li><i class="lotus-icon-person"></i> Max: 2 Person(s)</li>
-                                        <li><i class="lotus-icon-bed"></i> Bed: King-size or twin beds</li>
-                                        <li><i class="lotus-icon-view"></i> View: Ocen</li>
+                                        <li><i class="lotus-icon-person"></i>4 người</li>
+                                        <li><i class="lotus-icon-bed"></i> Giường đôi</li>
+                                        <li><i class="lotus-icon-view"></i> Nhìn ra thành phố</li>
                                     </ul>
 
-                                    <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
+                                    <a href="#" class="awe-btn awe-btn-default">Xem chi tiết</a>
 
                                 </div>
 
@@ -669,19 +666,19 @@
                         <div class="col-sm-6 col-md-4 col-lg-3">
                             <div class="room-compare_item">
                                 <div class="img">
-                                    <a href="#"><img src="img/room/detail/compare/img-3.jpg" alt=""></a>
+                                    <a href="#"><img src="img/homestay/homestay-1.jpg" alt=""></a>
                                 </div>
 
                                 <div class="text">
-                                    <h2><a href="#">standard Room</a></h2>
+                                    <h2><a href="#">Đống Đa</a></h2>
 
                                     <ul>
-                                        <li><i class="lotus-icon-person"></i> Max: 2 Person(s)</li>
-                                        <li><i class="lotus-icon-bed"></i> Bed: King-size or twin beds</li>
-                                        <li><i class="lotus-icon-view"></i> View: Ocen</li>
+                                        <li><i class="lotus-icon-person"></i>4 người</li>
+                                        <li><i class="lotus-icon-bed"></i> Giường đôi</li>
+                                        <li><i class="lotus-icon-view"></i> Nhìn ra thành phố</li>
                                     </ul>
 
-                                    <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
+                                    <a href="#" class="awe-btn awe-btn-default">Xem chi tiết</a>
 
                                 </div>
 
@@ -693,19 +690,19 @@
                         <div class="col-sm-6 col-md-4 col-lg-3">
                             <div class="room-compare_item">
                                 <div class="img">
-                                    <a href="#"><img src="img/room/detail/compare/img-4.jpg" alt=""></a>
+                                    <a href="#"><img src="img/homestay/homestay-1.jpg" alt=""></a>
                                 </div>
 
                                 <div class="text">
-                                    <h2><a href="#">couple Room</a></h2>
+                                    <h2><a href="#">Hoàn Kiếm</a></h2>
 
                                     <ul>
-                                        <li><i class="lotus-icon-person"></i> Max: 2 Person(s)</li>
-                                        <li><i class="lotus-icon-bed"></i> Bed: King-size or twin beds</li>
-                                        <li><i class="lotus-icon-view"></i> View: Ocen</li>
+                                        <li><i class="lotus-icon-person"></i>4 người</li>
+                                        <li><i class="lotus-icon-bed"></i> Giường đôi</li>
+                                        <li><i class="lotus-icon-view"></i> Nhìn ra thành phố</li>
                                     </ul>
 
-                                    <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
+                                    <a href="#" class="awe-btn awe-btn-default">Xem chi tiết</a>
 
                                 </div>
 
