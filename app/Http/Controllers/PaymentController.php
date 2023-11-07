@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Payment;
 use App\Models\Transaction;
+use App\Models\TransactionFacility;
 use App\Repositories\Interface\PaymentRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -40,8 +41,13 @@ class PaymentController extends Controller
         return redirect()->route('transaction.index')->with('success', 'Transaction room ' . $transaction->room->number . ' success, ' . Helper::convertToRupiah($request->payment) . ' paid');
     }
 
-    public function invoice(Payment $payment)
+    public function invoice($id)
     {
-        return view('payment.invoice', compact('payment'));
+        $transaction = Transaction::query()->findOrFail($id);
+        $transaction_facilities = TransactionFacility::where('transanction_id', $transaction->id)->get();
+        return view('payment.invoice', compact('transaction', 'transaction_facilities' ));
     }
+
+
+
 }

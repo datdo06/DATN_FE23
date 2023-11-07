@@ -65,10 +65,9 @@
             <!-- HEADER MENU -->
             <nav class="header_menu">
                 <ul class="menu">
-                    {{-- <li class="current-menu-item"> --}}
-                        <li class=" ">
-                        <a href="{{ route('home') }}">Trang Chủ </a>
-                        
+                    <li class="current-menu-item">
+                        <a href="{{ route('home') }}">Home <span class="fa fa-caret-down"></span></a>
+                       
                     </li>
 
                     <li>

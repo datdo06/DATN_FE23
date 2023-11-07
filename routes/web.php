@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FacilityRoomController;
 use App\Models\User;
 use App\Events\NewReservationEvent;
 use App\Events\RefreshDashboardEvent;
@@ -21,7 +22,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\RegisterController;
 
 
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,8 +34,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
 
 
 Route::group(['middleware' => ['auth', 'checkRole:Super']], function () {
@@ -62,9 +60,11 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
     Route::resource('roomstatus', RoomStatusController::class);
     Route::resource('transaction', TransactionController::class);
     Route::resource('facility', FacilityController::class);
+    Route::resource('facility_room', FacilityRoomController::class);
+
 
     Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
-    Route::get('/payment/{payment}/invoice', [PaymentController::class, 'invoice'])->name('payment.invoice');
+
 
     Route::get('/transaction/{transaction}/payment/create', [PaymentController::class, 'create'])->name('transaction.payment.create');
     Route::post('/transaction/{transaction}/payment/store', [PaymentController::class, 'store'])->name('transaction.payment.store');
@@ -77,6 +77,13 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin,Customer']], funct
     Route::resource('user', UserController::class)->only([
         'show'
     ]);
+    Route::get('/payment/{transaction}/invoice', [PaymentController::class, 'invoice'])->name('payment.invoice');
+    Route::post('/{user}/{room}/confirm', [TransactionRoomReservationController::class, 'confirm'])->name('confirm');
+    Route::name('transaction.reservation.')->group(function () {
+        Route::post('/{customer}/{room}/payOnlinePayment', [TransactionRoomReservationController::class, 'payOnlinePayment'])->name('payOnlinePayment');
+        Route::get('/payOnlinePayment', [TransactionRoomReservationController::class, 'vnpay'])->name('vnpay');
+        Route::post('/paym', [TransactionRoomReservationController::class, 'pay'])->name('pay');
+    });
 
     Route::view('/notification', 'notification.index')->name('notification.index');
 
@@ -86,7 +93,7 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin,Customer']], funct
 
     Route::get('/mark-all-as-read', [NotificationsController::class, 'markAllAsRead'])->name('notification.markAllAsRead');
 
-    Route::get('/notification-to/{id}',[NotificationsController::class, 'routeTo'])->name('notification.routeTo');
+    Route::get('/notification-to/{id}', [NotificationsController::class, 'routeTo'])->name('notification.routeTo');
 });
 
 Route::view('/admin/login', 'auth.login')->name('admin.login');
@@ -101,11 +108,19 @@ Route::get('/event', [\App\Http\Controllers\EventController::class, 'index'])->n
 Route::get('/about', [\App\Http\Controllers\AboutController::class, 'index'])->name('about');
 Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact');
 Route::get('/', [HomeController::class, 'show'])->name('home');
+
+
+//Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
 Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');
 Route::view('/login', 'client.login')->name('login');
 Route::view('/register', 'client.register')->name('register');
 Route::post('/addCustomer', [CustomerController::class, 'add'])->name('customer.add');
 
+Route::get('/oke', [TransactionRoomReservationController::class, 'oke']);
 Route::get('/sendEvent', function () {
     $superAdmins = User::where('role', 'Super')->get();
     event(new RefreshDashboardEvent("Someone reserved a room"));
@@ -115,3 +130,9 @@ Route::get('/sendEvent', function () {
         // event(new NewReservationEvent($message, $superAdmin));
     }
 });
+Route::get('/homestay-detail/{id}', [RoomController::class, 'homestayDetail'])->name('homestayDetail');
+Route::get('/booking', function () {
+    return view('booking');
+});
+
+// Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');

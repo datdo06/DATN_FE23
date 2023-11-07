@@ -14,6 +14,10 @@ class Payment extends Model
         'transaction_id',
         'price',
         'status',
+        'code_vnpay',
+        'vnp_response_code',
+        'code_bank',
+        'p_time'
     ];
 
     public function transaction()

@@ -1,32 +1,24 @@
 <?php
-
 namespace App\Repositories\Implementation;
-
-use App\Models\Type;
-use App\Repositories\Interface\TypeRepositoryInterface;
-
-class TypeRepository implements TypeRepositoryInterface
-{
-    public function showAll($request)
-    {
-        $types = Type::orderBy('id', 'DESC');
+use App\Models\Facility;
+use App\Repositories\Interface\FacilityRepositoryInterface;
+class FacilityRepository implements FacilityRepositoryInterface{
+    public function showAll($request){
+        $facilities = Facility::orderBy('id', 'DESC');
         if (!empty($request->search)) {
-            $types = $types->where('name', 'LIKE', '%' . $request->search . '%');
+            $facilities = $facilities->where('name', 'LIKE', '%' . $request->search . '%');
         }
-        $types = $types->paginate(5);
-        $types->appends($request->all());
+        $facilities = $facilities->paginate(5);
+        $facilities->appends($request->all());
 
-        return $types;
+        return $facilities;
     }
-
-
-    public function getTypesDatatable($request)
-    {
+    public function getFacilitiesDatatable($request){
         $columns = array(
-            0 => 'types.id',
-            1 => 'types.name',
-            2 => 'types.information',
-            3 => 'types.id',
+            0 => 'facilities.id',
+            1 => 'facilities.name',
+            2 => 'facilities.detail',
+            3 => 'facilities.id',
         );
 
         $limit          = $request->input('length');
@@ -34,11 +26,11 @@ class TypeRepository implements TypeRepositoryInterface
         $order          = $columns[$request->input('order.0.column')];
         $dir            = $request->input('order.0.dir');
 
-        $main_query = Type::select(
-            'types.id as number',
-            'types.name',
-            'types.information',
-            'types.id',
+        $main_query = Facility::select(
+            'facilities.id as number',
+            'facilities.name',
+            'facilities.detail',
+            'facilities.id',
         );
 
         $totalData = $main_query->get()->count();
@@ -73,7 +65,7 @@ class TypeRepository implements TypeRepositoryInterface
                 $data[] = array(
                     "number" => $model->id,
                     "name" => $model->name,
-                    "information" => $model->information,
+                    "detail" => $model->detail,
                     "id" => $model->id,
                 );
             }
@@ -88,19 +80,12 @@ class TypeRepository implements TypeRepositoryInterface
 
         return json_encode($response);
     }
+    public function store($facilityData){
+        $facilities = new Facility();
+        $facilities->name = $facilityData->name;
+        $facilities->detail = $facilityData->detail;
+        $facilities->save();
 
-    public function store($typeData)
-    {
-        $type = new Type;
-        $type->name = $typeData->name;
-        $type->information = $typeData->information;
-        $type->save();
-
-        return $type;
-    }
-
-    public function getTypeList($request)
-    {
-        return Type::get();
+        return $facilities;
     }
 }

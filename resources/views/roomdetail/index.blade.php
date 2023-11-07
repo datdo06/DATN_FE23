@@ -217,64 +217,7 @@
     }
     </style>
 </div>
-<!-- BANNER SLIDER -->
-<section class="section-slider">
-    <h1 class="element-invisible">Slider</h1>
-    <div id="slider-revolution">
-        <ul>
-            <li data-transition="fade">
-                <img src="img/slider/img-5.jpg" data-bgposition="left center" data-duration="14000"
-                    data-bgpositionend="right center" alt="">
 
-                <div class="tp-caption sft fadeout slider-caption-sub slider-caption-1" data-x="center" data-y="100"
-                    data-speed="700" data-start="1500" data-easing="easeOutBack">
-                    <img src="img/slider/hom1-slide1.png" alt="icons">
-                </div>
-
-                <div class="tp-caption sft fadeout slider-caption-sub slider-caption-1" data-x="center" data-y="240"
-                    data-speed="700" data-start="1500" data-easing="easeOutBack">
-                    WELCOME TO
-                </div>
-
-                <div class="tp-caption sfb fadeout slider-caption slider-caption-sub-1" data-x="center" data-y="280"
-                    data-speed="700" data-easing="easeOutBack" data-start="2000">KING THE LAND</div>
-
-                <a href="#" class="tp-caption sfb fadeout awe-btn awe-btn-12 awe-btn-slider" data-x="center"
-                    data-y="380" data-easing="easeOutBack" data-speed="700" data-start="2200">ĐẶT HOMESTAY NGAY</a>
-            </li>
-
-            <li data-transition="fade">
-                <img src="img/slider/img-4.jpg" data-bgposition="left center" data-duration="14000"
-                    data-bgpositionend="right center" alt="">
-
-                <div class="tp-caption sft fadeout" data-x="center" data-y="195" data-speed="700" data-start="1300"
-                    data-easing="easeOutBack">
-                    <img src="img/icon-slider-1.png" alt="">
-                </div>
-
-                <div class="tp-caption sft fadeout slider-caption-sub slider-caption-sub-3" data-x="center" data-y="220"
-                    data-speed="700" data-start="1500" data-easing="easeOutBack">
-                    Ưu đãi lên đến 60%
-
-                </div>
-
-                <div class="tp-caption sfb fadeout slider-caption slider-caption-3" data-x="center" data-y="260"
-                    data-speed="700" data-easing="easeOutBack" data-start="2000"> HÃY ĐẶT NGAY
-                </div>
-
-                <div class="tp-caption sfb fadeout slider-caption-sub slider-caption-sub-3" data-x="center" data-y="365"
-                    data-easing="easeOutBack" data-speed="700" data-start="2200"> và còn rất nhiều ưu đãi khác</div>
-
-                <div class="tp-caption sfb fadeout slider-caption-sub slider-caption-sub-3" data-x="center" data-y="395"
-                    data-easing="easeOutBack" data-speed="700" data-start="2400"><img src="img/icon-slider-2.png"
-                        alt=""></div>
-            </li>
-
-        </ul>
-    </div>
-
-</section>
-<!-- END / BANNER SLIDER -->
 
 <!-- CHECK AVAILABILITY -->
 <section class="section-check-availability">
@@ -405,22 +348,36 @@
                         </div>
                         <div class="buttons"> <button class="btn btn-outline-warning btn-long cart">Đặt trước
                                 phòng</button>
-                            <button class="btn btn-warning btn-long buy">Thanh Toán</button> <button
-                                class="btn btn-light wishlist"> <i class="fa fa-heart"></i> </button>
+                            <button class="btn btn-warning btn-long buy">Thanh Toán</button>  
                         </div>
                         <hr>
                         <div class="product-description">
-                            <div><span class="font-weight-bold">select box :</span><span> blue</span></div>
-                            <div class="my-color"> <label class="radio"> <input type="radio" name="gender" value="MALE"
-                                        checked> <span class="red"></span> </label> <label class="radio"> <input
-                                        type="radio" name="gender" value="FEMALE"> <span class="blue"></span> </label>
-                                <label class="radio"> <input type="radio" name="gender" value="FEMALE"> <span
-                                        class="green"></span> </label> <label class="radio"> <input type="radio"
-                                        name="gender" value="FEMALE"> <span class="orange"></span> </label>
-                            </div>
-                            <br><br>
-                            <div class="mt-2">
-                                <h4 class="font-bold">Thông tin phòng :</h4>
+                        <div class="">
+                    <div class="availability-form">
+                        <form action="chooseRoom" method="GET">
+                            <input type="text" class="awe-calendar from  @error('check_in') is-invalid @enderror"
+                                id="check_in" name="check_in" value="{{ old('check_in') }}" placeholder="Ngày đến"
+                                required>
+
+                            <input type="text" class="awe-calendar to @error('check_out') is-invalid @enderror"
+                                id="check_out" name="check_out" value="{{ old('check_out') }}" placeholder="Ngày đi"
+                                required>
+
+                            <input type="text" class="awe-input @error('count_person') is-invalid @enderror"
+                                id="count_person" name="count_person" value="{{ old('count_person') }}"
+                                placeholder="Số người" required>
+
+                            <select class="awe-select @error('type_id') is-invalid @enderror" name="type_id"
+                                id="type_id" required>
+                                 
+                            </select>
+
+                        </form>
+                    </div>
+                </div>
+                            <br><br> <br>
+                            <div class="mt-4">
+                                <h4 class="font-bold"></h4>
                                 <p>Căn hộ này có 1 phòng ngủ, bếp với tủ lạnh và bếp nấu, TV màn hình phẳng, khu vực ghế
                                     ngồi cũng như 2 phòng tắm được trang bị chậu rửa vệ sinh.
                                     Du khách có thể thưởng thức bữa ăn trên khu vực ăn uống ngoài trời trong khi ngắm
@@ -488,129 +445,6 @@
         });
         </script>
 </section>
-
-
-
-<section class="section-accommo_1 ">
-    <div class="container">
-
-        <div class="accomd-modations_1">
-
-            <h2 class="heading"> Các loại phòng khác</h2>
-
-            <div class="accomd-modations-content_1">
-
-                <div class="accomd-modations-slide_1">
-
-                    {{-- @foreach($rooms as $rooms) --}}
-                    <div class="accomd-modations-room_1 bg-white">
-
-                        <div class="img ">
-                            <a href="#"><img class="" src="img/homestay/homestay-11.jpg" alt=""></a>
-                        </div>
-
-                        <div class="text">
-                            <h2><a href="#">Căn 1 phòng ngủ</a></h2>
-                            <p class="desc">
-                                Căn hộ này có 1 phòng ngủ, bếp với tủ lạnh và bếp nấu, TV màn hình phẳng, khu vực ghế
-                                ngồi cũng như 2 phòng tắm được trang bị chậu rửa vệ sinh.
-                                Du khách có thể thưởng thức bữa ăn trên khu vực ăn uống ngoài trời trong khi ngắm nhìn
-                                quang cảnh thành phố. Để tăng thêm sự riêng tư, chỗ ở này có lối vào riêng.
-                            </p>
-                            <p class="desc">Tối đa : 2 người lớn và 1 trẻ em</p>
-
-                            <div class="wrap-price">
-                                <p class="price">
-                                    <span class="amout">700.000</span> / Ngày
-                                </p>
-                                <a href="{{ route('roomdetail') }}" class="awe-btn awe-btn-default">CHI TIẾT </a>
-                            </div>
-                        </div>
-
-                    </div>
-                    {{-- @endforeach --}}
-                    <!-- END / ITEM -->
-
-                    <!-- ITEM -->
-                    <div class="accomd-modations-room_1 bg-white">
-                        <div class="img">
-                            <a href="#"><img src="img/homestay/homestay-2.jpg" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="#">Căn 2 phòng ngủ</a></h2>
-                            <p class="desc">Căn hộ này có 2 phòng ngủ, bếp với tủ lạnh và bếp nấu, TV màn hình phẳng,
-                                khu vực ghế ngồi cũng như 2 phòng tắm được trang bị chậu rửa vệ sinh.
-                                Du khách có thể thưởng thức bữa ăn trên khu vực ăn uống ngoài trời trong khi ngắm nhìn
-                                quang cảnh thành phố. Để tăng thêm sự riêng tư, chỗ ở này có lối vào riêng.</p>
-                            <p class="desc">Tối đa : 4 người lớn và 1 trẻ em</p>
-
-                            <div class="wrap-price">
-                                <p class="price">
-                                    <span class="amout">1.400.000</span> / Ngày
-                                </p>
-                                <a href="#" class="awe-btn awe-btn-default">CHI TIẾT</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END / ITEM -->
-
-                    <!-- ITEM -->
-                    <div class="accomd-modations-room_1 bg-white">
-                        <div class="img">
-                            <a href="#"><img src="img/homestay/homestay-8.jpg" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="#">Căn 3 phòng ngủ</a></h2>
-                            <p class="desc">Căn hộ này có 2 phòng ngủ, bếp với tủ lạnh và bếp nấu, TV màn hình phẳng,
-                                khu vực ghế ngồi cũng như 2 phòng tắm được trang bị chậu rửa vệ sinh.
-                                Du khách có thể thưởng thức bữa ăn trên khu vực ăn uống ngoài trời trong khi ngắm nhìn
-                                quang cảnh thành phố. Để tăng thêm sự riêng tư, chỗ ở này có lối vào riêng.</p>
-                            <p class="desc">Tối đa : 6 người lớn và 1 trẻ em</p>
-
-
-                            <div class="wrap-price">
-                                <p class="price">
-                                    <span class="amout">2.100.000</span> / Ngày
-                                </p>
-                                <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END / ITEM -->
-
-                    <!-- ITEM -->
-                    <div class="accomd-modations-room_1 bg-white">
-                        <div class="img">
-                            <a href="#"><img src="img/homestay/homestay-20.jpg" alt=""></a>
-                        </div>
-                        <div class="text">
-                            <h2><a href="#">Căn 4 phòng ngủ</a></h2>
-                            <p class="desc">Căn hộ này có 2 phòng ngủ, bếp với tủ lạnh và bếp nấu, TV màn hình phẳng,
-                                khu vực ghế ngồi cũng như 2 phòng tắm được trang bị chậu rửa vệ sinh.
-                                Du khách có thể thưởng thức bữa ăn trên khu vực ăn uống ngoài trời trong khi ngắm nhìn
-                                quang cảnh thành phố. Để tăng thêm sự riêng tư, chỗ ở này có lối vào riêng.</p>
-                            <p class="desc">Tối đa : 8 người lớn và 1 trẻ em</p>
-
-
-
-                            <div class="wrap-price">
-                                <p class="price">
-                                    <span class="amout">2.800.000</span> / Ngày
-                                </p>
-                                <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END / ITEM -->
-
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</section>
-<br><br><br>
 
 <section class="container ">
     <div class="container  col-md-9  bg-white">
@@ -740,13 +574,130 @@
 
 
 
-
-
-
-
-
-
 </section>
+
+<section class="section-accommo_1 ">
+    <div class="container">
+
+        <div class="accomd-modations_1">
+
+            <h2 class="heading"> Các loại phòng khác</h2>
+
+            <div class="accomd-modations-content_1">
+
+                <div class="accomd-modations-slide_1">
+
+                    {{-- @foreach($rooms as $rooms) --}}
+                    <div class="accomd-modations-room_1 bg-white">
+
+                        <div class="img ">
+                            <a href="#"><img class="" src="img/homestay/homestay-11.jpg" alt=""></a>
+                        </div>
+
+                        <div class="text">
+                            <h2><a href="#">Căn 1 phòng ngủ</a></h2>
+                            <p class="desc">
+                                Căn hộ này có 1 phòng ngủ, bếp với tủ lạnh và bếp nấu, TV màn hình phẳng, khu vực ghế
+                                ngồi cũng như 2 phòng tắm được trang bị chậu rửa vệ sinh.
+                                Du khách có thể thưởng thức bữa ăn trên khu vực ăn uống ngoài trời trong khi ngắm nhìn
+                                quang cảnh thành phố. Để tăng thêm sự riêng tư, chỗ ở này có lối vào riêng.
+                            </p>
+                            <p class="desc">Tối đa : 2 người lớn và 1 trẻ em</p>
+
+                            <div class="wrap-price">
+                                <p class="price">
+                                    <span class="amout">700.000</span> / Ngày
+                                </p>
+                                <a href="{{ route('roomdetail') }}" class="awe-btn awe-btn-default">CHI TIẾT </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    {{-- @endforeach --}}
+                    <!-- END / ITEM -->
+
+                    <!-- ITEM -->
+                    <div class="accomd-modations-room_1 bg-white">
+                        <div class="img">
+                            <a href="#"><img src="img/homestay/homestay-2.jpg" alt=""></a>
+                        </div>
+                        <div class="text">
+                            <h2><a href="#">Căn 2 phòng ngủ</a></h2>
+                            <p class="desc">Căn hộ này có 2 phòng ngủ, bếp với tủ lạnh và bếp nấu, TV màn hình phẳng,
+                                khu vực ghế ngồi cũng như 2 phòng tắm được trang bị chậu rửa vệ sinh.
+                                Du khách có thể thưởng thức bữa ăn trên khu vực ăn uống ngoài trời trong khi ngắm nhìn
+                                quang cảnh thành phố. Để tăng thêm sự riêng tư, chỗ ở này có lối vào riêng.</p>
+                            <p class="desc">Tối đa : 4 người lớn và 1 trẻ em</p>
+
+                            <div class="wrap-price">
+                                <p class="price">
+                                    <span class="amout">1.400.000</span> / Ngày
+                                </p>
+                                <a href="#" class="awe-btn awe-btn-default">CHI TIẾT</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END / ITEM -->
+
+                    <!-- ITEM -->
+                    <div class="accomd-modations-room_1 bg-white">
+                        <div class="img">
+                            <a href="#"><img src="img/homestay/homestay-8.jpg" alt=""></a>
+                        </div>
+                        <div class="text">
+                            <h2><a href="#">Căn 3 phòng ngủ</a></h2>
+                            <p class="desc">Căn hộ này có 2 phòng ngủ, bếp với tủ lạnh và bếp nấu, TV màn hình phẳng,
+                                khu vực ghế ngồi cũng như 2 phòng tắm được trang bị chậu rửa vệ sinh.
+                                Du khách có thể thưởng thức bữa ăn trên khu vực ăn uống ngoài trời trong khi ngắm nhìn
+                                quang cảnh thành phố. Để tăng thêm sự riêng tư, chỗ ở này có lối vào riêng.</p>
+                            <p class="desc">Tối đa : 6 người lớn và 1 trẻ em</p>
+
+
+                            <div class="wrap-price">
+                                <p class="price">
+                                    <span class="amout">2.100.000</span> / Ngày
+                                </p>
+                                <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END / ITEM -->
+
+                    <!-- ITEM -->
+                    <div class="accomd-modations-room_1 bg-white">
+                        <div class="img">
+                            <a href="#"><img src="img/homestay/homestay-20.jpg" alt=""></a>
+                        </div>
+                        <div class="text">
+                            <h2><a href="#">Căn 4 phòng ngủ</a></h2>
+                            <p class="desc">Căn hộ này có 2 phòng ngủ, bếp với tủ lạnh và bếp nấu, TV màn hình phẳng,
+                                khu vực ghế ngồi cũng như 2 phòng tắm được trang bị chậu rửa vệ sinh.
+                                Du khách có thể thưởng thức bữa ăn trên khu vực ăn uống ngoài trời trong khi ngắm nhìn
+                                quang cảnh thành phố. Để tăng thêm sự riêng tư, chỗ ở này có lối vào riêng.</p>
+                            <p class="desc">Tối đa : 8 người lớn và 1 trẻ em</p>
+
+
+
+                            <div class="wrap-price">
+                                <p class="price">
+                                    <span class="amout">2.800.000</span> / Ngày
+                                </p>
+                                <a href="#" class="awe-btn awe-btn-default">VIEW DETAIL</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END / ITEM -->
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<br><br><br>
+
+
 
 
 

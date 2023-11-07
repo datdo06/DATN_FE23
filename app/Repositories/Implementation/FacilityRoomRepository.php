@@ -1,32 +1,27 @@
 <?php
-
 namespace App\Repositories\Implementation;
+use App\Models\Facility;
+use App\Models\FacilityRoom;
 
-use App\Models\Type;
-use App\Repositories\Interface\TypeRepositoryInterface;
+use App\Repositories\Interface\FacilityRoomRepositoryInterface;
 
-class TypeRepository implements TypeRepositoryInterface
-{
-    public function showAll($request)
-    {
-        $types = Type::orderBy('id', 'DESC');
+class FacilityRoomRepository implements FacilityRoomRepositoryInterface{
+    public function showAll($request){
+        $facilityRoom = FacilityRoom::orderBy('id', 'DESC');
         if (!empty($request->search)) {
-            $types = $types->where('name', 'LIKE', '%' . $request->search . '%');
+            $facilityRoom = $facilityRoom->where('name', 'LIKE', '%' . $request->search . '%');
         }
-        $types = $types->paginate(5);
-        $types->appends($request->all());
+        $facilityRoom = $facilityRoom->paginate(5);
+        $facilityRoom->appends($request->all());
 
-        return $types;
+        return $facilityRoom;
     }
-
-
-    public function getTypesDatatable($request)
-    {
+    public function getFacilityRoomDatatable($request){
         $columns = array(
-            0 => 'types.id',
-            1 => 'types.name',
-            2 => 'types.information',
-            3 => 'types.id',
+            0 => 'facility_rooms.id',
+            1 => 'rooms.number',
+            2 => 'facilities.name',
+            3 => 'facility_rooms.id',
         );
 
         $limit          = $request->input('length');
@@ -34,12 +29,14 @@ class TypeRepository implements TypeRepositoryInterface
         $order          = $columns[$request->input('order.0.column')];
         $dir            = $request->input('order.0.dir');
 
-        $main_query = Type::select(
-            'types.id as number',
-            'types.name',
-            'types.information',
-            'types.id',
-        );
+        $main_query = FacilityRoom::select(
+            'facility_rooms.id as number',
+            'rooms.number as homestay',
+            'facilities.name as facility',
+            'facility_rooms.id',
+        )->leftJoin("rooms", "rooms.id", "=", "facility_rooms.room_id")
+            ->leftJoin("facilities", "facility_rooms.facility_id", "=", "facilities.id")
+        ;
 
         $totalData = $main_query->get()->count();
 
@@ -72,8 +69,8 @@ class TypeRepository implements TypeRepositoryInterface
             foreach ($models as $model) {
                 $data[] = array(
                     "number" => $model->id,
-                    "name" => $model->name,
-                    "information" => $model->information,
+                    "homestay" => $model->homestay,
+                    "facility" => $model->facility,
                     "id" => $model->id,
                 );
             }
@@ -88,19 +85,12 @@ class TypeRepository implements TypeRepositoryInterface
 
         return json_encode($response);
     }
+    public function store($facilityRoomData){
+        $facilityRoom = new FacilityRoom();
+        $facilityRoom->room_id = $facilityRoomData->room_id;
+        $facilityRoom->facility_id = $facilityRoomData->facility_id;
+        $facilityRoom->save();
 
-    public function store($typeData)
-    {
-        $type = new Type;
-        $type->name = $typeData->name;
-        $type->information = $typeData->information;
-        $type->save();
-
-        return $type;
-    }
-
-    public function getTypeList($request)
-    {
-        return Type::get();
+        return $facilityRoom;
     }
 }
