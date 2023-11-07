@@ -32,6 +32,7 @@ class FacilityController extends Controller
     public function create()
     {
         $view = view('facility.create')->render();
+
         return response()->json([
             'view' => $view,
         ]);
@@ -45,13 +46,6 @@ class FacilityController extends Controller
             'message' => 'success', 'Facility ' . $facility->name . ' created'
         ]);
     }
-
-    public function show(Facility $facility)
-    {
-
-
-    }
-
 
     public function edit(Facility $facility)
     {

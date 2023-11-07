@@ -98,5 +98,6 @@ import Pusher from "pusher-js";
         import ("./pages/customer"),
         import("./pages/facility"),
         import("./pages/facility_room"),
+        import("./pages/coupon"),
     ])
 })();

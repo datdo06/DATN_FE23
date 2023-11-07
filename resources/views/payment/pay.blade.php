@@ -138,6 +138,20 @@
 
                                 </div>
 
+                            <form action="{{ route('check-coupon') }}" method="post">
+                                @csrf
+                                <div class="reservation-room-seleted_total-room">
+                                    MÃ giảm giá
+                                    <span class="reservation-amout"><input style="margin-bottom: 50px"
+                                                                           type="text"
+                                                                           name="coupon"></span>
+                                </div>
+
+                                <div style="margin-top: 50px">
+                                    <button type="submit" name="check_coupon" class="awe-btn awe-btn-13 ">Thêm mã giảm giá
+                                    </button>
+                                </div>
+                            </form>
                             <form method="POST"
                                   action="{{route('transaction.reservation.payOnlinePayment', ['customer' => $customer->id, 'room' => $room->id])}}">
                                 @csrf
@@ -149,6 +163,9 @@
                                 </div>
                                 <button style="margin-top: 50px" type="submit" class="awe-btn awe-btn-13">THANH TOÁN VNPAY</button>
                             </form>
+                            @if(session('coupon'))
+                                {{ dd(session('coupon') -> coupon_code )}}
+                            @endif
 
                         </div>
                         <!-- END / SIDEBAR -->

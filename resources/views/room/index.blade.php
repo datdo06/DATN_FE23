@@ -81,17 +81,6 @@
                                     </tbody>
                                     <tfoot>
 
-                                    <tr>
-                                        <th>
-                                            <select id="filter-type">
-                                                <option value="">Tất cả</option>
-                                                @foreach ($district as $type)
-                                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                                @endforeach
-                                            </select>
-
-
-                                    </tr>
 
                                     </tfoot>
                                 </table>

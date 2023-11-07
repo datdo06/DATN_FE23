@@ -117,13 +117,6 @@
                                     </div>
                                     <!-- END / ITEM -->
 
-                                    <!-- ITEM -->
-                                    <!-- END / ITEM -->
-
-                                    <!-- TOTAL -->
-
-                                    <!-- END / TOTAL -->
-
                                 </div>
                                 <!-- END / ROOM SELECT -->
 
