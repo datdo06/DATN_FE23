@@ -363,8 +363,6 @@ class TransactionRoomReservationController extends Controller
             'person' => $request->person,
             'total_day' => $request->total_day,
         ];
-
-
         return view('payment.pay', compact('data', 'customer', 'room', 'facilities'));
     }
 
