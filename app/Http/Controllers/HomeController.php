@@ -7,6 +7,9 @@ use App\Models\Customer;
 use App\Models\Image;
 use App\Models\Room;
 use App\Models\Transaction;
+use App\Models\Comment;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\User;
 use App\Repositories\Interface\RoomRepositoryInterface;
 use Carbon\Carbon;
@@ -14,6 +17,7 @@ use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Requests\ChooseRoomRequest;
 use App\Repositories\Interface\ReservationRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 
 class HomeController extends Controller
@@ -95,5 +99,30 @@ class HomeController extends Controller
             ->get();
 
         return view('home', compact('roomImage', 'rooms', 'users', 'room_type'));
+    }
+    public function formComment($id){
+        $room = Room::find($id);
+        $comment = DB::table('comments')
+        ->join('rooms', 'rooms.id', '=', 'comments.com_room_id')
+        ->join('users', 'users.id', '=', 'comments.com_user_id')
+        ->select('rooms.id','users.id as uid', 'users.name', 'users.avatar', 'comments.com_content','comments.com_subject', 'comments.created_at')
+        ->where('rooms.id', $id)
+        ->get();
+        $results = Comment::select('com_room_id', DB::raw('COUNT(*) as comment_count'))
+        ->groupBy('com_room_id')
+        ->where('comments.com_room_id', $id)
+        ->get();
+        return view('comment', compact('room','results','comment'));
+    }
+    public function postComment($id, Request $request)
+    {
+        $idCom = $id;
+        $comment = new Comment;
+        $comment->com_room_id = $idCom;
+        $comment->com_user_id = Auth::user()->id;
+        $comment->com_content = $request->com_content;
+        $comment->com_subject = $request->com_subject;
+        $comment->save();
+        return redirect()->back();
     }
 }
