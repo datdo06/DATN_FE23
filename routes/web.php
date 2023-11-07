@@ -14,6 +14,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\TransactionRoomReservationController;
 use App\Http\Controllers\RoomStatusController;
 use App\Http\Controllers\TransactionController;
@@ -61,6 +62,7 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin']], function () {
     Route::resource('transaction', TransactionController::class);
     Route::resource('facility', FacilityController::class);
     Route::resource('facility_room', FacilityRoomController::class);
+    Route::resource('coupon', CouponController::class);
 
 
     Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
@@ -77,13 +79,17 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin,Customer']], funct
     Route::resource('user', UserController::class)->only([
         'show'
     ]);
+    Route::get('/{user}/{room}/confirm', [TransactionRoomReservationController::class, 'confirm'])->name('confirm');
+
+    Route::post('/check-coupon', [TransactionRoomReservationController::class,'check_coupon'])->name('check-coupon');
+
     Route::get('/{user}/order', [TransactionRoomReservationController::class, 'TransactionHometay'])->name('order');
     Route::get('/payment/{transaction}/invoice', [PaymentController::class, 'invoice'])->name('payment.invoice');
     Route::post('/{user}/{room}/confirm', [TransactionRoomReservationController::class, 'confirm'])->name('confirm');
     Route::name('transaction.reservation.')->group(function () {
         Route::post('/{customer}/{room}/payOnlinePayment', [TransactionRoomReservationController::class, 'payOnlinePayment'])->name('payOnlinePayment');
         Route::get('/payOnlinePayment', [TransactionRoomReservationController::class, 'vnpay'])->name('vnpay');
-        Route::post('/paym', [TransactionRoomReservationController::class, 'pay'])->name('pay');
+        Route::post('/pay', [TransactionRoomReservationController::class, 'pay'])->name('pay');
     });
 
     Route::view('/notification', 'notification.index')->name('notification.index');
@@ -96,6 +102,7 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin,Customer']], funct
 
     Route::get('/notification-to/{id}', [NotificationsController::class, 'routeTo'])->name('notification.routeTo');
 });
+
 
 Route::view('/admin/login', 'auth.login')->name('admin.login');
 Route::post('/postLogin', [AuthController::class, 'postLogin'])->name('postlogin');

@@ -34,8 +34,7 @@ class RoomController extends Controller
         $types = $this->typeRepository->getTypeList($request);
         $roomStatuses = $this->roomStatusRepositoryInterface->getRoomStatusList($request);
         return view('room.index', compact('types', 'roomStatuses'));
-        $district = Type::query()->get();
-        return view('room.index', compact('district'));
+
     }
 
     public function create()

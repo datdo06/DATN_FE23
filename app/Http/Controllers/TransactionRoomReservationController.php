@@ -7,6 +7,7 @@ use App\Events\RefreshDashboardEvent;
 use App\Helpers\Helper;
 use App\Http\Requests\ChooseRoomRequest;
 use App\Http\Requests\StoreCustomerRequest;
+use App\Models\Coupon;
 use App\Jobs\SendSuccessMail;
 use App\Jobs\SendWelcomeEmail;
 use App\Mail\CancelHomestayMail;
@@ -26,6 +27,8 @@ use App\Repositories\Interface\ReservationRepositoryInterface;
 use App\Repositories\Interface\PaymentRepositoryInterface;
 use App\Repositories\Interface\TransactionRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+session_start();
 use Illuminate\Support\Facades\Mail;
 
 class TransactionRoomReservationController extends Controller
@@ -112,7 +115,6 @@ class TransactionRoomReservationController extends Controller
         Request  $request,
     )
     {
-
         $dayDifference = Helper::getDateDifference($request->check_in, $request->check_out);
         $minimumDownPayment = $request->sum_money * 0.15;
 
@@ -127,6 +129,8 @@ class TransactionRoomReservationController extends Controller
         if (in_array($room->id, $occupiedRoomIdInArray)) {
             return redirect()->back()->with('failed', 'Sorry, room ' . $room->number . ' already occupied');
         }
+
+
 
         session(['customer' => $customer]);
         session(['room' => $room]);
@@ -161,23 +165,14 @@ class TransactionRoomReservationController extends Controller
             }else{
                 $amount = $data['downPayment'];
             }
-
         }
 
-
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-
         $vnp_TmnCode = "LLWJITYZ";//Mã website tại VNPAY
         $vnp_HashSecret = "EZNGMRKORWXAHBPAJWRNZIMHXIVQQOAF"; //Chuỗi bí mật
-
         $vnp_TxnRef = rand(1, 10000); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-
-
         $vnp_Locale = "vn";
-
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-//Add Params of 2.0.1 Version
-
 
         $inputData = array(
             "vnp_Version" => "2.1.0",
@@ -300,9 +295,6 @@ class TransactionRoomReservationController extends Controller
         else{
             return 'Giao dịch không thành công';
         }
-
-
-
     }
 
     public function payDownPayment(
@@ -353,11 +345,13 @@ class TransactionRoomReservationController extends Controller
             ->pluck('room_id');
     }
     public function confirm(User $user, Room $room, Request $request){
+
         $customer= Customer::whereUserId($user->id)->first();
         $checkin = date_create($request->checkin);
         $checkout = date_create($request->checkout);
         $request->checkin = date_format($checkin,"Y-m-d");
         $request->checkout = date_format($checkout,"Y-m-d");
+
         if($request->total_day == 0){
             $request->total_day = Helper::getDateDifference($request->checkin, $request->checkout);
         }
@@ -368,6 +362,8 @@ class TransactionRoomReservationController extends Controller
             'person' => $request->person,
             'total_day' => $request->total_day,
         ];
+
+        return view('payment.pay', compact('data',  'customer', 'room'));
         return view('payment.pay', compact('data',  'customer', 'room', 'facilities'));
     }
     public function TransactionHometay(User $user){
@@ -385,4 +381,19 @@ class TransactionRoomReservationController extends Controller
 
     }
 
+    public function check_coupon(Request $request) {
+        $data = $request->all();
+        $coupon = Coupon::where('coupon_code', $data['coupon'])->first();
+        if ($coupon) {
+            $count_coupon = $coupon->count();
+//            if($count_coupon > 0) {
+
+
+                return redirect()->back()->with(['coupon' => $coupon] );
+//            }
+        } else {
+            return redirect()->back()->with('error', " no oke");
+
+        }
+    }
 }

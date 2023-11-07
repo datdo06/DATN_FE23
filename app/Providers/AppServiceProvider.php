@@ -12,6 +12,7 @@ use App\Repositories\Implementation\RoomRepository;
 use App\Repositories\Implementation\RoomStatusRepository;
 use App\Repositories\Implementation\TransactionRepository;
 use App\Repositories\Implementation\TypeRepository;
+use App\Repositories\Implementation\CouponRepository;
 use App\Repositories\Implementation\UserRepository;
 use App\Repositories\Interface\CustomerRepositoryInterface;
 use App\Repositories\Interface\FacilityRepositoryInterface;
@@ -24,6 +25,7 @@ use App\Repositories\Interface\RoomStatusRepositoryInterface;
 use App\Repositories\Interface\TransactionRepositoryInterface;
 use App\Repositories\Interface\TypeRepositoryInterface;
 use App\Repositories\Interface\UserRepositoryInterface;
+use App\Repositories\Interface\CouponRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -46,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(FacilityRepositoryInterface::class, FacilityRepository::class);
         $this->app->bind(FacilityRoomRepositoryInterface::class, FacilityRoomRepository::class);
+        $this->app->bind(CouponRepositoryInterface::class, CouponRepository::class);
     }
 
     /**
