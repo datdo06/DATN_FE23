@@ -1,12 +1,12 @@
 $(function() {
     const currentRoute = window.location.pathname;
-    if(!currentRoute.startsWith('/facility_room')) return
+    if(!currentRoute.startsWith('/coupon')) return
 
-    const datatable = $("#facilityRoom-table").DataTable({
+    const datatable = $("#coupon-table").DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: `/facility_room`,
+            url: `/coupon`,
             type: 'GET',
             error: function(xhr, status, error) {
 
@@ -17,31 +17,39 @@ $(function() {
             "data": "number"
         },
             {
-                "name": "homestay",
-                "data": "homestay"
+                "name": "coupon_name",
+                "data": "coupon_name"
             },
             {
-                "name": "facility",
-                "data": "facility"
+                "name": "coupon_time",
+                "data": "coupon_time"
+            },
+            {
+                "name": "coupon_code",
+                "data": "coupon_code"
+            },
+            {
+                "name": "coupon_condition",
+                "data": "coupon_condition"
             },
             {
                 "name": "id",
                 "data": "id",
                 "width": "100px",
-                "render": function(facilityRoomId) {
+                "render": function(couponId) {
                     return `
                         <button class="btn btn-light btn-sm rounded shadow-sm border"
-                            data-action="edit-facility-room" data-facility-room-id="${facilityRoomId}"
-                            data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Facility Room">
+                            data-action="edit-coupon" data-coupon-id="${couponId}"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Edit coupon">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <form class="btn btn-sm delete-facility-room" method="POST"
-                            id="delete-facility-room-form-${facilityRoomId}"
-                            action="/facility_room/${facilityRoomId}">
+                        <form class="btn btn-sm delete-coupon" method="POST"
+                            id="delete-coupon-form-${couponId}"
+                            action="/coupon/${couponId}">
                             <input type="hidden" name="_method" value="DELETE">
                             <a class="btn btn-light btn-sm rounded shadow-sm border delete"
-                                href="#" facility_room_id="${facilityRoomId}" type-role="type" data-bs-toggle="tooltip"
-                                data-bs-placement="top" title="Delete facility">
+                                href="#" coupon-id="${couponId}" type-role="type" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Delete coupon">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </form>
@@ -57,9 +65,14 @@ $(function() {
         keyboard: true,
         focus: true
     })
+
     $(document).on('click', '.delete', function() {
-        var facility_room_id = $(this).attr('facility_room_id');
-        var facility_room_url = $(this).attr('facility_room-url');
+        var coupon_id = $(this).attr('coupon-id');
+        var coupon_name = $(this).attr('coupon-name');
+        var coupon_time = $(this).attr('coupon_time');
+        var coupon_code = $(this).attr('coupon_code');
+        var coupon_condition = $(this).attr('coupon_condition');
+
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',
@@ -78,21 +91,23 @@ $(function() {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                $(`#delete-facility-room-form-${facility_room_id}`).submit();
+                $(`#delete-coupon-form-${coupon_id}`).submit();
             }
         })
-    }).on('click', '#add-facility-room', async function() {
+    }).on('click', '#add-button', async function() {
         modal.show()
+
         $('#main-modal .modal-body').html(`Fetching data`)
-        const response = await $.get(`/facility_room/create`);
+
+        const response = await $.get(`/coupon/create`);
         if (!response) return
-        $('#main-modal .modal-title').text('Create new facility homestay')
+
+        $('#main-modal .modal-title').text('Create new coupon')
         $('#main-modal .modal-body').html(response.view)
         $('.select2').select2();
     }).on('click', '#btn-modal-save', function() {
-        $('#form-save-facility-room').submit()
-    }).on('submit', '#form-save-facility-room', async function(e) {
-        modal.hide()
+        $('#form-save-coupon').submit()
+    }).on('submit', '#form-save-coupon', async function(e) {
         e.preventDefault();
         CustomHelper.clearError()
         $('#btn-modal-save').attr('disabled', true)
@@ -115,8 +130,9 @@ $(function() {
                 showConfirmButton: false,
                 timer: 1500
             })
-            datatable.ajax.reload()
+
             modal.hide()
+            datatable.ajax.reload()
         } catch (e) {
             if (e.status === 422) {
                 console.log(e)
@@ -130,18 +146,22 @@ $(function() {
         } finally {
             $('#btn-modal-save').attr('disabled', false)
         }
-    }).on('click', '[data-action="edit-facility-room"]', async function() {
+    }).on('click', '[data-action="edit-coupon"]', async function() {
         modal.show()
+
         $('#main-modal .modal-body').html(`Fetching data`)
-        var facilityRoomID = $(this).data('facility-room-id')
-        const response = await $.get(`/facility_room/${facilityRoomID}/edit`);
+
+        const couponId = $(this).data('coupon-id')
+
+        const response = await $.get(`/coupon/${couponId}/edit`);
         if (!response) return
 
-        $('#main-modal .modal-title').text('Edit Facility Room')
+        $('#main-modal .modal-title').text('Edit coupon')
         $('#main-modal .modal-body').html(response.view)
         $('.select2').select2();
-    }).on('submit', '.delete-facility-room', async function(e) {
+    }).on('submit', '.delete-coupon', async function(e) {
         e.preventDefault()
+
         try {
             const response = await $.ajax({
                 url: $(this).attr('action'),
@@ -149,7 +169,6 @@ $(function() {
                 method: $(this).attr('method'),
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             })
-            console.log(response);
 
             if (!response) return
 
@@ -160,6 +179,7 @@ $(function() {
                 showConfirmButton: false,
                 timer: 1500
             })
+
             datatable.ajax.reload()
         } catch (e) {
             if(e && e.responseJSON && e.responseJSON.message) {

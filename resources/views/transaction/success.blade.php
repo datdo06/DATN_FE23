@@ -77,32 +77,50 @@
             text-align: center;
             padding: 15px 0;
         }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0078d4;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
 <div class="success-card">
     <div class="header">
-        <h1>Đặt phòng thành công</h1>
+        <h1>Đặt homestay thành công</h1>
     </div>
-    <p>Xin chào [Tên khách hàng],</p>
+    <p>Xin chào {{$user->name}},</p>
     <p>Cảm ơn bạn đã đặt phòng tại khách sạn chúng tôi. Đặt phòng của bạn đã được xác nhận và thông tin đặt phòng chi tiết như sau:</p>
 
     <h2>Thông tin đặt phòng</h2>
     <ul>
-        <li><strong>Ngày nhận phòng:</strong> [Ngày nhận phòng]</li>
-        <li><strong>Ngày trả phòng:</strong> [Ngày trả phòng]</li>
-        <li><strong>Loại phòng:</strong> [Loại phòng]</li>
-        <li><strong>Số lượng người lớn:</strong> [Số người lớn]</li>
-        <li><strong>Số lượng trẻ em:</strong> [Số trẻ em]</li>
-        <li><strong>Tổng giá:</strong> [Tổng giá]</li>
+        <li><strong>Ngày nhận phòng:</strong> {{\App\Helpers\Helper::dateFormat($transaction->check_in)}}</li>
+        <li><strong>Ngày trả phòng:</strong> {{\App\Helpers\Helper::dateFormat($transaction->check_out)}}</li>
+        <li><strong>Homestay đã đặt: </strong>{{$transaction->room->number}} - {{$transaction->room->type->name}}</li>
+        <li><strong>Số người: </strong>{{$transaction->sum_people}}</li>
+        <li><strong>Tổng giá:</strong> {{\App\Helpers\Helper::convertToRupiah($transaction->sum_money)}}</li>
     </ul>
 
-    <p>Hãy kiểm tra email này để xem lại thông tin đặt phòng của bạn. Nếu bạn có bất kỳ câu hỏi hoặc cần sự hỗ trợ bổ sung, vui lòng liên hệ với chúng tôi tại <span>kingtheland@gmail.com</span> hoặc số điện thoại [Số điện thoại của khách sạn].</p>
+    <p>Hãy kiểm tra email này để xem lại thông tin đặt phòng của bạn. Nếu bạn có bất kỳ câu hỏi hoặc cần sự hỗ trợ bổ sung, vui lòng liên hệ với chúng tôi tại kingtheland@gmail.com hoặc số điện thoại 0123456789.</p>
 
     <p>Chúng tôi rất mong được phục vụ bạn tại homestay của chúng tôi. Chúc bạn có một kỳ nghỉ thú vị!</p>
 
     <p>Trân trọng,</p>
     <p>Kng The Land</p>
+    <div class="button-container">
+        <a href="{{route('home')}}" class="button">Quay lại trang chủ</a>
+    </div>
 </div>
 </body>
 </html>

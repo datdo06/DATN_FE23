@@ -18,6 +18,7 @@ class Transaction extends Model
         'room_id',
         'check_in',
         'check_out',
+        'sum_people',
         'status',
         'sum_money'
     ];

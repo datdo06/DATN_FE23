@@ -18,6 +18,8 @@ class FacilityRepository implements FacilityRepositoryInterface{
             0 => 'facilities.id',
             1 => 'facilities.name',
             2 => 'facilities.detail',
+            4 => 'facilities.status',
+            3 => 'facilities.price',
             3 => 'facilities.id',
         );
 
@@ -30,6 +32,8 @@ class FacilityRepository implements FacilityRepositoryInterface{
             'facilities.id as number',
             'facilities.name',
             'facilities.detail',
+            'facilities.status',
+            'facilities.price',
             'facilities.id',
         );
 
@@ -66,6 +70,8 @@ class FacilityRepository implements FacilityRepositoryInterface{
                     "number" => $model->id,
                     "name" => $model->name,
                     "detail" => $model->detail,
+                    "status" => $model->status,
+                    "price" => $model->price,
                     "id" => $model->id,
                 );
             }

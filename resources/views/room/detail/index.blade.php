@@ -67,7 +67,7 @@
                             </div>
 
                             <div class="room-detail_form">
-                                <?php 
+                                <?php
                                 if(isset($_GET['checkin']) && isset($_GET['checkout']) && isset($_GET['person'])){
                                 ?>
                                 <label>Arrive</label>
@@ -102,10 +102,10 @@
                                 @if (isset(Auth()->user()->id))
                                     <form
                                         action="{{ route('confirm', ['user' => Auth()->user()->id, 'room' => $detailRoom->id]) }}"
-                                        method="POST">
+                                        method="GET">
                                     @else
                                         <form action="{{ route('confirm', ['user' => 0, 'room' => $detailRoom->id]) }}"
-                                            method="POST">
+                                            method="GET">
                                 @endif
                                 @csrf
                                 <label>Arrive</label>
