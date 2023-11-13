@@ -165,8 +165,13 @@
                     <div class="col-lg-12">
                         <div class="card shadow-sm border">
                             <div class="card-header border-0">
-                                <div class="d-flex justify-content-between">
-                                    <h3 class="card-title">Monthly Income Chart</h3>
+                                <div class="d-flex justify-content-between ">
+                                    <h3 class="card-title ">Monthly Income Chart</h3>
+                                    <select style="width: 700px" name="" id="filter" class="form-control">
+                                        <option value="">Chọn</option>
+                                        <option value="1">3 Quý gần nhất</option>
+                                        <option value="2">3 tháng gần nhất</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -186,14 +191,7 @@
                                     <div class="chart-area">
                                         <canvas id="myAreaChart" height="400px"></canvas>
                                     </div>
-                                    <div class="d-flex flex-row justify-content-between">
-                                    <span class="mr-2">
-                                        <i class="fas fa-square text-primary"></i> {{ Helper::thisMonth() }}
-                                    </span>
-                                        <span>
-                                        <i class="fas fa-square text-gray"></i> Last month
-                                    </span>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -203,6 +201,7 @@
         </div>
     </div>
 @endsection
+
 {{-- @section('footer')
     <script src="{{ asset('style/js/chart.min.js') }}"></script>
     <script src="{{ asset('style/js/guestsChart.js') }}"></script>

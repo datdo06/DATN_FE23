@@ -145,5 +145,5 @@ Route::get('/booking', function () {
 });
 
 Route::get('/money', [ChartController::class,'dailyMoneysPerMonth']);
-Route::get('/{transaction}/mail', [TransactionRoomReservationController::class, 'CancelHomstay'])->name('cancelHomestay');
+Route::post('/{transaction}/mail', [TransactionRoomReservationController::class, 'CancelHomstay'])->name('cancelHomestay');
 // Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');

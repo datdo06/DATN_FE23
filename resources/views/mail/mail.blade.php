@@ -81,10 +81,30 @@
                     <td><strong>Ngày trả phòng: {{\App\Helpers\Helper::dateFormat($transaction->check_out)}}</strong></td>
                 </tr>
                 <tr>
-                    <th colspan="2">Tổng tiền: {{\App\Helpers\Helper::convertToRupiah($transaction->sum_money)}}</th>
+                    <th >Tiền bạn đã cọc: {{\App\Helpers\Helper::convertToRupiah($transaction->getTotalPayment())}}</th>
+                    <th >Tổng tiền: {{\App\Helpers\Helper::convertToRupiah($transaction->sum_money)}}</th>
                 </tr>
 
             </table>
+            <div>
+                @if($hoan == 0)
+                    <div>
+                        <p>Quý khách đã hủy đặt homestay trước 3 ngày nên sẽ được hoàn lại 100% phí đã đặt cọc</p>
+                        <p>Quý khách được hoàn {{\App\Helpers\Helper::convertToRupiah($transaction->getTotalPayment())}}</p>
+                    </div>
+                @elseif($hoan == 15)
+                    <div>
+                        <p>Quý khách đã hủy đặt homestay từ 3 đến 7 ngày nên sẽ được hoàn lại 15% phí đã đặt cọc</p>
+                        <p>Quý khách được hoàn {{\App\Helpers\Helper::convertToRupiah($transaction->getTotalPayment() - ($transaction->getTotalPayment() * $hoan /100))}}</p>
+                    </div>
+                @elseif($hoan == 100){
+                    <div>
+                        <div>
+                            <p>Quý khách đã hủy đặt homestay sau 7 ngày nên sẽ bị mất 100% phí đã đặt cọc</p>
+                            <p>Quý khách được hoàn {{\App\Helpers\Helper::convertToRupiah(0)}}</p>
+                        </div>
+                    </div>
+            </div>
 
             <p>Chúng tôi hiểu rằng có những thay đổi trong kế hoạch của bạn và việc hủy đặt homestay có thể gây phiền hà. Nếu bạn có bất kỳ câu hỏi hoặc cần hỗ trợ thêm, vui lòng liên hệ với chúng tôi.</p>
             <p>Chúng tôi rất mong được phục vụ bạn trong tương lai và cảm ơn bạn đã lựa chọn dịch vụ của chúng tôi.</p>
@@ -93,7 +113,7 @@
             <div class="signature">
                 King The Land
                 <div class="contact-info">
-                    Email: john.doe@example.com<br>
+                    Email: kingtheland@gmail.com<br>
                     Phone: (123) 456-7890
                 </div>
             </div>

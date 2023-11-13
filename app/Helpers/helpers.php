@@ -48,7 +48,7 @@ class Helper
         $check_in = strtotime($check_in);
         $check_out = strtotime($check_out);
         $date_difference = $check_out - $check_in;
-        $date_difference = round($date_difference / (60 * 60 * 24));
+        $date_difference = ceil($date_difference / (60 * 60 * 24));
         return $date_difference;
     }
     public static function getHourDifference($check_in, $now)
