@@ -115,6 +115,12 @@
                             >
                                 Chi tiết
                             </a></td>
+                            <td><a style="font-weight: bold" class="btn btn-light btn-sm rounded shadow-sm border"
+                                href="/formComment/{{$transaction->room->id}}"
+                                data-bs-toggle="tooltip" data-bs-placement="top"
+                             >
+                                 Đánh giá
+                             </a></td>
                         @php
                             date_default_timezone_set('Asia/Ho_Chi_Minh');
                         @endphp

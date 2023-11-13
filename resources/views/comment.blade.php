@@ -4,26 +4,25 @@
     <div class="sub-banner">
         <div class="container">
             <div class="text text-center">
-                <h2>Our BLOG</h2>
-                <p>Lorem Ipsum is simply dummy text</p>
+                <h2>Đánh giá</h2>
+                <p>Hãy cho chúng tôi lắng nghe ý kiến của bạn</p>
             </div>
         </div>
 
     </div>
 
 </section>
+
 <section class="section-blog bg-white">
     <div class="container">
         <div class="blog">
             <div class="row">
 
-                <div class="col-md-8 col-md-push-4">
+                <div class="col-md-8 col-md-offset-2">
                     <div class="blog-content">
-                        <h1 class="element-invisible">Blog detail</h1>
-                        <!-- COMMENT -->
                         <div id="comments">
                             @foreach ($results as $r)
-                            <h4 class="comment-title">COMMENT ({{ $r->comment_count }})</h4>
+                            <h4 class="comment-title">Đánh giá ({{ $r->comment_count }})</h4>
                             @endforeach
                             <ul class="commentlist">
                                 @foreach ($comment as $c)
@@ -70,85 +69,6 @@
 
                     </div>
                 </div> 
-
-                <div class="col-md-4 col-md-pull-8">
-                    <div class="sidebar">
-
-                        <!-- WIDGET CHECK AVAILABILITY -->
-                        <div class="widget widget_check_availability">
-
-                            <h4 class="widget-title">YOUR RESERVATION</h4>
-
-                            <div class="check_availability">
-
-                                <h6 class="check_availability_title">your stay dates</h6>
-                                
-                                <div class="check_availability-field">
-                                    <label>Arrive</label>
-                                    <input type="text" class="awe-calendar awe-input from" placeholder="Arrive">
-                                </div>
-                                
-                                <div class="check_availability-field">
-                                    <label>Depature</label>
-                                    <input type="text" class="awe-calendar awe-input to" placeholder="Depature">
-                                </div>
-                                
-                                <h6 class="check_availability_title">ROOMS &amp; GUest</h6>
-                                
-                                <div class="check_availability-field">
-                                    <label>ROOMS</label>
-                                    <select class="awe-select">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="check_availability_group">
-                                
-                                    <span class="label-group">ROOM 1</span>
-                                
-                                    <div class="check_availability-field_group">
-                                
-                                        <div class="check_availability-field">
-                                            <label>Adult</label>
-                                            <select class="awe-select">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                                <option>6</option>
-                                            </select>
-                                        </div>
-                                
-                                        <div class="check_availability-field">
-                                            <label>Chirld</label>
-                                            <select class="awe-select">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                                <option>6</option>
-                                            </select>
-                                        </div>
-                                
-                                    </div>
-                                
-                                </div>
-                                
-                                <button class="awe-btn awe-btn-13">CHECK AVAILABLE</button>
-                            </div>
-
-                        </div>
-                    
-
-                    </div>
-                </div>
 
             </div>
         </div>
