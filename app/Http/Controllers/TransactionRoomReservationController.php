@@ -363,8 +363,6 @@ class TransactionRoomReservationController extends Controller
             'person' => $request->person,
             'total_day' => $request->total_day,
         ];
-
-
         return view('payment.pay', compact('data', 'customer', 'room', 'facilities'));
     }
 
@@ -375,15 +373,14 @@ class TransactionRoomReservationController extends Controller
         return view('client.order', compact('transactions'));
     }
 
-    public function CancelHomstay(Transaction $transaction)
+    public function CancelHomstay(Request $request, Transaction $transaction)
     {
+        $hoan = $request->hoan;
         $user = User::query()->findOrFail($transaction->user_id);
-        $mail = new CancelHomestayMail($user, $transaction);
+        $mail = new CancelHomestayMail($user, $transaction,$hoan);
         SendWelcomeEmail::dispatch($user, $mail);
         $transaction->delete();
         return view('cancelHomestay', compact('transaction'));
-
-
     }
 
     public function check_coupon(Request $request)

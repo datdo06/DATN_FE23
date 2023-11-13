@@ -99,8 +99,10 @@
     <p><strong>Ngày trả phòng:</strong> {{\App\Helpers\Helper::dateFormat($transaction->check_out)}}</p>
     <p><strong>Homestay đã đặt: </strong>{{$transaction->room->number}} - {{$transaction->room->type->name}}</p>
     <p><strong>Tổng giá:</strong> {{\App\Helpers\Helper::convertToRupiah($transaction->sum_money)}}</p>
-    <p><strong>Lưu ý: </strong>Quý khách sẽ được hoàn tiền nếu hủy đặt homestay trước 1 ngày</p>
-
+    <p><strong>Lưu ý: </strong>Chính sách hoàn tiền của homestay của chúng tôi</p>
+    <p>Nếu quý khách hủy trước 3 ngày sẽ được hoàn lại 100% phí đã đặt cọc</p>
+    <p>Nếu quý khách hủy từ 3 đến 7 ngày sẽ được hoàn lại 15% phí đã đặt cọc</p>
+    <p>Nếu quý khách hủy sau 7 ngày sẽ bị mất hoàn toàn phí đã đặt cọc</p>
     <p>Nếu bạn có bất kỳ câu hỏi hoặc cần sự hỗ trợ bổ sung, vui lòng liên hệ với chúng tôi</p>
 
     <p>Chúng tôi rất mong được phục vụ bạn tại homestay của chúng tôi. Chúc bạn có một kỳ nghỉ thú vị!</p>
