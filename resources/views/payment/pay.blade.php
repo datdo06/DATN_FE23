@@ -52,91 +52,6 @@
                         <!-- SIDEBAR -->
                         <div class=" col-md-8 col-lg-8">
 
-                                <div class="reservation-sidebar">
-
-                                    <!-- RESERVATION DATE -->
-                                    <div class="reservation-date bg-gray">
-
-                                        <!-- HEADING -->
-                                        <h2 class="reservation-heading">Dates</h2>
-                                        <!-- END / HEADING -->
-
-                                        <ul>
-                                            <li>
-                                                <span>Check-In</span>
-                                                <span>{{Helper::dateFormat($data['checkin'])}}</span>
-                                            </li>
-                                            <li>
-                                                <span>Check-Out</span>
-                                                <span>{{Helper::dateFormat($data['checkout'])}}</span>
-                                            </li>
-                                            <li>
-                                                <span>Total Day</span>
-                                                <span>{{$data['total_day']}}</span>
-                                            </li>
-                                            <li>
-                                                <span>Total Guests</span>
-                                                <span>{{$data['person']}}</span>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                    <!-- END / RESERVATION DATE -->
-
-                                    <!-- ROOM SELECT -->
-                                    <div class="reservation-room-selected bg-gray">
-
-                                        <!-- HEADING -->
-                                        <h2 class="reservation-heading">Select Homestay</h2>
-                                        <!-- END / HEADING -->
-
-                                        <!-- ITEM -->
-                                        <div class="reservation-room-seleted_item">
-
-                                            <h6>{{$room->number}}</h6> <span class="reservation-option">{{$room->capacity}} people</span>
-
-                                            <div class="reservation-room-seleted_name has-package">
-                                                <h2><a href="#">{{$room->type->name}}</a></h2>
-                                            </div>
-
-                                            <div class="reservation-room-seleted_package">
-                                                <h6>Space Price</h6>
-                                                <ul>
-                                                    <li>
-                                                        <span>Price/Day</span>
-                                                        <span>{{ Helper::convertToRupiah($room->price) }}"</span>
-                                                    </li>
-
-                                                </ul>
-                                            </div>
-                                            <div class="reservation-room-seleted_total-room">
-                                                TOTAL DAY
-                                                <span class="reservation-amout">{{ $data['total_day'] }} {{ Helper::plural('Day', $data['total_day']) }}</span>
-                                            </div>
-
-
-                                            <div class="reservation-room-seleted_total-room">
-                                                TOTAL {{$room->name}}
-                                                <span class="reservation-amout">{{ Helper::convertToRupiah(Helper::getTotalPayment($data['total_day'], $room->price)) }}</span>
-                                            </div>
-                                        </div>
-                                        <!-- END / ITEM -->
-
-                                        <!-- ITEM -->
-                                        <!-- END / ITEM -->
-
-                                        <!-- TOTAL -->
-                                        <div class="reservation-room-seleted_total bg-blue">
-                                            <label>TOTAL</label>
-                                            <span class="reservation-total">{{ Helper::convertToRupiah(Helper::getTotalPayment($data['total_day'], $room->price)) }}</span>
-                                        </div>
-                                        <!-- END / TOTAL -->
-
-                                    </div>
-                                    <!-- END / ROOM SELECT -->
-
-                                </div>
-
                             <form action="{{ route('check-coupon') }}" method="post">
                                 @csrf
                                 <div class="reservation-room-seleted_total-room">
@@ -264,8 +179,6 @@
                                 <!-- END / ROOM SELECT -->
 
                             </div>
-
-
                                 <div>
                                     <input type="hidden" value="{{$data['checkin']}}" name="check_in">
                                     <input type="hidden" value="{{$data['checkout']}}" name="check_out">
@@ -278,9 +191,7 @@
                                     VNPAY
                                 </button>
                             </form>
-                            @if(session('coupon'))
-                                {{ dd(session('coupon') -> coupon_code )}}
-                            @endif
+
 
                         </div>
                         <!-- END / SIDEBAR -->

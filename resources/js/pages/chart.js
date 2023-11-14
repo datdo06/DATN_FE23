@@ -26,9 +26,13 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     }
     return s.join(dec);
 }
+let myLineChart;
 function handleData(data){
     var ctx = document.getElementById("myAreaChart");
-    var myLineChart = new Chart(ctx, {
+    if(myLineChart){
+        myLineChart.destroy();
+    }
+    myLineChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: data['day'],
@@ -117,21 +121,43 @@ function handleData(data){
     });
 
 }
-fetch('http://127.0.0.1:8000/money')
-    .then(response => {
-        if (response.ok) {
-            return response.json(); // Parse the response data as JSON
-        } else {
-            throw new Error('API request failed');
+
+$(function (){
+    const response = $.ajax({
+        url: '/money', // Điều này cần được thay thế bằng địa chỉ endpoint của bạn
+        method: 'GET',
+        data: { },
+        success: function(data) {
+            // Xử lý dữ liệu trả về từ server và cập nhật bảng DataTables (nếu cần)
+        },
+        error: function(xhr, status, error) {
+            // Xử lý lỗi nếu cần
         }
-    })
-    .then(data => {
+    }).then(data =>{
         console.log(data);
         handleData(data);
-    })
-    .catch(error => {
-        // Handle any errors here
-        console.error(error); // Example: Logging the error to the console
     });
+    $(document).on('change','#filter', async function (){
 
+        var selectedType = $(this).val();
+        console.log(selectedType);
+        // Gửi giá trị đã chọn lên server bằng AJAX
+        const response = await $.ajax({
+            url: '/money', // Điều này cần được thay thế bằng địa chỉ endpoint của bạn
+            method: 'GET',
+            data: { filter_type: selectedType },
+            success: function(data) {
+                // Xử lý dữ liệu trả về từ server và cập nhật bảng DataTables (nếu cần)
+            },
+            error: function(xhr, status, error) {
+                // Xử lý lỗi nếu cần
+            }
+        }).then(data =>{
+            console.log(data);
+            handleData(data);
+        });
+
+
+    })
+})
 // Area Chart Example

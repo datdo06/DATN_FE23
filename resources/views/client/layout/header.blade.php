@@ -30,23 +30,6 @@
                         </span>
                 @endif
 
-                <div class="dropdown currency">
-                    <span>USD <i class="fa fa"></i></span>
-                    <ul>
-                        <li class="active"><a href="#">USD</a></li>
-                        <li><a href="#">EUR</a></li>
-                    </ul>
-                </div>
-
-                <div class="dropdown language">
-                    <span>ENG</span>
-
-                    <ul>
-                        <li class="active"><a href="#">ENG</a></li>
-                        <li><a href="#">FR</a></li>
-                    </ul>
-                </div>
-
             </div>
         </div>
     </div>
@@ -58,78 +41,25 @@
         <div class="container">
             <!-- HEADER LOGO -->
             <div class="header_logo">
-                <a href="#"><img style="width: 150px" src="img/logo/sip.png" alt=""></a>
+                <a href="{{ route('home') }}"><img style="width: 150px" src="{{ asset('img/logo/sip.png') }}" alt=""></a>
             </div>
             <!-- END / HEADER LOGO -->
 
             <!-- HEADER MENU -->
-            <nav class="header_menu">
+            <nav class="header_menu" style="float: left; padding-left: 60px;">
                 <ul class="menu">
                     <li class="current-menu-item">
-                        <a href="{{ route('home') }}">Home <span class="fa fa-caret-down"></span></a>
-
-                    </li>
-
-                    <li>
-
-                        <a href="#">Homestay<span class="fa fa-caret-down"></span></a>
-                        <ul class="sub-menu">
-                            <li><a href="room-1.html">Homestay 1</a></li>
-                            <li><a href="room-2.html">Homestay 2</a></li>
-                            <li><a href="room-3.html">Homestay 3</a></li>
-                            <li><a href="room-4.html">Homestay 4</a></li>
-                            <li><a href="room-5.html">Homestay 5</a></li>
-                            <li><a href="room-6.html">Homestay 6</a></li>
-                        </ul>
-
-                        <a href="#">Room <span class="fa fa-caret-down"></span></a>
-
+                        <a href="{{ route('home') }}">Home </a>
                     </li>
                     <li>
-                        <a href="#">Restaurant <span class="fa fa-caret-down"></span></a>
-
+                        <a href="{{ route('event') }}">Sự Kiện </a>
                     </li>
                     <li>
-                        <a href="#">Reservation <span class="fa fa-caret-down"></span></a>
-
-
-                    </li>
-                    
-                    <li>
-
-                        <a href="#">Đặt Homestay </a>
-
-                        <a href="#">Page <span class="fa fa-caret-down"></span></a>
-
-
-                    </li>
-                    
-
-                            <li>
-                                <a href="{{ route('event') }}">Sự Kiện </a>
-                                
-                            </li>
-                            
-                            
-                    <li>
-
                         <a href="{{ route('gallery') }}">Triển Lãm </a>
-                        
                     </li>
-                    
                     <li><a href="{{ route('about') }}">Thông Tin</a></li>
                     <li><a href="{{ route('contact') }}">Liên Hệ</a></li>
-
-
-                        <a href="#">Gallery <span class="fa fa-caret-down"></span></a>
-
-                    </li>
-                    <li>
-                        <a href="#">Blog <span class="fa fa-caret-down"></span></a>
-
-                    </li>
                     <li><a href="{{ route('contact') }}">Contact</a></li>
-
                 </ul>
             </nav>
             <!-- END / HEADER MENU -->

@@ -1,25 +1,64 @@
-<form id="form-save-type" class="row g-3" method="POST" action="{{ route('coupon.update', ['coupon' => $coupon->id]) }}">
+<form id="form-save-coupon" class="row g-3" method="POST" action="{{ route('coupon.update', ['coupon' => $coupon->id]) }}">
     @method('PUT')
     @csrf
     <div class="col-md-12">
         <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-            value="{{ $type->name }}">
-        @error('name')
-            <div class="text-danger mt-1">
-                {{ $message }}
-            </div>
+        <input type="text" class="form-control @error('coupon_name') is-invalid @enderror" id="coupon_name"
+               name="coupon_name" value="{{ $coupon->coupon_name }}">
+        @error('coupon_name')
+        <div class="text-danger mt-1">
+            {{ $message }}
+        </div>
         @enderror
-        <div id="error_name" class="text-danger error"></div>
+        <div id="error_coupon_name" class="text-danger error"></div>
     </div>
     <div class="col-md-12">
-        <label for="information" class="form-label">Information</label>
-        <textarea class="form-control" id="information" name="information" rows="3">{{ $type->information }}</textarea>
-        @error('information')
-            <div class="text-danger mt-1">
-                {{ $message }}
-            </div>
+        <label for="name" class="form-label">Code</label>
+        <input type="text" class="form-control @error('coupon_code') is-invalid @enderror" id="coupon_code"
+               name="coupon_code" value="{{ $coupon->coupon_code}}">
+        @error('coupon_code')
+        <div class="text-danger mt-1">
+            {{ $message }}
+        </div>
         @enderror
-        <div id="error_information" class="text-danger error"></div>
+        <div id="error_coupon_code" class="text-danger error"></div>
     </div>
+    <div class="col-md-12">
+        <label for="name" class="form-label">Time</label>
+        <input type="text" class="form-control @error('coupon_time') is-invalid @enderror" id="coupon_time"
+               name="coupon_time" value="{{$coupon->coupon_time}}">
+        @error('coupon_time')
+        <div class="text-danger mt-1">
+            {{ $message }}
+        </div>
+        @enderror
+        <div id="error_coupon_time" class="text-danger error"></div>
+    </div>
+
+    <div class="col-md-12">
+        <label for="name" class="form-label">Number</label>
+        <input type="text" class="form-control @error('coupon_number') is-invalid @enderror" id="coupon_number"
+               name="coupon_number" value="{{$coupon->coupon_number}}">
+        @error('coupon_number')
+        <div class="text-danger mt-1">
+            {{ $message }}
+        </div>
+        @enderror
+        <div id="error_coupon_number" class="text-danger error"></div>
+    </div>
+    <div class="col-md-12">
+        <label for="information" class="form-label">Condition</label>
+        <select class="form-select @error('coupon_condition') is-invalid @enderror" id="coupon_condition" name="coupon_condition" aria-label="Chọn giảm theo % hoặc tiền">
+            <option selected>Chọn: </option>
+            <option value="1">Theo phần trăm</option>
+            <option value="2">Theo tiền</option>
+        </select>
+        @error('coupon_condition')
+        <div class="text-danger mt-1">
+            {{ $message }}
+        </div>
+        @enderror
+        <div id="error_coupon_condition" class="text-danger error"></div>
+    </div>
+
 </form>

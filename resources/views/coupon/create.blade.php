@@ -1,4 +1,4 @@
-<form id="form-save-coupon" class="row g-3" method="POST" action="{{ route('coupon.store') }}">
+<form id="form-save-coupon" class="row g-3" method="POST" action="{{route('coupon.store') }}">
     @csrf
     <div class="col-md-12">
         <label for="name" class="form-label">Name</label>

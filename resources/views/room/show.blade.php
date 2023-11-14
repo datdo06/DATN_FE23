@@ -98,9 +98,6 @@
                                             <p>
                                                 Capacity: {{ $room->capacity }}
                                             </p>
-                                            <p>
-                                                Dịch vụ: <button>Thêm dịch homestay</button>
-                                            </p>
                                         </div>
                                     </div>
                                 </div>
