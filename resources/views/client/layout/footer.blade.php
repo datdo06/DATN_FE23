@@ -65,9 +65,8 @@
                     <div class="widget">
                         <h4 class="widget-title">Trang chủ</h4>
                         <ul>
-                            <li><a href="#">Triển Lãm</a></li>
-                            <li><a href="#">Sự Kiện</a></li>
-                            <li><a href="#">Blog</a></li>
+                            <li><a href="{{ route('gallery') }}">Triển Lãm</a></li>
+                            <li><a href="{{ route('event') }}">Sự Kiện</a></li>
                         </ul>
                     </div>
                 </div>
@@ -104,13 +103,4 @@
         </div>
     </div>
     <!-- END / FOOTER CENTER -->
-
-    {{-- <!-- FOOTER BOTTOM -->
-    <div class="footer_bottom">
-        <div class="container">
-            <p>&copy; Made in 2023 by FPT.</p>
-        </div>
-    </div>
-    <!-- END / FOOTER BOTTOM --> --}}
-
 </footer>

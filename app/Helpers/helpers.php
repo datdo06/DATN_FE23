@@ -9,7 +9,7 @@ class Helper
 {
     public static function convertToRupiah($price)
     {
-        $price_rupiah =   number_format($price, 0, '', '.')." VNĐ";
+        $price_rupiah = number_format($price, 0, '', '.')." VNĐ";
         return $price_rupiah;
     }
 
@@ -48,7 +48,7 @@ class Helper
         $check_in = strtotime($check_in);
         $check_out = strtotime($check_out);
         $date_difference = $check_out - $check_in;
-        $date_difference = round($date_difference / (60 * 60 * 24));
+        $date_difference = ceil($date_difference / (60 * 60 * 24));
         return $date_difference;
     }
     public static function getHourDifference($check_in, $now)

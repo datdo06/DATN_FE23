@@ -119,12 +119,12 @@
                     <div class="accomd-modations-room_1">
 
                         <div class="img">
-                            <a href="#"><img class="" src="{{ $room-> firstImage() }}" alt=""></a>
+                            <a href="{{ route('homestayDetail' , $room -> id) }}"><img class="" src="{{ $room-> firstImage() }}" alt="" ></a>
                         </div>
 
                         <div class="text">
                             <h2><a href="#">{{ $room -> number }}</a></h2>
-                            <p class="desc">
+                            <p class="desc" style="height: 150px">
                                 {{ $room -> view }}
                             </p>
                             <div class="wrap-price">

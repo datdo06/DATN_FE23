@@ -383,11 +383,4 @@ class TransactionRoomReservationController extends Controller
 
 
     }
-
-    public function check_coupon(Request $request)
-    {
-        $coupon = Coupon::where('coupon_code', $request->coupon)->first();
-        return redirect()->back()->with(['coupon' => $coupon]);
-
-    }
 }

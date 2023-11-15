@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Coupon extends Model
 {
@@ -16,4 +17,14 @@ class Coupon extends Model
       'coupon_number',
       'coupon_condition'
     ];
+
+    public function setExpirationDateAttribute($value)
+    {
+        $this->attributes['expiration_date'] = Carbon::parse($value)->endOfDay();
+    }
+
+    public function getExpiredAttribute()
+    {
+        return Carbon::now()->greaterThan($this->expiration_date);
+    }
 }

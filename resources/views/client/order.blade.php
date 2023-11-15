@@ -94,7 +94,7 @@
                     <th>Ngày đến</th>
                     <th>Ngày đi</th>
                     <th>Tổng tiền</th>
-                    <th colspan="2">Thao tác</th>
+                    <th colspan="3">Thao tác</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -124,7 +124,8 @@
                         @php
                             date_default_timezone_set('Asia/Ho_Chi_Minh');
                         @endphp
-                        @if(Helper::getDateDifference(now(),$transaction->check_in)>=1)
+
+                        @if(Helper::getDateDifference(now(),$transaction->check_in)>0)
                             <td><form action="{{route('cancelHomestay', $transaction->id)}}" id="form" method="post">
                                     @csrf
                                     <button class="btn-danger" onclick="if(confirm('Bạn có muốn hủy')){
@@ -132,9 +133,6 @@
                             }">Hủy phòng</button>
                                 </form></td>
                         @endif
-
-
-
                     </tr>
                 @endforeach
 
