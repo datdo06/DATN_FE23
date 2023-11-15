@@ -82,7 +82,7 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin,Customer']], funct
     ]);
     Route::get('/{user}/{room}/confirm', [TransactionRoomReservationController::class, 'confirm'])->name('confirm');
 
-    Route::post('/check-coupon', [TransactionRoomReservationController::class,'check_coupon'])->name('check-coupon');
+    Route::post('/check-coupon', [CouponController::class,'check_coupon'])->name('check-coupon');
     Route::get('/{user}/order', [TransactionRoomReservationController::class, 'TransactionHometay'])->name('order');
     Route::get('/payment/{transaction}/invoice', [PaymentController::class, 'invoice'])->name('payment.invoice');
     Route::post('/{user}/{room}/confirm', [TransactionRoomReservationController::class, 'confirm'])->name('confirm');

@@ -71,7 +71,7 @@
 }
 
 
- 
+
 
 /* DEMO 5 ============================== */
 .hover-5::after {
@@ -175,8 +175,6 @@
 
 
 <section class="container">
-        
-
  <div class="container">
          <div class="row">
             <div class="col-lg-12 text-center my-2">
@@ -193,12 +191,12 @@
          </div>
          <div class="portfolio-item row">
             <div class="item other col-lg-3 col-md-4 col-6 col-sm">
-               <a href="img/event/event-1.jpg" class="fancylight popup-btn" data-fancybox-group="light"> 
+               <a href="img/event/event-1.jpg" class="fancylight popup-btn" data-fancybox-group="light">
                <img class="img-fluid" src="img/event/event-1.jpg" alt="">
                </a>
             </div>
             <div class="item homestay col-lg-3 col-md-4 col-6 col-sm">
-               <a href="img/homestay/homestay-1.jpg" class="fancylight popup-btn" data-fancybox-group="light"> 
+               <a href="img/homestay/homestay-1.jpg" class="fancylight popup-btn" data-fancybox-group="light">
                <img class="img-fluid" src="img/homestay/homestay-1.jpg" alt="">
                </a>
             </div>
@@ -399,7 +397,7 @@
             </div>
          </div>
       </div>
-      
+
       <script>
                 $('.portfolio-item').isotope({
          	itemSelector: '.item',
@@ -408,7 +406,7 @@
         $('.portfolio-menu ul li').click(function(){
          	$('.portfolio-menu ul li').removeClass('active');
          	$(this).addClass('active');
-         	
+
          	var selector = $(this).attr('data-filter');
          	$('.portfolio-item').isotope({
          		filter:selector
@@ -418,7 +416,7 @@
          $(document).ready(function() {
          var popup_btn = $('.popup-btn');
          popup_btn.magnificPopup({
-         type : 'image',    
+         type : 'image',
          gallery : {
          	enabled : true
          }
@@ -428,7 +426,7 @@
 
     </section>
 
-    
+
 
 
 @endsection

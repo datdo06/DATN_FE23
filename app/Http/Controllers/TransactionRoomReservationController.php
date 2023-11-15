@@ -382,11 +382,4 @@ class TransactionRoomReservationController extends Controller
         $transaction->delete();
         return view('cancelHomestay', compact('transaction'));
     }
-
-    public function check_coupon(Request $request)
-    {
-        $coupon = Coupon::where('coupon_code', $request->coupon)->first();
-        return redirect()->back()->with(['coupon' => $coupon]);
-
-    }
 }

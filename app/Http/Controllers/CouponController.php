@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCouponRequest;
 use App\Models\Coupon;
 use App\Repositories\Interface\CouponRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CouponController extends Controller
 {
@@ -72,8 +73,23 @@ class CouponController extends Controller
             ], 500);
         }
     }
-    public function test (Request $request){
-        dd($request);
+    public function check_coupon(Request $request){
+        $data = $request->all();
+        $coupon = Coupon::where('coupon_code', $data['coupon'])->first();
+
+        if (session('coupon')) {
+            session()->forget('coupon');
+        }
+        if ($coupon && $coupon->coupon_time > 0 && !$coupon->expired) {
+            // Mã giảm giá hợp lệ
+            $coupon->coupon_time -= 1;
+            $coupon->save();
+            session()->put('coupon', $coupon);
+            return redirect()->back()->with('success', 'Mã giảm giá đã được áp dụng.');
+        } else {
+            // Mã giảm giá không hợp lệ
+            return redirect()->back()->with('error', 'Mã giảm giá không hợp lệ.');
+        }
     }
 }
 

@@ -59,7 +59,6 @@
                     </li>
                     <li><a href="{{ route('about') }}">Thông Tin</a></li>
                     <li><a href="{{ route('contact') }}">Liên Hệ</a></li>
-                    <li><a href="{{ route('contact') }}">Contact</a></li>
                 </ul>
             </nav>
             <!-- END / HEADER MENU -->

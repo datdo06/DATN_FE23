@@ -29,6 +29,10 @@ $(function() {
                 "data": "coupon_code"
             },
             {
+                "name": "coupon_number",
+                "data": "coupon_number"
+            },
+            {
                 "name": "coupon_condition",
                 "data": "coupon_condition"
             },
@@ -71,6 +75,7 @@ $(function() {
         var coupon_name = $(this).attr('coupon-name');
         var coupon_time = $(this).attr('coupon_time');
         var coupon_code = $(this).attr('coupon_code');
+        var coupon_code = $(this).attr('coupon_number');
         var coupon_condition = $(this).attr('coupon_condition');
 
         const swalWithBootstrapButtons = Swal.mixin({

@@ -41,6 +41,7 @@
                                             <th scope="col">Code</th>
                                             <th scope="col">Number</th>
                                             <th scope="col">Condition</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

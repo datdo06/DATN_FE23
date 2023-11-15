@@ -9,7 +9,7 @@ class Helper
 {
     public static function convertToRupiah($price)
     {
-        $price_rupiah =   number_format($price, 0, '', '.')." VNĐ";
+        $price_rupiah = number_format($price, 0, '', '.')." VNĐ";
         return $price_rupiah;
     }
 
