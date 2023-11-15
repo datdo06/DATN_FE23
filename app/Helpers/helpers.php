@@ -13,6 +13,10 @@ class Helper
         return $price_rupiah;
     }
 
+    public static function thisNow()
+    {
+        return Carbon::parse(Carbon::now());
+    }
     public static function thisMonth()
     {
         return Carbon::parse(Carbon::now())->format('m');

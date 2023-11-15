@@ -60,6 +60,7 @@
     <footer class="footer mt-auto py-2 shadow-sm border-top mt-3" style="background: #f8f9fa; height:55px">
         @include('template.include._footer')
     </footer>
+    @vite('resources/js/pages/Chart.min.js')
     @vite('resources/js/app.js')
     @yield('footer')
 </body>

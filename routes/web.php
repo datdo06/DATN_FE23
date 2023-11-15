@@ -91,7 +91,7 @@ Route::group(['middleware' => ['auth', 'checkRole:Super,Admin,Customer']], funct
         Route::get('/payOnlinePayment', [TransactionRoomReservationController::class, 'vnpay'])->name('vnpay');
         Route::post('/pay', [TransactionRoomReservationController::class, 'pay'])->name('pay');
     });
-    Route::get('/formComment/{id}', [HomeController::class, 'formComment'])->name('formComment');
+    Route::get('/formComment/{room_id}', [HomeController::class, 'formComment'])->name('formComment');
     Route::post('/comment/{id}', [HomeController::class, 'postComment'])->name('postComment');
     Route::view('/notification', 'notification.index')->name('notification.index');
 

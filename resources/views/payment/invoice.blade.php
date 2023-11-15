@@ -147,7 +147,7 @@
                         </table>
                     </div>
                     <div class="address p-2">
-                        @if(Helper::getDateDifference(now(),$transaction->check_in)>=1)
+                        @if(Helper::getDateDifference(now(),$transaction->check_in)>0)
                             <form action="{{route('cancelHomestay', $transaction->id)}}" id="form" method="post">
                                 @csrf
                                 <button style="color: #fff;background-color: #d9534f;border-color: #d43f3a;" onclick="if(confirm('Bạn có muốn hủy')){
@@ -155,6 +155,10 @@
                             }">Hủy phòng
                                 </button>
                             </form>
+                        @elseif(Helper::getDateDifference($transaction->check_in,now())>0 && Helper::getDateDifference(now(),$transaction->out)>0 )
+                            <p>Khách đang trải nghiệm tại homestay</p>
+                        @elseif(Helper::getDateDifference($transaction->out,now())>0)
+                            <p>Khách đã thuê xong</p>
                         @endif
                     </div>
                 </div>

@@ -29,17 +29,16 @@
                                         <li>
                                             <div class="comment-body">
 
-                                                <a class="comment-avatar"><img src="{{ asset('img/user/' . $c->name . '-' . $c->uid . '/' . $c->avatar) }}" alt=""></a>
+                                                <a class="comment-avatar"><img
+                                                        src="{{ asset('img/user/' . $c->name . '-' . $c->uid . '/' . $c->avatar) }}"
+                                                        alt=""></a>
 
                                                 <h4 class="comment-subject">{{ $c->com_subject }}</h4>
                                                 <p>{{ $c->com_content }}.</p>
 
                                                 <span class="comment-meta">
-                                            <a href="#">{{ $c->name }}</a> - {{ $c->created_at }}
-                                        </span>
-
-
-
+                                                    <a href="#">{{ $c->name }}</a> - {{ $c->created_at }}
+                                                </span>
                                             </div>
                                         </li>
                                     @endforeach
@@ -48,23 +47,31 @@
                             <!-- END / COMMENT -->
 
                             <!-- COMMENT RESPOND -->
-                            <div class="comment-respond">
-                                <h3 class="comment-reply-title">LEAVE A COMMENT</h3>
-                                <form action="{{ route('postComment', ['id' => $room->id]) }}" method="post" class="comment-form">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <input type="text" class="field-text" placeholder="Subject"  name="com_subject" required>
+                            @if (isset($checkUser->cui))
+                             
+                                <h3 class="comment-reply-title">Cảm ơn bạn đã đánh giá!!!</h3>
+                            @else
+                                <div class="comment-respond">
+                                    <h3 class="comment-reply-title">LEAVE A COMMENT</h3>
+                                    <form action="{{ route('postComment', ['id' => $room->id]) }}" method="post"
+                                        class="comment-form">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <input type="text" class="field-text" placeholder="Subject"
+                                                    name="com_subject" required>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <textarea placeholder="Your comment" name="com_content" class="field-textarea" required></textarea>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <button class="awe-btn awe-btn-14">SUBMIT COMMENT</button>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-12">
-                                            <textarea placeholder="Your comment"  name="com_content" class="field-textarea" required></textarea>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <button class="awe-btn awe-btn-14">SUBMIT COMMENT</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                                    </form>
+                                </div>
+                            @endif
+
                             <!-- END COMMENT RESPOND -->
 
                         </div>

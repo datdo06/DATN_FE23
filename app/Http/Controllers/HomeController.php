@@ -99,6 +99,12 @@ class HomeController extends Controller
     }
     public function formComment($id){
         $room = Room::find($id);
+        $checkUser = DB::table('comments')
+        ->join('rooms', 'rooms.id', '=', 'comments.com_room_id')
+        ->select('rooms.id','comments.com_user_id as cui')
+        ->where('rooms.id', $id)
+        ->first();
+     
         $comment = DB::table('comments')
         ->join('rooms', 'rooms.id', '=', 'comments.com_room_id')
         ->join('users', 'users.id', '=', 'comments.com_user_id')
@@ -109,7 +115,7 @@ class HomeController extends Controller
         ->groupBy('com_room_id')
         ->where('comments.com_room_id', $id)
         ->get();
-        return view('comment', compact('room','results','comment'));
+        return view('comment', compact('room','results','comment','checkUser'));
     }
     public function postComment($id, Request $request)
     {
