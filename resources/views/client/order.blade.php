@@ -98,47 +98,64 @@
                 </tr>
                 </thead>
                 <tbody>
+                    @foreach ($transactions as $transaction)
+                        <tr>
+                            <th>{{ $transaction->id }}
+                            </th>
+                            <td>{{ $transaction->room->number }}</td>
+                            <td>{{ $transaction->room->type->name }}</td>
+                            <td>{{ Helper::dateFormat($transaction->check_in) }}</td>
+                            <td>{{ Helper::dateFormat($transaction->check_out) }}</td>
+                            <td>{{ Helper::convertToRupiah($transaction->sum_money) }}
+                            </td>
+                            <td><a style="font-weight: bold" class="btn btn-light btn-sm rounded shadow-sm border"
+                                    href="/payment/{{ $transaction->id }}/invoice" data-bs-toggle="tooltip"
+                                    data-bs-placement="top">
+                                    Chi tiết
+                                </a></td>
+                            @php
+                                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                            @endphp
+                            @if (Helper::thisNow() > $transaction->check_out)
+                                <td><a style="font-weight: bold" class="btn btn-light btn-sm rounded shadow-sm border"
+                                        href="/formComment/{{ $transaction->room->id }}" data-bs-toggle="tooltip"
+                                        data-bs-placement="top">
+                                        Đánh giá
+                                    </a></td>
+                            @endif
 
-                @foreach($transactions as $transaction)
-                    <tr>
-                        <th>{{$transaction->id}}
-                        </th>
-                        <td>{{ $transaction->room->number }}</td>
-                        <td>{{ $transaction->room->type->name}}</td>
-                        <td>{{ Helper::dateFormat($transaction->check_in) }}</td>
-                        <td>{{ Helper::dateFormat($transaction->check_out) }}</td>
-                        <td>{{ Helper::convertToRupiah($transaction->sum_money) }}
-                        </td>
-                        <td><a style="font-weight: bold" class="btn btn-light btn-sm rounded shadow-sm border"
-                               href="/payment/{{$transaction->id}}/invoice"
-                               data-bs-toggle="tooltip" data-bs-placement="top"
-                            >
-                                Chi tiết
-                            </a></td>
-                        @php
-                            date_default_timezone_set('Asia/Ho_Chi_Minh');
-                        @endphp
-                        @if(Helper::getDateDifference(now(),$transaction->check_in)>=0)
-                            @if(Helper::getDateDifference(now(),$transaction->check_in)<=3)
-                                <td>
-                                    <button class="btn btn-danger" id="delete1" transaction_id = {{$transaction->id}}>Hủy phòng</button>
-                                    <form action="{{route('cancelHomestay', $transaction->id)}}" id="form--{{$transaction->id}}" method="post">
-                                        @csrf
-                                    </form></td>
-                            @elseif(Helper::getDateDifference(now(),$transaction->check_in)<=7)
-                                <td>
-                                    <button class="btn btn-danger" id="delete2" transaction_id = {{$transaction->id}}>Hủy phòng</button>
-                                    <form action="{{route('cancelHomestay', $transaction->id)}}" id="form--{{$transaction->id}}" method="post">
-                                        @csrf
-                                        <input type="hidden" value="15" name="hoan" >
-                                    </form></td>
-                            @else
-                                <td>
-                                    <button class="btn btn-danger" id="delete3" transaction_id = {{$transaction->id}}>Hủy phòng</button>
-                                    <form action="{{route('cancelHomestay', $transaction->id)}}" id="form--{{$transaction->id}}" method="post" class="delete-cus">
-                                        @csrf
-                                        <input type="hidden" value="100" name="hoan">
-                                    </form></td>
+
+                            @if (Helper::getDateDifference(now(), $transaction->check_in) >= 0)
+                                @if (Helper::getDateDifference(now(), $transaction->check_in) <= 3)
+                                    <td>
+                                        <button class="btn btn-danger" id="delete1"
+                                            transaction_id={{ $transaction->id }}>Hủy phòng</button>
+                                        <form action="{{ route('cancelHomestay', $transaction->id) }}"
+                                            id="form--{{ $transaction->id }}" method="post">
+                                            @csrf
+                                        </form>
+                                    </td>
+                                @elseif(Helper::getDateDifference(now(), $transaction->check_in) <= 7)
+                                    <td>
+                                        <button class="btn btn-danger" id="delete2"
+                                            transaction_id={{ $transaction->id }}>Hủy phòng</button>
+                                        <form action="{{ route('cancelHomestay', $transaction->id) }}"
+                                            id="form--{{ $transaction->id }}" method="post">
+                                            @csrf
+                                            <input type="hidden" value="15" name="hoan">
+                                        </form>
+                                    </td>
+                                @else
+                                    <td>
+                                        <button class="btn btn-danger" id="delete3"
+                                            transaction_id={{ $transaction->id }}>Hủy phòng</button>
+                                        <form action="{{ route('cancelHomestay', $transaction->id) }}"
+                                            id="form--{{ $transaction->id }}" method="post" class="delete-cus">
+                                            @csrf
+                                            <input type="hidden" value="100" name="hoan">
+                                        </form>
+                                    </td>
+                                @endif
                             @endif
                         @endif
                     </tr>

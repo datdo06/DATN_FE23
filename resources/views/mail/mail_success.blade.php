@@ -98,6 +98,23 @@
     <p><strong>Ngày nhận phòng:</strong> {{\App\Helpers\Helper::dateFormat($transaction->check_in)}}</p>
     <p><strong>Ngày trả phòng:</strong> {{\App\Helpers\Helper::dateFormat($transaction->check_out)}}</p>
     <p><strong>Homestay đã đặt: </strong>{{$transaction->room->number}} - {{$transaction->room->type->name}}</p>
+    <p><strong>Số người: </strong>{{$transaction->sum_people}}</p>
+    @php
+        $dayDifference = Helper::getDateDifference($transaction->check_in, $transaction->check_out);
+        $price = ($transaction->room->price * $dayDifference);
+    @endphp
+    <p><strong>Tiền homestay: </strong>{{App\Helpers\Helper::convertToRupiah($price)}}</p>
+    @foreach($transactionFacility as $tF)
+        <p><strong>Tiền dich vụ {{$tF->Facility->name}}: </strong>{{\App\Helpers\Helper::convertToRupiah($tF->Facility->price)}}</p>
+    @endforeach
+    @if(!empty($transactionCoupon))
+        <p><strong>Bạn đã sử dụng mã giảm giá: </strong>{{$transactionCoupon->Coupon->coupon_name}}</p>
+        @if($transactionCoupon->Coupon->coupon_condition == 2)
+            <p><strong>Bạn được giảm: </strong>{{\App\Helpers\Helper::convertToRupiah($transactionCoupon->Coupon->coupon_number)}}</p>
+        @else
+            <p><strong>Bạn được giảm: </strong>{{\App\Helpers\Helper::convertToRupiah(($price*$transactionCoupon->Coupon->coupon_number/100))}}</p>
+        @endif
+    @endif
     <p><strong>Tổng giá:</strong> {{\App\Helpers\Helper::convertToRupiah($transaction->sum_money)}}</p>
     <p><strong>Lưu ý: </strong>Chính sách hoàn tiền của homestay của chúng tôi</p>
     <p>Nếu quý khách hủy trước 3 ngày sẽ được hoàn lại 100% phí đã đặt cọc</p>
@@ -111,7 +128,7 @@
     <div class="signature">
         King The Land
         <div class="contact-info">
-            Email: john.doe@example.com<br>
+            Email: kingtheland@email.com<br>
             Phone: (123) 456-7890
         </div>
     </div>

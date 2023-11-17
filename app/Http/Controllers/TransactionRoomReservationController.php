@@ -18,6 +18,7 @@ use App\Models\FacilityRoom;
 use App\Models\Payment;
 use App\Models\Room;
 use App\Models\Transaction;
+use App\Models\TransactionCoupon;
 use App\Models\TransactionFacility;
 use App\Models\Type;
 use App\Models\User;
@@ -118,7 +119,6 @@ class TransactionRoomReservationController extends Controller
     {
         $dayDifference = Helper::getDateDifference($request->check_in, $request->check_out);
         $minimumDownPayment = $request->sum_money * 0.15;
-
         if (empty($request->cus)) {
             $request->validate([
                 'downPayment' => 'required|numeric|gte:' . $minimumDownPayment
@@ -136,6 +136,7 @@ class TransactionRoomReservationController extends Controller
         session(['room' => $room]);
         session(['request' => $request->all()]);
         $data = $request->all();
+
 
         if (!empty($request->cus)) {
             if (!empty($request->facility)) {
@@ -255,7 +256,6 @@ class TransactionRoomReservationController extends Controller
             ]);
             if (isset($request['facility'])) {
                 $facility = $request['facility'];
-
                 foreach ($facility as $key => $value) {
                     $facility_room = TransactionFacility::create([
                         'transanction_id' => $transaction->id,
@@ -272,6 +272,7 @@ class TransactionRoomReservationController extends Controller
                 'status' => $status
             ]);
 
+
             $superAdmins = User::where('role', 'Super')->get();
 
             foreach ($superAdmins as $superAdmin) {
@@ -281,12 +282,26 @@ class TransactionRoomReservationController extends Controller
             }
 
             event(new RefreshDashboardEvent("Someone reserved a room"));
+            $transactionFacility = TransactionFacility::query()->where('transanction_id', $transaction->id)->get();
 
             if (isset($request['cus'])) {
                 $user = User::query()->findOrFail($transaction->user_id);
-                $mail = new SuccessHomestayMail($user, $transaction);
-                SendSuccessMail::dispatch($user, $mail);
-                return view('transaction.success', compact('user', 'transaction'));
+                if (!empty($request['coupon_id'])){
+                    $transactionCoupon = TransactionCoupon::create([
+                        'transaction_id'=>$transaction->id,
+                        'coupon_id'=>$request['coupon_id'],
+                    ]);
+                    $mail = new SuccessHomestayMail($user, $transaction, $transactionCoupon, $transactionFacility);
+                    SendSuccessMail::dispatch($user, $mail);
+                    return view('transaction.success', compact('user', 'transaction', 'transactionCoupon', 'transactionFacility'));
+                }else{
+                    $transactionCoupon = TransactionCoupon::query()->find(0);
+                    $mail = new SuccessHomestayMail($user, $transaction, $transactionCoupon);
+                    SendSuccessMail::dispatch($user, $mail);
+                    return view('transaction.success', compact('user', 'transaction'));
+                }
+
+
             } else {
                 return redirect()->route('transaction.index')
                     ->with('success', 'Room ' . $room->number . ' has been reservated by ' . $customer->name);
