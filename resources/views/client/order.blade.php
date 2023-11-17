@@ -44,8 +44,7 @@
             border-collapse: collapse;
         }
 
-        table th,
-        table td {
+        table th, table td {
             padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ccc;
@@ -63,10 +62,10 @@
         table tbody tr:hover {
             background-color: #e0e0e0;
         }
-
-        swal2-show {
+        swal2-show{
             width: 500px;
         }
+
     </style>
     <section class="section-sub-banner bg-16">
 
@@ -88,90 +87,73 @@
             <h2>Lịch sử Đặt HomeStay</h2>
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>HomeStay</th>
-                        <th>Quận</th>
-                        <th>Ngày đến</th>
-                        <th>Ngày đi</th>
-                        <th>Tổng tiền</th>
-                        <th colspan="2">Thao tác</th>
-                    </tr>
+                <tr>
+                    <th>STT</th>
+                    <th>HomeStay</th>
+                    <th>Quận</th>
+                    <th>Ngày đến</th>
+                    <th>Ngày đi</th>
+                    <th>Tổng tiền</th>
+                    <th colspan="2">Thao tác</th>
+                </tr>
                 </thead>
                 <tbody>
 
-                    @foreach ($transactions as $transaction)
-                        <tr>
-                            <th>{{ $transaction->id }}
-                            </th>
-                            <td>{{ $transaction->room->number }}</td>
-                            <td>{{ $transaction->room->type->name }}</td>
-                            <td>{{ Helper::dateFormat($transaction->check_in) }}</td>
-                            <td>{{ Helper::dateFormat($transaction->check_out) }}</td>
-                            <td>{{ Helper::convertToRupiah($transaction->sum_money) }}
-                            </td>
-                            <td><a style="font-weight: bold" class="btn btn-light btn-sm rounded shadow-sm border"
-                                    href="/payment/{{ $transaction->id }}/invoice" data-bs-toggle="tooltip"
-                                    data-bs-placement="top">
-                                    Chi tiết
-                                </a></td>
-                            @php
-                                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                            @endphp
-                            @if (Helper::thisNow() > $transaction->check_out)
-                                <td><a style="font-weight: bold" class="btn btn-light btn-sm rounded shadow-sm border"
-                                        href="/formComment/{{ $transaction->room->id }}" data-bs-toggle="tooltip"
-                                        data-bs-placement="top">
-                                        Đánh giá
-                                    </a></td>
+                @foreach($transactions as $transaction)
+                    <tr>
+                        <th>{{$transaction->id}}
+                        </th>
+                        <td>{{ $transaction->room->number }}</td>
+                        <td>{{ $transaction->room->type->name}}</td>
+                        <td>{{ Helper::dateFormat($transaction->check_in) }}</td>
+                        <td>{{ Helper::dateFormat($transaction->check_out) }}</td>
+                        <td>{{ Helper::convertToRupiah($transaction->sum_money) }}
+                        </td>
+                        <td><a style="font-weight: bold" class="btn btn-light btn-sm rounded shadow-sm border"
+                               href="/payment/{{$transaction->id}}/invoice"
+                               data-bs-toggle="tooltip" data-bs-placement="top"
+                            >
+                                Chi tiết
+                            </a></td>
+                        @php
+                            date_default_timezone_set('Asia/Ho_Chi_Minh');
+                        @endphp
+                        @if(Helper::getDateDifference(now(),$transaction->check_in)>=0)
+                            @if(Helper::getDateDifference(now(),$transaction->check_in)<=3)
+                                <td>
+                                    <button class="btn btn-danger" id="delete1" transaction_id = {{$transaction->id}}>Hủy phòng</button>
+                                    <form action="{{route('cancelHomestay', $transaction->id)}}" id="form--{{$transaction->id}}" method="post">
+                                        @csrf
+                                    </form></td>
+                            @elseif(Helper::getDateDifference(now(),$transaction->check_in)<=7)
+                                <td>
+                                    <button class="btn btn-danger" id="delete2" transaction_id = {{$transaction->id}}>Hủy phòng</button>
+                                    <form action="{{route('cancelHomestay', $transaction->id)}}" id="form--{{$transaction->id}}" method="post">
+                                        @csrf
+                                        <input type="hidden" value="15" name="hoan" >
+                                    </form></td>
+                            @else
+                                <td>
+                                    <button class="btn btn-danger" id="delete3" transaction_id = {{$transaction->id}}>Hủy phòng</button>
+                                    <form action="{{route('cancelHomestay', $transaction->id)}}" id="form--{{$transaction->id}}" method="post" class="delete-cus">
+                                        @csrf
+                                        <input type="hidden" value="100" name="hoan">
+                                    </form></td>
                             @endif
-
-
-                            @if (Helper::getDateDifference(now(), $transaction->check_in) >= 0)
-                                @if (Helper::getDateDifference(now(), $transaction->check_in) <= 3)
-                                    <td>
-                                        {{ Helper::getDateDifference(now(), $transaction->check_in) }}
-                                        <button class="btn btn-danger" id="delete1"
-                                            transaction_id={{ $transaction->id }}>Hủy phòng</button>
-                                        <form action="{{ route('cancelHomestay', $transaction->id) }}"
-                                            id="form--{{ $transaction->id }}" method="post">
-                                            @csrf
-                                        </form>
-                                    </td>
-                                @elseif(Helper::getDateDifference(now(), $transaction->check_in) <= 7)
-                                    <td>
-                                        <button class="btn btn-danger" id="delete2"
-                                            transaction_id={{ $transaction->id }}>Hủy phòng</button>
-                                        <form action="{{ route('cancelHomestay', $transaction->id) }}"
-                                            id="form--{{ $transaction->id }}" method="post">
-                                            @csrf
-                                            <input type="hidden" value="15" name="hoan">
-                                        </form>
-                                    </td>
-                                @else
-                                    <td>
-                                        <button class="btn btn-danger" id="delete3"
-                                            transaction_id={{ $transaction->id }}>Hủy phòng</button>
-                                        <form action="{{ route('cancelHomestay', $transaction->id) }}"
-                                            id="form--{{ $transaction->id }}" method="post" class="delete-cus">
-                                            @csrf
-                                            <input type="hidden" value="100" name="hoan">
-                                        </form>
-                                    </td>
-                                @endif
-                            @endif
-                        </tr>
-                    @endforeach
+                        @endif
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </section>
     </div>
+
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-    $(function() {
-        $(document).on('click', '#delete1', function(e) {
+    $(function () {
+        $(document).on('click', '#delete1', function (e) {
             var transaction_id = $(this).attr('transaction_id');
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -195,15 +177,13 @@
                     $(`#form--${transaction_id}`).submit();
                 }
             })
-        }).on('submit', '.delete-cus', async function(e) {
+        }).on('submit', '.delete-cus', async function (e) {
             try {
                 const response = await $.ajax({
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
                     method: $(this).attr('method'),
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 })
 
                 if (!response) return
@@ -228,7 +208,7 @@
                 }
             }
         })
-        $(document).on('click', '#delete2', function(e) {
+        $(document).on('click', '#delete2', function (e) {
             var transaction_id = $(this).attr('transaction_id');
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -252,15 +232,13 @@
                     $(`#form--${transaction_id}`).submit();
                 }
             })
-        }).on('submit', '.delete-cus', async function(e) {
+        }).on('submit', '.delete-cus', async function (e) {
             try {
                 const response = await $.ajax({
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
                     method: $(this).attr('method'),
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 })
 
                 if (!response) return
@@ -285,7 +263,7 @@
                 }
             }
         })
-        $(document).on('click', '#delete3', function(e) {
+        $(document).on('click', '#delete3', function (e) {
             var transaction_id = $(this).attr('transaction_id');
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -309,15 +287,13 @@
                     $(`#form--${transaction_id}`).submit();
                 }
             })
-        }).on('submit', '.delete-cus', async function(e) {
+        }).on('submit', '.delete-cus', async function (e) {
             try {
                 const response = await $.ajax({
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
                     method: $(this).attr('method'),
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 })
 
                 if (!response) return

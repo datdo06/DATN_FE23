@@ -104,6 +104,7 @@
                             <p>Quý khách được hoàn {{\App\Helpers\Helper::convertToRupiah(0)}}</p>
                         </div>
                     </div>
+                @endif
             </div>
 
             <p>Chúng tôi hiểu rằng có những thay đổi trong kế hoạch của bạn và việc hủy đặt homestay có thể gây phiền hà. Nếu bạn có bất kỳ câu hỏi hoặc cần hỗ trợ thêm, vui lòng liên hệ với chúng tôi.</p>
