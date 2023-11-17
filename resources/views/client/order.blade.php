@@ -44,8 +44,7 @@
             border-collapse: collapse;
         }
 
-        table th,
-        table td {
+        table th, table td {
             padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ccc;
@@ -63,10 +62,10 @@
         table tbody tr:hover {
             background-color: #e0e0e0;
         }
-
-        swal2-show {
+        swal2-show{
             width: 500px;
         }
+
     </style>
     <section class="section-sub-banner bg-16">
 
@@ -88,18 +87,17 @@
             <h2>Lịch sử Đặt HomeStay</h2>
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>HomeStay</th>
-                        <th>Quận</th>
-                        <th>Ngày đến</th>
-                        <th>Ngày đi</th>
-                        <th>Tổng tiền</th>
-                        <th colspan="2">Thao tác</th>
-                    </tr>
+                <tr>
+                    <th>STT</th>
+                    <th>HomeStay</th>
+                    <th>Quận</th>
+                    <th>Ngày đến</th>
+                    <th>Ngày đi</th>
+                    <th>Tổng tiền</th>
+                    <th colspan="2">Thao tác</th>
+                </tr>
                 </thead>
                 <tbody>
-
                     @foreach ($transactions as $transaction)
                         <tr>
                             <th>{{ $transaction->id }}
@@ -159,18 +157,20 @@
                                     </td>
                                 @endif
                             @endif
-                        </tr>
-                    @endforeach
+                        @endif
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </section>
     </div>
+
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-    $(function() {
-        $(document).on('click', '#delete1', function(e) {
+    $(function () {
+        $(document).on('click', '#delete1', function (e) {
             var transaction_id = $(this).attr('transaction_id');
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -194,15 +194,13 @@
                     $(`#form--${transaction_id}`).submit();
                 }
             })
-        }).on('submit', '.delete-cus', async function(e) {
+        }).on('submit', '.delete-cus', async function (e) {
             try {
                 const response = await $.ajax({
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
                     method: $(this).attr('method'),
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 })
 
                 if (!response) return
@@ -227,7 +225,7 @@
                 }
             }
         })
-        $(document).on('click', '#delete2', function(e) {
+        $(document).on('click', '#delete2', function (e) {
             var transaction_id = $(this).attr('transaction_id');
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -251,15 +249,13 @@
                     $(`#form--${transaction_id}`).submit();
                 }
             })
-        }).on('submit', '.delete-cus', async function(e) {
+        }).on('submit', '.delete-cus', async function (e) {
             try {
                 const response = await $.ajax({
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
                     method: $(this).attr('method'),
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 })
 
                 if (!response) return
@@ -284,7 +280,7 @@
                 }
             }
         })
-        $(document).on('click', '#delete3', function(e) {
+        $(document).on('click', '#delete3', function (e) {
             var transaction_id = $(this).attr('transaction_id');
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {
@@ -308,15 +304,13 @@
                     $(`#form--${transaction_id}`).submit();
                 }
             })
-        }).on('submit', '.delete-cus', async function(e) {
+        }).on('submit', '.delete-cus', async function (e) {
             try {
                 const response = await $.ajax({
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
                     method: $(this).attr('method'),
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 })
 
                 if (!response) return

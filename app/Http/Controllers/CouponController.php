@@ -6,7 +6,6 @@ use App\Http\Requests\StoreCouponRequest;
 use App\Models\Coupon;
 use App\Repositories\Interface\CouponRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class CouponController extends Controller
 {

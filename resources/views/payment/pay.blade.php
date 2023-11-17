@@ -130,7 +130,6 @@
                                                     class="reservation-amout">{{ $data['total_day'] }} {{ Helper::plural('Day', $data['total_day']) }}</span>
                                             </div>
 
-
                                             <div class="reservation-room-seleted_total-room">
                                                 TOTAL {{$room->number}}
                                                 <span
@@ -173,7 +172,8 @@
                                             @if(session('coupon'))
                                                 @if(session('coupon') -> coupon_condition == 0)
                                                     @php
-                                                        $total_coupon = (Helper::getTotalPayment($data['total_day'], $room->price) * (session('coupon') -> coupon_number)/100);
+                                                        $money_reduced = (Helper::getTotalPayment($data['total_day'], $room->price) * (session('coupon') -> coupon_number)/100);
+                                                        $total_coupon = Helper::getTotalPayment($data['total_day'], $room->price) - $money_reduced;
                                                         echo '<span class="reservation-total">'. Helper::convertToRupiah($total_coupon).'</span>';
                                                     @endphp
                                                 @elseif(session('coupon') -> coupon_condition == 2)
