@@ -109,6 +109,22 @@
         <li><strong>Ngày trả phòng:</strong> {{\App\Helpers\Helper::dateFormat($transaction->check_out)}}</li>
         <li><strong>Homestay đã đặt: </strong>{{$transaction->room->number}} - {{$transaction->room->type->name}}</li>
         <li><strong>Số người: </strong>{{$transaction->sum_people}}</li>
+        @php
+            $dayDifference = Helper::getDateDifference($transaction->check_in, $transaction->check_out);
+            $price = ($transaction->room->price * $dayDifference);
+        @endphp
+        <li><strong>Tiền homestay: </strong>{{App\Helpers\Helper::convertToRupiah($price)}}</li>
+        @foreach($transactionFacility as $tF)
+            <li><strong>Tiền dich vụ {{$tF->Facility->name}}: </strong>{{\App\Helpers\Helper::convertToRupiah($tF->Facility->price)}}</li>
+        @endforeach
+        @if(!empty($transactionCoupon))
+            <li><strong>Bạn đã sử dụng mã giảm giá: </strong>{{$transactionCoupon->Coupon->coupon_name}}</li>
+            @if($transactionCoupon->Coupon->coupon_condition == 2)
+                <li><strong>Bạn được giảm: </strong>{{\App\Helpers\Helper::convertToRupiah($transactionCoupon->Coupon->coupon_number)}}</li>
+            @else
+                <li><strong>Bạn được giảm: </strong>{{\App\Helpers\Helper::convertToRupiah(($price*$transactionCoupon->Coupon->coupon_number/100))}}</li>
+            @endif
+        @endif
         <li><strong>Tổng giá:</strong> {{\App\Helpers\Helper::convertToRupiah($transaction->sum_money)}}</li>
     </ul>
 

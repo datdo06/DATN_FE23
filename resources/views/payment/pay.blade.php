@@ -197,6 +197,7 @@
                                         <input type="hidden" value="{{$data['person']}}" name="person">
                                         @if(session('coupon'))
                                             <input type="hidden" id="sum_money" value="{{$total_coupon}}" name="sum_money">
+                                            <input type="hidden" name="coupon_id" value="{{session('coupon') -> id}}">
                                         @else
                                             <input type="hidden" id="sum_money" value="{{Helper::getTotalPayment($data['total_day'], $room->price)}}" name="sum_money">
                                         @endif

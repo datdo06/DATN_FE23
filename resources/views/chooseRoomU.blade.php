@@ -122,11 +122,11 @@
                                         @if(isset(Auth()->user()->id))
                                             <form
                                                 action="{{route('confirm',['user' => Auth()->user()->id, 'room'=>$room->id])}}"
-                                                method="POST">
+                                                method="GET">
                                                 @else
                                                     <form
                                                         action="{{route('confirm',['user' => 0, 'room'=>$room->id])}}"
-                                                        method="POST">
+                                                        method="GET">
                                                         @endif
                                                         @csrf
                                                         <h2 class="reservation-room_name"><a

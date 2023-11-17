@@ -130,7 +130,6 @@
                             @if (Helper::getDateDifference(now(), $transaction->check_in) >= 0)
                                 @if (Helper::getDateDifference(now(), $transaction->check_in) <= 3)
                                     <td>
-                                        {{ Helper::getDateDifference(now(), $transaction->check_in) }}
                                         <button class="btn btn-danger" id="delete1"
                                             transaction_id={{ $transaction->id }}>Hủy phòng</button>
                                         <form action="{{ route('cancelHomestay', $transaction->id) }}"
