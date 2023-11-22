@@ -85,7 +85,6 @@ class HomeController extends Controller
 
         $rooms = Room::query()
             ->get();
-
         $transactions = Transaction::pluck('room_id')->toArray();
 
         $rooms = Room::whereNotIn('id', $transactions)->get();
@@ -104,7 +103,7 @@ class HomeController extends Controller
         ->select('rooms.id','comments.com_user_id as cui')
         ->where('rooms.id', $id)
         ->first();
-     
+
         $comment = DB::table('comments')
         ->join('rooms', 'rooms.id', '=', 'comments.com_room_id')
         ->join('users', 'users.id', '=', 'comments.com_user_id')

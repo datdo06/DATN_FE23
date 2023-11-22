@@ -37,6 +37,14 @@ $(function() {
                 "data": "coupon_condition"
             },
             {
+                "name": "start_time",
+                "data": "start_time"
+            },
+            {
+                "name": "end_time",
+                "data": "end_time"
+            },
+            {
                 "name": "id",
                 "data": "id",
                 "width": "100px",

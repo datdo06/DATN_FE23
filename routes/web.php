@@ -119,11 +119,6 @@ Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index']
 Route::get('/', [HomeController::class, 'show'])->name('home');
 
 
-//Route::get('/', [HomeController::class, 'index'])->name('home');
-
-// Route::get('/', [HomeController::class, 'index'])->name('home');
-
-
 Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');
 Route::view('/login', 'client.login')->name('login');
 Route::view('/register', 'client.register')->name('register');
@@ -146,4 +141,8 @@ Route::get('/booking', function () {
 
 Route::get('/money', [ChartController::class,'dailyMoneysPerMonth']);
 Route::post('/{transaction}/mail', [TransactionRoomReservationController::class, 'CancelHomstay'])->name('cancelHomestay');
-// Route::get('/chooseRoom', [HomeController::class, 'chooseRoomU'])->name('chooseRoomU');
+
+Route::get('/forget-password',[\App\Http\Controllers\Auth\ResetPasswordController::class, "forgetPassword"])->name('forget.password');
+Route::post('/forget-password',[\App\Http\Controllers\Auth\ResetPasswordController::class, "forgetPasswordPost"])->name('forget.password.post');
+Route::get('/reset-password/{token}', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'resetPassword'])->name('reset.password');
+Route::post('/reset-password', [\App\Http\Controllers\Auth\ResetPasswordController::class, 'resetPasswordPost'])->name('reset.password.post');

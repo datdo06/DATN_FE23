@@ -24,7 +24,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <h5 class="card-title text-center">King Hotel</h5>
+                                <h5 class="card-title text-center">King The Land Hotel</h5>
                             </div>
                         </div>
                         <form class="form-signin" action="/postLogin" method="post">
@@ -38,23 +38,23 @@
                                     <div class="form-label-group">
                                         <input type="password" id="password" name="password" autocomplete="new-password"
                                             class="form-control" placeholder="Password" value="" required>
-                                        <label for="password">Password</label>
+                                        <label for="password">Mật Khẩu</label>
                                     </div>
                                     <div class="form-label-group">
                                         <input type="password" id="password_konfirmasi" name="password_konfirmasi"
                                             class="form-control" placeholder="Repead Password" value="" required>
-                                        <label for="password_konfirmasi">Confirm password</label>
+                                        <label for="password_konfirmasi">Đặt lại mật khẩu</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 d-flex justify-content-center">
                                     <button class="btn btn-lg btn-primary text-white btn-block text-uppercase"
-                                        type="submit">Register</button>
+                                        type="submit">Đăng ký</button>
                                 </div>
                             </div>
                             <hr class="my-4">
-                            <p class="text-center">Do you have a account? <a href="/login">Login</a></p>
+                            <p class="text-center">Không có tài khoản nào? <a href="/login">Đăng nhập</a></p>
                         </form>
                     </div>
                 </div>

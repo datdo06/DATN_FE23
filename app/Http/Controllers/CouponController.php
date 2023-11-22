@@ -6,7 +6,7 @@ use App\Http\Requests\StoreCouponRequest;
 use App\Models\Coupon;
 use App\Repositories\Interface\CouponRepositoryInterface;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class CouponController extends Controller
 {
     private $couponRepository;
@@ -74,12 +74,15 @@ class CouponController extends Controller
     }
     public function check_coupon(Request $request){
         $data = $request->all();
-        $coupon = Coupon::where('coupon_code', $data['coupon'])->first();
+        $currentDate = Carbon::now();
+        $coupon = Coupon::where('coupon_code', $data['coupon'])
+            ->first();
 
         if (session('coupon')) {
             session()->forget('coupon');
         }
-        if ($coupon && $coupon->coupon_time > 0 && !$coupon->expired) {
+
+        if ($coupon && $coupon->coupon_time > 0 && !$coupon->expired && $currentDate->between($coupon->start_time, $coupon->end_time)) {
             // Mã giảm giá hợp lệ
             $coupon->coupon_time -= 1;
             $coupon->save();
