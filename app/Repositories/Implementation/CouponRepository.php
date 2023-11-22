@@ -27,6 +27,9 @@ class CouponRepository implements CouponRepositoryInterface
         $coupon->coupon_time = $couponData->coupon_time;
         $coupon->coupon_number = $couponData->coupon_number;
         $coupon->coupon_condition = $couponData->coupon_condition;
+        $coupon->start_time = $couponData->start_time;
+        $coupon->end_time = $couponData->end_time;
+
         $coupon->save();
 
         return $coupon;
@@ -46,6 +49,8 @@ class CouponRepository implements CouponRepositoryInterface
             3 => 'coupons.coupon_time',
             4 => 'coupons.coupon_number',
             5 => 'coupons.coupon_condition',
+            6 => 'coupons.start_time',
+            7 => 'coupons.end_time',
         );
 
         $limit          = $request->input('length');
@@ -60,6 +65,8 @@ class CouponRepository implements CouponRepositoryInterface
             'coupons.coupon_time',
             'coupons.coupon_number',
             'coupons.coupon_condition',
+            'coupons.start_time',
+            'coupons.end_time',
             'coupons.id',
         );
 
@@ -99,6 +106,9 @@ class CouponRepository implements CouponRepositoryInterface
                     "coupon_time" => $model->coupon_time,
                     "coupon_number" => $model->coupon_number,
                     "coupon_condition" => $model->coupon_condition,
+                    'start_time' => $model->start_time,
+                    'end_time' => $model->end_time,
+
                     "id" => $model->id,
 
                 );

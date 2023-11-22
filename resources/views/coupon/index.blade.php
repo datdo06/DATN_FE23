@@ -36,12 +36,14 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Time</th>
-                                            <th scope="col">Code</th>
-                                            <th scope="col">Number</th>
-                                            <th scope="col">Condition</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col">Tên</th>
+                                            <th scope="col">Số mã còn lại</th>
+                                            <th scope="col">Mã</th>
+                                            <th scope="col">Số tiền giảm</th>
+                                            <th scope="col">Phương thức</th>
+                                            <th scope="col">Ngày mở</th>
+                                            <th scope="col">Ngày hết</th>
+                                            <th scope="col">Chức năng</th>
                                         </tr>
                                     </thead>
                                     <tbody>

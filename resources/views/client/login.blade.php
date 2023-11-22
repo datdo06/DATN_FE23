@@ -5,8 +5,8 @@
         <div class="container">
             <div class="login-register">
                 <div class="text text-center">
-                    <h2>LOGIN ACCOUNT</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing</p>
+                    <h2>ĐĂNG NHẬP TÀI KHOẢN</h2>
+                    <p>Đăng nhập King The Land</p>
                     <form action="{{route('postlogin')}}" class="account_form" method="post">
                         @csrf
                         <div class="field-form">
@@ -27,9 +27,9 @@
                             @enderror
                         </div>
                         <div class="field-form field-submit">
-                            <button class="awe-btn awe-btn-13" type="submit">Login</button>
+                            <button class="awe-btn awe-btn-13" type="submit">Đăng nhập</button>
                         </div>
-                        <span class="account-desc">I don’t have an account  -  <a href="#">Forgot Password</a></span>
+                        <span class="account-desc">Tôi không có tài khoản -  <a href="{{ route('forget.password') }}">Quên mật khẩu</a></span>
                     </form>
                 </div>
             </div>
