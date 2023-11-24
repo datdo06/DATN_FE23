@@ -133,7 +133,7 @@
     <p>Chúng tôi rất mong được phục vụ bạn tại homestay của chúng tôi. Chúc bạn có một kỳ nghỉ thú vị!</p>
 
     <p>Trân trọng,</p>
-    <p>Kng The Land</p>
+    <p>King The Land</p>
     <div class="button-container">
         <a href="{{route('home')}}" class="button">Quay lại trang chủ</a>
     </div>

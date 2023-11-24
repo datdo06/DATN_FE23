@@ -16,7 +16,7 @@
                                     action="{{ route('transaction.reservation.chooseRoom', ['customer' => $customer->id]) }}">
                                     <div class="col-md-12">
                                         <label for="count_person" class="form-label">
-                                            How many person?
+                                            Nhập số người ở
                                         </label>
                                         <input type="text"
                                             class="form-control @error('count_person') is-invalid @enderror"
@@ -29,7 +29,7 @@
                                             </div>
                                         @enderror
                                         <label for="check_in" class="form-label">
-                                            From
+                                            Ngày đến
                                         </label>
                                         <input type="date" class="form-control @error('check_in') is-invalid @enderror"
                                             id="
@@ -41,7 +41,7 @@
                                             </div>
                                         @enderror
                                         <label for="check_out" class="form-label">
-                                            Until
+                                            Ngày đi
                                         </label>
                                         <input type="date" class="form-control @error('check_out') is-invalid @enderror"
                                             id="
@@ -68,7 +68,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-12">
-                                        <button type="submit" class="btn myBtn shadow-sm border float-end">Next</button>
+                                        <button type="submit" class="btn myBtn shadow-sm border float-end">Tiếp tục</button>
                                     </div>
                                 </form>
                             </div>

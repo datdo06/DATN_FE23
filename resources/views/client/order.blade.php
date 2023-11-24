@@ -157,7 +157,7 @@
                                     </td>
                                 @endif
                             @endif
-                        @endif
+                   
                     </tr>
                 @endforeach
                 </tbody>

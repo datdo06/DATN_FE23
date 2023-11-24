@@ -7,34 +7,34 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row mb-3">
-                            <label class=" col-sm-2 col-form-label">Room</label>
+                            <label class=" col-sm-2 col-form-label">Homestay</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" value="{{ $transaction->room->number }}" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">Check In</label>
+                            <label class="col-sm-2 col-form-label">Ngày đến</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control"
                                     value="{{ Helper::dateFormat($transaction->check_in) }}" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">Check Out</label>
+                            <label class="col-sm-2 col-form-label">Ngày đi</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control"
                                     value="{{ Helper::dateFormat($transaction->check_out) }}" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class=" col-sm-2 col-form-label">Room Price</label>
+                            <label class=" col-sm-2 col-form-label">Giá Homestay</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control"
                                     value="{{ Helper::convertToRupiah($transaction->room->price) }}" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">Days Count</label>
+                            <label class="col-sm-2 col-form-label">Số ngày đặt</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control"
                                     value="{{ $transaction->getDateDifferenceWithPlural($transaction->check_in, $transaction->check_out) }}"
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">Total Price</label>
+                            <label class="col-sm-2 col-form-label">Tổng tiền</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control"
                                     value="{{ Helper::convertToRupiah($transaction->getTotalPrice($transaction->room->price, $transaction->check_in, $transaction->check_out)) }}"
@@ -50,14 +50,14 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">Paid Off</label>
+                            <label class="col-sm-2 col-form-label">Đã trả</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control"
                                     value="{{ Helper::convertToRupiah($transaction->getTotalPayment()) }}" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">Insufficient</label>
+                            <label class="col-sm-2 col-form-label">Số tiền chưa trả</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control"
                                     value="{{ Helper::convertToRupiah($transaction->getTotalPrice($transaction->room->price, $transaction->check_in, $transaction->check_out) - $transaction->getTotalPayment()) }}"
@@ -70,10 +70,10 @@
                                     action="{{ route('transaction.payment.store', ['transaction' => $transaction->id]) }}">
                                     @csrf
                                     <div class="row mb-3">
-                                        <label for="payment" class="col-sm-2 col-form-label">Pay</label>
+                                        <label for="payment" class="col-sm-2 col-form-label">Thanh toán</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control @error('payment') is-invalid @enderror"
-                                                placeholder="Input payment" value="" id="payment" name="payment">
+                                                placeholder="Nhập số tiền thanh toán" value="" id="payment" name="payment">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -85,7 +85,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                    <button class="btn btn-success float-end">Pay</button>
+                                    <button class="btn btn-success float-end">Thanh toán</button>
                                 </form>
                             </div>
                         </div>

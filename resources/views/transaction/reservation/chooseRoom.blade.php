@@ -22,10 +22,10 @@
             <div class="col-md-8 mt-2">
                 <div class="card shadow-sm border">
                     <div class="card-body p-3">
-                        <h2>{{ $roomsCount }} Homestay Available for:</h2>
+                        <h2>{{ $roomsCount }} Homestay có sẵn cho:</h2>
                         <p>{{ request()->input('count_person') }}
-                            {{ Helper::plural('People', request()->input('count_person')) }} on
-                            {{ Helper::dateFormat(request()->input('check_in')) }} to
+                            {{ Helper::plural('Người', request()->input('count_person')) }} trong ngày
+                            {{ Helper::dateFormat(request()->input('check_in')) }} đến ngày
                             {{ Helper::dateFormat(request()->input('check_out')) }}</p>
                         <hr>
                         <form method="GET"
@@ -39,11 +39,10 @@
                                 <div class="col-lg-3">
                                     <select class="form-select" id="sort_name" name="sort_name"
                                         aria-label="Default select example">
-                                        <option value="Price" @if (request()->input('sort_name') == 'Price') selected @endif>Price
+                                        <option value="Price" @if (request()->input('sort_name') == 'Giá tiền') selected @endif>Giá tiền
                                         </option>
-                                        <option value="Number" @if (request()->input('sort_name') == 'Number') selected @endif>Number
-                                        </option>
-                                        <option value="Capacity" @if (request()->input('sort_name') == 'Capacity') selected @endif>Capacity
+                                       
+                                        <option value="Capacity" @if (request()->input('sort_name') == 'Số người') selected @endif>Số người
                                         </option>
                                     </select>
                                 </div>
@@ -60,14 +59,14 @@
                                 <div class="col-lg-3">
                                     <select class="form-select" id="sort_type" name="sort_type"
                                         aria-label="Default select example">
-                                        <option value="ASC" @if (request()->input('sort_type') == 'ASC') selected @endif>Ascending
+                                        <option value="ASC" @if (request()->input('sort_type') == 'ASC') selected @endif>Tăng dần
                                         </option>
-                                        <option value="DESC" @if (request()->input('sort_type') == 'DESC') selected @endif>Descending
+                                        <option value="DESC" @if (request()->input('sort_type') == 'DESC') selected @endif>Giảm dần
                                         </option>
                                     </select>
                                 </div>
                                 <div class="col-lg-3">
-                                    <button type="submit" class="btn myBtn shadow-sm border w-100">Search</button>
+                                    <button type="submit" class="btn myBtn shadow-sm border w-100">Tìm</button>
                                 </div>
                             </div>
                         </form>
@@ -78,16 +77,16 @@
                                         class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                         <div class="col p-4 d-flex flex-column position-static">
                                             <strong class="d-inline-block mb-2 text-secondary">{{ $room->capacity }}
-                                                {{ Str::plural('Person', $room->capacity) }}</strong>
+                                                {{ Str::plural('Người', $room->capacity) }}</strong>
                                             <h3 class="mb-0">{{ $room->number }} ~ {{ $room->type->name }}</h3>
                                             <div class="mb-1 text-muted">{{ Helper::convertToRupiah($room->price) }} /
-                                                Day
+                                                Đêm
                                             </div>
                                             <div class="wrapper">
                                                 <p class="card-text mb-auto demo-1">{{ $room->view }}</p>
                                             </div>
                                             <a href="{{ route('transaction.reservation.confirmation', ['customer' => $customer->id, 'room' => $room->id, 'from' => request()->input('check_in'), 'to' => request()->input('check_out')]) }}"
-                                                class="btn myBtn shadow-sm border w-100 m-2">Choose</a>
+                                                class="btn myBtn shadow-sm border w-100 m-2">Chọn</a>
                                         </div>
                                         <div class="col-auto d-none d-lg-block">
                                             <img src="{{ $room->firstImage() }}" width="200" height="250"
@@ -96,8 +95,7 @@
                                     </div>
                                 </div>
                             @empty
-                                <h3>Theres no available room for {{ request()->input('count_person') }} or more
-                                    person
+                                <h3>Không có Homestay có sẵn cho {{ request()->input('count_person') }} người hoặc nhiều người hơn
                                 </h3>
                             @endforelse
                         </div>

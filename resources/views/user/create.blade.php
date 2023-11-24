@@ -5,13 +5,13 @@
         <div class="col-lg-8">
             <div class="card shadow-sm border">
                 <div class="card-header">
-                    <h2>Add User</h2>
+                    <h2>Thêm mới</h2>
                 </div>
                 <div class="card-body p-3">
                     <form class="row g-3" method="POST" action="{{ route('user.store') }}">
                         @csrf
                         <div class="col-md-12">
-                            <label for="name" class="form-label">Name</label>
+                            <label for="name" class="form-label">Tên</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
                                 name="name" value="{{ old('name') }}">
                             @error('name')
@@ -31,7 +31,7 @@
                             @enderror
                         </div>
                         <div class=" col-md-6">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">Mật khẩu</label>
                             <input type="password" class="form-control @error('password') is-invalid @enderror" " id="
                                 password" name="password" value="{{ old('password') }}">
                             @error('password')
@@ -41,12 +41,12 @@
                             @enderror
                         </div>
                         <div class=" col-md-12">
-                            <label for="role" class="form-label">Role</label>
+                            <label for="role" class="form-label">Vai trò</label>
                             <select id="role" name="role" class="form-select @error('password') is-invalid @enderror">
-                                <option selected disabled hidden>Choose...</option>
-                                <option value="Super" @if (old('role') == 'Super') selected @endif>Super</option>
-                                <option value="Admin" @if (old('role') == 'Admin') selected @endif>Admin</option>
-                                <option value="Customer" @if (old('role') == 'Customer') selected @endif>Customer</option>
+                                <option selected disabled hidden>Chọn...</option>
+                                <option value="Super" @if (old('role') == 'Super') selected @endif>Quản lý</option>
+                                <option value="Admin" @if (old('role') == 'Admin') selected @endif>Nhân viên</option>
+                                <option value="Customer" @if (old('role') == 'Customer') selected @endif>Khách hàng</option>
                             </select>
                             @error('role')
                                 <div class="text-danger mt-1">
@@ -55,7 +55,7 @@
                             @enderror
                         </div>
                         <div class="col-mg-12">
-                            <label for="avatar" class="form-label">Profile Picture</label>
+                            <label for="avatar" class="form-label">Ảnh đại diện</label>
                             <input class="form-control" type="file" name="avatar" id="avatar">
                             @error('avatar')
                                 <div class="text-danger mt-1">
@@ -64,7 +64,7 @@
                             @enderror
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-light shadow-sm border float-end">Save</button>
+                            <button type="submit" class="btn btn-light shadow-sm border float-end">Lưu</button>
                         </div>
                     </form>
                 </div>

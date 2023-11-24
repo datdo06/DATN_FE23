@@ -10,14 +10,14 @@
             <div class="col-lg-12">
                 <div class="card shadow-sm border">
                     <div class="card-header">
-                        <h2>Add Customer</h2>
+                        <h2>Thêm khách hàng</h2>
                     </div>
                     <div class="card-body p-3">
                         <form class="row g-3" method="POST" action="{{ route('transaction.reservation.storeCustomer') }}"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="col-md-12">
-                                <label for="name" class="form-label">Name</label>
+                                <label for="name" class="form-label">Họ tên</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
                                     name="name" value="{{ old('name') }}">
                                 @error('name')
@@ -37,7 +37,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-12">
-                                <label for="birthdate" class="form-label">Date of birth</label>
+                                <label for="birthdate" class="form-label">Ngày sinh</label>
                                 <input type="date" class="form-control @error('birthdate') is-invalid @enderror"
                                     id="birthdate" name="birthdate" value="{{ old('birthdate') }}">
                                 @error('birthdate')
@@ -47,11 +47,11 @@
                                 @enderror
                             </div>
                             <div class="col-md-12">
-                                <label for="gender" class="form-label">Gender</label>
+                                <label for="gender" class="form-label">Giới tính</label>
                                 <select class="form-select @error('gender') is-invalid @enderror" id="gender" name="gender" aria-label="Default select example">
                                     {{-- <option selected hidden>Select</option> --}}
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
+                                    <option value="Male">Name</option>
+                                    <option value="Female">Nữ</option>
                                 </select>
                                 @error('gender')
                                     <div class="text-danger mt-1">
@@ -60,7 +60,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-12">
-                                <label for="job" class="form-label">Job</label>
+                                <label for="job" class="form-label">Nghề nghiệp</label>
                                 <input type="text" class="form-control @error('job') is-invalid @enderror" id="job"
                                     name="job" value="{{ old('job') }}">
                                 @error('job')
@@ -70,7 +70,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-12">
-                                <label for="address" class="form-label">Address</label>
+                                <label for="address" class="form-label">Địa chỉ</label>
                                 <textarea class="form-control" id="address" name="address"
                                     rows="3">{{ old('address') }}</textarea>
                                 @error('address')
@@ -80,7 +80,7 @@
                                 @enderror
                             </div>
                             <div class="col-mg-12">
-                                <label for="avatar" class="form-label">Profile Picture</label>
+                                <label for="avatar" class="form-label">Ảnh đại diện</label>
                                 <input class="form-control" type="file" name="avatar" id="avatar">
                                 @error('avatar')
                                     <div class="text-danger mt-1">
@@ -89,7 +89,7 @@
                                 @enderror
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn myBtn shadow-sm border float-end">Save</button>
+                                <button type="submit" class="btn myBtn shadow-sm border float-end">Lưu</button>
                             </div>
                         </form>
                     </div>
