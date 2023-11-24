@@ -59,7 +59,7 @@
                             <div class="room-detail_total">
                                 <img src="img/icon-logo.png" alt="" class="icon-logo">
 
-                                <h6>STARTING HOMESTAY FROM</h6>
+                                <h6>Bắt đầu homestay từ</h6>
 
                                 <p class="price">
                                     <span class="amout">{{ Helper::convertToRupiah($detailRoom->price) }}</span> /days
@@ -70,15 +70,15 @@
                                 <?php
                                 if(isset($_GET['checkin']) && isset($_GET['checkout']) && isset($_GET['person'])){
                                 ?>
-                                <label>Arrive</label>
+                                <label>Ngày đến</label>
                                 <input type="text" class="awe-calendar from" disabled placeholder="Arrive Date"
                                     value="{{ Helper::dateFormat($_GET['checkin']) }}" name="checkin">
-                                <label>Depature</label>
+                                <label>Ngày đi</label>
                                 <input type="text" class="awe-calendar to" disabled placeholder="Departure Date"
                                     value="{{ Helper::dateFormat($_GET['checkout']) }}" name="checkin">
-                                <label>Person: {{ $_GET['person'] }}</label>
+                                <label>Số người: {{ $_GET['person'] }}</label>
 
-                                <label>Address: {{ $detailRoom->type->name }}</label>
+                                <label>Địa chỉ: {{ $detailRoom->type->name }}</label>
 
                                 @if (isset(Auth()->user()->id))
                                     <form

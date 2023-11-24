@@ -27,7 +27,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <li role="presentation">
-                                <div class="dropdown-header">Notifications</div>
+                                <div class="dropdown-header">Thông báo</div>
                             </li>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                                     </li>
                                 @empty
                                     <p class="text-center">
-                                        There's no new notification
+                                        Không có thông báo mới
                                     </p>
                                 @endforelse
                             </ul>
@@ -63,9 +63,9 @@
                                 <div class="row">
                                     <div class="col-lg-12 text-center">
                                         <a href="{{ route('notification.markAllAsRead') }}"
-                                            class="float-start mb-2 ms-2">Mark all as read</a>
-                                        <a href="{{ route('notification.index') }}" class="float-end mb-2 me-2">See
-                                            All</a>
+                                            class="float-start mb-2 ms-2">Đánh dấu tất cả như đã đọc</a>
+                                        <a href="{{ route('notification.index') }}" class="float-end mb-2 me-2">Xem tất
+                                            cả</a>
                                     </div>
                                 </div>
                             </li>
@@ -80,17 +80,17 @@
                         style="cursor: pointer" width="40" height="40" alt="">
                 </div>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item"
-                            href="{{ route('user.show', ['user' => auth()->user()->id]) }}">Profil</a>
+                    <li><a class="dropdown-item" href="{{ route('user.show', ['user' => auth()->user()->id]) }}">Hồ
+                            sơ</a>
                     </li>
-                    <li><a class="dropdown-item" href="#">Activity</a></li>
-                    <li><a class="dropdown-item" href="#">Setting</a></li>
+                    <li><a class="dropdown-item" href="#">Hoạt động</a></li>
+                    <li><a class="dropdown-item" href="#">Cài đặt</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
                     <form action="/logout" method="POST">
                         @csrf
-                        <li><button class="dropdown-item" type="submit">Logout</button></li>
+                        <li><button class="dropdown-item" type="submit">Đăng xuất</button></li>
                     </form>
                 </ul>
             </div>
