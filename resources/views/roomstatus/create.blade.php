@@ -1,9 +1,9 @@
 <form id="form-save-roomstatus" class="row g-3" method="POST" action="{{ route('roomstatus.store') }}">
     @csrf
     <div class="col-md-12">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-            name="name" value="{{ old('name') }}">
+        <label for="name" class="form-label">Tên</label>
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+            value="{{ old('name') }}">
         @error('name')
             <div class="text-danger mt-1">
                 {{ $message }}
@@ -12,9 +12,9 @@
         <div id="error_name" class="text-danger error"></div>
     </div>
     <div class="col-md-12">
-        <label for="code" class="form-label">Code</label>
-        <input type="text" class="form-control @error('code') is-invalid @enderror"
-            id="code" name="code" value="{{ old('code') }}">
+        <label for="code" class="form-label">Mã</label>
+        <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code"
+            value="{{ old('code') }}">
         @error('code')
             <div class="text-danger mt-1">
                 {{ $message }}
@@ -23,7 +23,7 @@
         <div id="error_code" class="text-danger error"></div>
     </div>
     <div class="col-md-12">
-        <label for="information" class="form-label">Information</label>
+        <label for="information" class="form-label">Thông tin</label>
         <textarea class="form-control" id="information" name="information" rows="3">{{ old('information') }}</textarea>
         @error('information')
             <div class="text-danger mt-1">

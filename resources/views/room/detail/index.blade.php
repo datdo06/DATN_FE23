@@ -59,7 +59,7 @@
                             <div class="room-detail_total">
                                 <img src="img/icon-logo.png" alt="" class="icon-logo">
 
-                                <h6>STARTING HOMESTAY FROM</h6>
+                                <h6>Bắt đầu homestay từ</h6>
 
                                 <p class="price">
                                     <span class="amout">{{ Helper::convertToRupiah($detailRoom->price) }}</span> /days
@@ -70,15 +70,15 @@
                                 <?php
                                 if(isset($_GET['checkin']) && isset($_GET['checkout']) && isset($_GET['person'])){
                                 ?>
-                                <label>Arrive</label>
+                                <label>Ngày đến</label>
                                 <input type="text" class="awe-calendar from" disabled placeholder="Arrive Date"
                                     value="{{ Helper::dateFormat($_GET['checkin']) }}" name="checkin">
-                                <label>Depature</label>
+                                <label>Ngày đi</label>
                                 <input type="text" class="awe-calendar to" disabled placeholder="Departure Date"
                                     value="{{ Helper::dateFormat($_GET['checkout']) }}" name="checkin">
-                                <label>Person: {{ $_GET['person'] }}</label>
+                                <label>Số người: {{ $_GET['person'] }}</label>
 
-                                <label>Address: {{ $detailRoom->type->name }}</label>
+                                <label>Địa chỉ: {{ $detailRoom->type->name }}</label>
 
                                 @if (isset(Auth()->user()->id))
                                     <form
@@ -115,9 +115,7 @@
 
                                 <input type="text" class="awe-calendar to" placeholder="Ngày đi" id="check_out"
                                     name="checkout" value="{{ old('checkout') }}" required>
-                                <input type="hidden"
-                                    value="0"
-                                    name="total_day">
+                                <input type="hidden" value="0" name="total_day">
                                 <label>Số người</label>
                                 <input type="text" class="awe-input" placeholder="Số người" id="count_person"
                                     name="person" value="{{ old('person') }}" required>
@@ -160,8 +158,9 @@
                                 '>de Finibus Bonorum et
                                         Malorum", written by Cicero in 45 BC</h5> --}}
                                     <p>KingTheLand Homestay là một lựa chọn tuyệt vời cho khách du lịch khi đến Hà
-                    Nội, cung cấp không khí dành cho gia đình cùng với nhiều tiện nghi hữu ích cho kì nghỉ của bạn.
-                    KingTheLand Homestay trở thành lựa chọn lý tưởng khi khi đến Hà Nội.</p>
+                                        Nội, cung cấp không khí dành cho gia đình cùng với nhiều tiện nghi hữu ích cho kì
+                                        nghỉ của bạn.
+                                        KingTheLand Homestay trở thành lựa chọn lý tưởng khi khi đến Hà Nội.</p>
 
                                     <div class="row">
                                         <div class="col-xs-6 col-md-4">
@@ -192,7 +191,8 @@
                             <div class="tab-pane fade active in" id="amenities">
 
                                 <div class="room-detail_amenities">
-                                    <p> Khách có thể dùng nhân viên hỗ trợ khách và dịch vụ phòng khi nghỉ tại KingTheLand Homestay.</p>
+                                    <p> Khách có thể dùng nhân viên hỗ trợ khách và dịch vụ phòng khi nghỉ tại KingTheLand
+                                        Homestay.</p>
 
                                     <div class="row">
                                         <div class="col-xs-6 col-lg-4">

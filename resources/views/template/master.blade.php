@@ -32,8 +32,8 @@
                     </div>
                     <div class="modal-footer">
                         <button id="btn-modal-close" type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">Close</button>
-                        <button id="btn-modal-save" type="button" class="btn btn-primary text-white">Save</button>
+                            data-bs-dismiss="modal">Đóng</button>
+                        <button id="btn-modal-save" type="button" class="btn btn-primary text-white">Lưu</button>
                     </div>
                 </div>
             </div>

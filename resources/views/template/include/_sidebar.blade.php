@@ -36,11 +36,12 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('room.index') }}">Homestay</a></li>
-                        <li><a class="dropdown-item" href="{{ route('type.index') }}">District</a></li>
-                        <li><a class="dropdown-item" href="{{ route('roomstatus.index') }}">Status</a></li>
-                        <li><a class="dropdown-item" href="{{ route('facility.index') }}">Facility</a></li>
-                        <li><a class="dropdown-item" href="{{ route('facility_room.index') }}">FacilityRoom</a></li>
-                        <li><a class="dropdown-item" href="{{ route('coupon.index') }}">Coupon</a></li>
+                        <li><a class="dropdown-item" href="{{ route('type.index') }}">Quận/Huyện</a></li>
+                        <li><a class="dropdown-item" href="{{ route('roomstatus.index') }}">Trạng thái</a></li>
+                        <li><a class="dropdown-item" href="{{ route('facility.index') }}">Cơ sở</a></li>
+                        <li><a class="dropdown-item" href="{{ route('facility_room.index') }}">Cơ sở vật chất phòng</a>
+                        </li>
+                        <li><a class="dropdown-item" href="{{ route('coupon.index') }}">Phiếu mua hàng</a></li>
                     </ul>
                 </li>
                 <li class="mb-2 bg-white rounded cursor-pointer">
@@ -51,9 +52,9 @@
                         <i class="fas fa-users"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('customer.index') }}">Customer</a></li>
+                        <li><a class="dropdown-item" href="{{ route('customer.index') }}">Khách hàng</a></li>
                         @if (auth()->user()->role == 'Super')
-                            <li><a class="dropdown-item" href="{{ route('user.index') }}">User</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.index') }}">Người dùng</a></li>
                         @endif
                     </ul>
                 </li>
