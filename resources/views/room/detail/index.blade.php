@@ -610,111 +610,31 @@
             <!-- COMPARE ACCOMMODATION -->
             <div class="room-detail_compare">
                 <h2 class="room-compare_title">Địa điểm khác</h2>
-
                 <div class="room-compare_content">
-
                     <div class="row">
+                        @foreach($other_locations as $other_location)
                         <!-- ITEM -->
-                        <div class="col-sm-6 col-md-4 col-lg-3">
+                        <div class="col-md-4 col-sm-6">
                             <div class="room-compare_item">
                                 <div class="img">
-                                    <a href="#"><img src="img/homestay/homestay-1.jpg" alt=""></a>
+                                    <a href="{{ route('homestayDetail' , $other_location -> id) }}"><img src="{{ $other_location-> firstImage() }}" alt=""></a>
                                 </div>
-
                                 <div class="text">
-                                    <h2><a href="#">Cửa Nam</a></h2>
-
+                                    <h2><a href="#">{{ $other_location -> number }}</a></h2>
                                     <ul>
                                         <li><i class="lotus-icon-person"></i>2 người</li>
                                         <li><i class="lotus-icon-bed"></i> Giường đôi</li>
                                         <li><i class="lotus-icon-view"></i> Nhìn ra thành phố</li>
                                     </ul>
-
-                                    <a href="#" class="awe-btn awe-btn-default">Xem chi tiết</a>
-
+                                    <a href="{{ route('homestayDetail' , $other_location -> id) }}" class="awe-btn awe-btn-default">Xem chi tiết</a>
                                 </div>
-
                             </div>
                         </div>
-                        <!-- END / ITEM -->
-
-                        <!-- ITEM -->
-                        <div class="col-sm-6 col-md-4 col-lg-3">
-                            <div class="room-compare_item">
-                                <div class="img">
-                                    <a href="#"><img src="img/homestay/homestay-1.jpg" alt=""></a>
-                                </div>
-
-                                <div class="text">
-                                    <h2><a href="#">Phương Mai</a></h2>
-
-                                    <ul>
-                                        <li><i class="lotus-icon-person"></i>4 người</li>
-                                        <li><i class="lotus-icon-bed"></i> Giường đôi</li>
-                                        <li><i class="lotus-icon-view"></i> Nhìn ra thành phố</li>
-                                    </ul>
-
-                                    <a href="#" class="awe-btn awe-btn-default">Xem chi tiết</a>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- END / ITEM -->
-
-                        <!-- ITEM -->
-                        <div class="col-sm-6 col-md-4 col-lg-3">
-                            <div class="room-compare_item">
-                                <div class="img">
-                                    <a href="#"><img src="img/homestay/homestay-1.jpg" alt=""></a>
-                                </div>
-
-                                <div class="text">
-                                    <h2><a href="#">Đống Đa</a></h2>
-
-                                    <ul>
-                                        <li><i class="lotus-icon-person"></i>4 người</li>
-                                        <li><i class="lotus-icon-bed"></i> Giường đôi</li>
-                                        <li><i class="lotus-icon-view"></i> Nhìn ra thành phố</li>
-                                    </ul>
-
-                                    <a href="#" class="awe-btn awe-btn-default">Xem chi tiết</a>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- END / ITEM -->
-
-                        <!-- ITEM -->
-                        <div class="col-sm-6 col-md-4 col-lg-3">
-                            <div class="room-compare_item">
-                                <div class="img">
-                                    <a href="#"><img src="img/homestay/homestay-1.jpg" alt=""></a>
-                                </div>
-
-                                <div class="text">
-                                    <h2><a href="#">Hoàn Kiếm</a></h2>
-
-                                    <ul>
-                                        <li><i class="lotus-icon-person"></i>4 người</li>
-                                        <li><i class="lotus-icon-bed"></i> Giường đôi</li>
-                                        <li><i class="lotus-icon-view"></i> Nhìn ra thành phố</li>
-                                    </ul>
-
-                                    <a href="#" class="awe-btn awe-btn-default">Xem chi tiết</a>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- END / ITEM -->
+                        @endforeach
                     </div>
-
                 </div>
             </div>
             <!-- END / COMPARE ACCOMMODATION -->
-
         </div>
     </section>
 @endsection

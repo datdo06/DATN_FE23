@@ -83,9 +83,9 @@
 
                 <div class="col-xs-4 col-lg-3">
                     <div class="widget widget_tripadvisor">
-                        <h4 class="widget-title">Tripadvisor</h4>
+                        <h4 class="widget-title">King The Land</h4>
                         <div class="tripadvisor">
-                            <p>Đã xuất hiện trên Tripadvisor</p>
+                            <p>Đã xuất hiện trên King The Land</p>
                             <img src="img/tripadvisor.png" alt="">
                             <span class="tripadvisor-circle">
                                         <i></i>

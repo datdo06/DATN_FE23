@@ -113,6 +113,11 @@ class RoomController extends Controller
         $room_type = Type::query()->get();
         $detailRoom = Room::where('id', $id)->first();
         $image = Image::where('room_id', $id)->get();
-        return view('room.detail.index', compact('detailRoom', 'image','room_type'));
+        $transactions = Transaction::pluck('room_id')->toArray();
+
+        $other_locations = Room::whereNotIn('id', $transactions)->get();
+        return view('room.detail.index', compact('detailRoom', 'image','room_type', 'other_locations'));
     }
+
+
 }

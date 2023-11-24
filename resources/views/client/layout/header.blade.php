@@ -17,7 +17,7 @@
                             <li>
                                 <form action="{{route('logout')}}" method="POST" id="logout">
                                     @csrf
-                                    <a onclick="document.getElementById('logout').submit();">Logout</a>
+                                    <a onclick="document.getElementById('logout').submit();">Đăng Xuất</a>
                                 </form>
                             </li>
                             <li><a href="{{route('order', ['user'=>auth()->user()->id])}}">Lịch sử</a></li>
@@ -25,8 +25,8 @@
                     </div>
                 @else
                     <span class="login-register">
-                            <a href="{{route('login')}}">Login</a>
-                            <a href="{{route('register')}}">register</a>
+                            <a href="{{route('login')}}">Đăng nhập</a>
+                            <a href="{{route('register')}}">Đăng ký?</a>
                         </span>
                 @endif
 
