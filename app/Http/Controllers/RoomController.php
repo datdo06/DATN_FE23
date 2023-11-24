@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Comment;
 
 use App\Http\Requests\StoreRoomRequest;
 use App\Models\Room;
@@ -13,6 +14,8 @@ use App\Repositories\Interface\RoomRepositoryInterface;
 use App\Repositories\Interface\RoomStatusRepositoryInterface;
 use App\Repositories\Interface\TypeRepositoryInterface;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -113,6 +116,20 @@ class RoomController extends Controller
         $room_type = Type::query()->get();
         $detailRoom = Room::where('id', $id)->first();
         $image = Image::where('room_id', $id)->get();
-        return view('room.detail.index', compact('detailRoom', 'image','room_type'));
+        $transactions = Transaction::pluck('room_id')->toArray();
+        $results = Comment::select('com_room_id', DB::raw('COUNT(*) as comment_count'))
+        ->groupBy('com_room_id')
+        ->where('comments.com_room_id', $id)
+        ->get();
+        $comment = DB::table('comments')
+        ->join('rooms', 'rooms.id', '=', 'comments.com_room_id')
+        ->join('users', 'users.id', '=', 'comments.com_user_id')
+        ->select('rooms.id','users.id as uid', 'users.name', 'users.avatar', 'comments.com_content','comments.com_subject', 'comments.created_at')
+        ->where('rooms.id', $id)
+        ->get();
+        $other_locations = Room::whereNotIn('id', $transactions)->get();
+        return view('room.detail.index', compact('detailRoom', 'image','room_type', 'other_locations','comment','results'));
     }
+
+
 }

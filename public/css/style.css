@@ -6453,19 +6453,24 @@ blockquote p:after {
 }
 
 .room-detail_compare .room-compare_item {
-    margin-top: 30px
+    margin-top: 30px;
+
 }
 
 .room-compare_item {
-    position: relative
+
 }
 
 .room-compare_item .img {
-    position: relative
+    flex-basis: 20%;
+    max-width: 100%;
 }
 
 .room-compare_item .img img {
-    width: 100%
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    height: 250px;
 }
 
 .room-compare_item .text {

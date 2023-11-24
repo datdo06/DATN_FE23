@@ -5,8 +5,8 @@
         <div class="container">
             <div class="login-register">
                 <div class="text text-center">
-                    <h2>REGISTER FORM</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing</p>
+                    <h2>ĐĂNG KÝ</h2>
+                    <p>Đăng ký King The Land</p>
                     <form action="{{route('customer.add')}}" class="account_form" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="field-form">
@@ -44,8 +44,8 @@
                         </div>
                         <div class="field-form">
                             <select class="field-text" name="gender">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                                <option value="Male">Nam</option>
+                                <option value="Female">Nữ</option>
                             </select>
                             @error('gender')
                             <span class="invalid-feedback" role="alert">
@@ -87,9 +87,9 @@
                         </div>
 
                         <div class="field-form field-submit">
-                            <button class="awe-btn awe-btn-13" type="submit">Create</button>
+                            <button class="awe-btn awe-btn-13" type="submit">Thêm</button>
                         </div>
-                        <span class="account-desc">I don’t have an account  -  <a href="#">Forgot Password</a></span>
+                        <span class="account-desc">Tôi không có tài khoản - -  <a href="#">Quên mật khẩu</a></span>
                     </form>
                 </div>
             </div>

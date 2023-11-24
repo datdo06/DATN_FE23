@@ -115,9 +115,7 @@
 
                                 <input type="text" class="awe-calendar to" placeholder="Ngày đi" id="check_out"
                                     name="checkout" value="{{ old('checkout') }}" required>
-                                <input type="hidden"
-                                    value="0"
-                                    name="total_day">
+                                <input type="hidden" value="0" name="total_day">
                                 <label>Số người</label>
                                 <input type="text" class="awe-input" placeholder="Số người" id="count_person"
                                     name="person" value="{{ old('person') }}" required>
@@ -160,8 +158,9 @@
                                 '>de Finibus Bonorum et
                                         Malorum", written by Cicero in 45 BC</h5> --}}
                                     <p>KingTheLand Homestay là một lựa chọn tuyệt vời cho khách du lịch khi đến Hà
-                    Nội, cung cấp không khí dành cho gia đình cùng với nhiều tiện nghi hữu ích cho kì nghỉ của bạn.
-                    KingTheLand Homestay trở thành lựa chọn lý tưởng khi khi đến Hà Nội.</p>
+                                        Nội, cung cấp không khí dành cho gia đình cùng với nhiều tiện nghi hữu ích cho kì
+                                        nghỉ của bạn.
+                                        KingTheLand Homestay trở thành lựa chọn lý tưởng khi khi đến Hà Nội.</p>
 
                                     <div class="row">
                                         <div class="col-xs-6 col-md-4">
@@ -192,7 +191,8 @@
                             <div class="tab-pane fade active in" id="amenities">
 
                                 <div class="room-detail_amenities">
-                                    <p> Khách có thể dùng nhân viên hỗ trợ khách và dịch vụ phòng khi nghỉ tại KingTheLand Homestay.</p>
+                                    <p> Khách có thể dùng nhân viên hỗ trợ khách và dịch vụ phòng khi nghỉ tại KingTheLand
+                                        Homestay.</p>
 
                                     <div class="row">
                                         <div class="col-xs-6 col-lg-4">
@@ -606,115 +606,75 @@
 
             </div>
             <!-- END / TAB -->
+            <section class="section-blog bg-white">
+                <div class="container">
+                    <div class="blog">
+                        <div class="row">
 
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="blog-content">
+                                    <div id="comments">
+                                        @foreach ($results as $r)
+                                            <h4 class="comment-title">Đánh giá ({{ $r->comment_count }})</h4>
+                                        @endforeach
+                                        <ul class="commentlist">
+                                            @foreach ($comment as $c)
+                                                <li>
+                                                    <div class="comment-body">
+
+                                                        <a class="comment-avatar"><img
+                                                                src="{{ asset('img/user/' . $c->name . '-' . $c->uid . '/' . $c->avatar) }}"
+                                                                alt=""></a>
+
+                                                        <h4 class="comment-subject">{{ $c->com_subject }}</h4>
+                                                        <p>{{ $c->com_content }}.</p>
+
+                                                        <span class="comment-meta">
+                                                            <a href="#">{{ $c->name }}</a> -
+                                                            {{ $c->created_at }}
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
             <!-- COMPARE ACCOMMODATION -->
             <div class="room-detail_compare">
                 <h2 class="room-compare_title">Địa điểm khác</h2>
-
                 <div class="room-compare_content">
-
                     <div class="row">
-                        <!-- ITEM -->
-                        <div class="col-sm-6 col-md-4 col-lg-3">
-                            <div class="room-compare_item">
-                                <div class="img">
-                                    <a href="#"><img src="img/homestay/homestay-1.jpg" alt=""></a>
+                        @foreach ($other_locations as $other_location)
+                            <!-- ITEM -->
+                            <div class="col-md-4 col-sm-6">
+                                <div class="room-compare_item">
+                                    <div class="img">
+                                        <a href="{{ route('homestayDetail', $other_location->id) }}"><img
+                                                src="{{ $other_location->firstImage() }}" alt=""></a>
+                                    </div>
+                                    <div class="text">
+                                        <h2><a href="#">{{ $other_location->number }}</a></h2>
+                                        <ul>
+                                            <li><i class="lotus-icon-person"></i>2 người</li>
+                                            <li><i class="lotus-icon-bed"></i> Giường đôi</li>
+                                            <li><i class="lotus-icon-view"></i> Nhìn ra thành phố</li>
+                                        </ul>
+                                        <a href="{{ route('homestayDetail', $other_location->id) }}"
+                                            class="awe-btn awe-btn-default">Xem chi tiết</a>
+                                    </div>
                                 </div>
-
-                                <div class="text">
-                                    <h2><a href="#">Cửa Nam</a></h2>
-
-                                    <ul>
-                                        <li><i class="lotus-icon-person"></i>2 người</li>
-                                        <li><i class="lotus-icon-bed"></i> Giường đôi</li>
-                                        <li><i class="lotus-icon-view"></i> Nhìn ra thành phố</li>
-                                    </ul>
-
-                                    <a href="#" class="awe-btn awe-btn-default">Xem chi tiết</a>
-
-                                </div>
-
                             </div>
-                        </div>
-                        <!-- END / ITEM -->
-
-                        <!-- ITEM -->
-                        <div class="col-sm-6 col-md-4 col-lg-3">
-                            <div class="room-compare_item">
-                                <div class="img">
-                                    <a href="#"><img src="img/homestay/homestay-1.jpg" alt=""></a>
-                                </div>
-
-                                <div class="text">
-                                    <h2><a href="#">Phương Mai</a></h2>
-
-                                    <ul>
-                                        <li><i class="lotus-icon-person"></i>4 người</li>
-                                        <li><i class="lotus-icon-bed"></i> Giường đôi</li>
-                                        <li><i class="lotus-icon-view"></i> Nhìn ra thành phố</li>
-                                    </ul>
-
-                                    <a href="#" class="awe-btn awe-btn-default">Xem chi tiết</a>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- END / ITEM -->
-
-                        <!-- ITEM -->
-                        <div class="col-sm-6 col-md-4 col-lg-3">
-                            <div class="room-compare_item">
-                                <div class="img">
-                                    <a href="#"><img src="img/homestay/homestay-1.jpg" alt=""></a>
-                                </div>
-
-                                <div class="text">
-                                    <h2><a href="#">Đống Đa</a></h2>
-
-                                    <ul>
-                                        <li><i class="lotus-icon-person"></i>4 người</li>
-                                        <li><i class="lotus-icon-bed"></i> Giường đôi</li>
-                                        <li><i class="lotus-icon-view"></i> Nhìn ra thành phố</li>
-                                    </ul>
-
-                                    <a href="#" class="awe-btn awe-btn-default">Xem chi tiết</a>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- END / ITEM -->
-
-                        <!-- ITEM -->
-                        <div class="col-sm-6 col-md-4 col-lg-3">
-                            <div class="room-compare_item">
-                                <div class="img">
-                                    <a href="#"><img src="img/homestay/homestay-1.jpg" alt=""></a>
-                                </div>
-
-                                <div class="text">
-                                    <h2><a href="#">Hoàn Kiếm</a></h2>
-
-                                    <ul>
-                                        <li><i class="lotus-icon-person"></i>4 người</li>
-                                        <li><i class="lotus-icon-bed"></i> Giường đôi</li>
-                                        <li><i class="lotus-icon-view"></i> Nhìn ra thành phố</li>
-                                    </ul>
-
-                                    <a href="#" class="awe-btn awe-btn-default">Xem chi tiết</a>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- END / ITEM -->
+                        @endforeach
                     </div>
-
                 </div>
             </div>
             <!-- END / COMPARE ACCOMMODATION -->
-
         </div>
     </section>
 @endsection
