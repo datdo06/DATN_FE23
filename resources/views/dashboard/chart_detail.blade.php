@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h3 class="p-3 text-center">
-                Occupied room at {{ Helper::dateFormat($date) }}
+                Phòng đang có khách {{ Helper::dateFormat($date) }}
             </h3>
         </div>
     </div>
